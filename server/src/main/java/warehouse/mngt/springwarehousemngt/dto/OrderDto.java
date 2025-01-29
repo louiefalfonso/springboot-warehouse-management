@@ -19,10 +19,13 @@ public class OrderDto {
 
     private Long id;
 
-    private User user;
+    private User userId;
+
+    private String productStatus;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
     private Date orderDate;
 
-    private List<OrderItem> orderItems;
+    private List<OrderItemDto> orderItems;
+
 }

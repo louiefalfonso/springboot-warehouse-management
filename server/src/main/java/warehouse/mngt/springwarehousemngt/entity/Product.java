@@ -21,7 +21,7 @@ public class Product {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String productName;
 
     private String description;
 
@@ -34,5 +34,4 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
-
 }

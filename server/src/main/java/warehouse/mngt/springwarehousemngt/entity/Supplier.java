@@ -21,7 +21,7 @@ public class Supplier {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String supplierName;
 
     private String contactInfo;
 
