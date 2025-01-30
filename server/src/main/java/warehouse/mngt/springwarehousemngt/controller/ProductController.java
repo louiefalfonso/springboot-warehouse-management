@@ -9,6 +9,8 @@ import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.repository.ProductRepository;
 import warehouse.mngt.springwarehousemngt.service.ProductService;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/products")
@@ -34,5 +36,42 @@ public class ProductController {
                 .orElseThrow(()-> new RuntimeException("Product does not exist with Id:" + id));
         return ResponseEntity.ok(product);
     }
+
+    //GET - Get All Products REST API
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> getAllProducts(){
+        List <ProductDto> products = productService.getAllProducts();
+        return ResponseEntity.ok(products);
+    }
+
+    //UPDATE - Update Product REST API
+    public ResponseEntity<Product> updateProducts( long id, Product productDetails){
+        Product updateProduct = productRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Product does not exist with id: " + id));
+
+        updateProduct.setProductName(productDetails.getProductName());
+        updateProduct.setDescription(productDetails.getDescription());
+        updateProduct.setQuantity(productDetails.getQuantity());
+        updateProduct.setPrice(productDetails.getPrice());
+        updateProduct.setSupplier(productDetails.getSupplier());
+    }
+
+
+    /*
+    //UPDATE - Update Asset REST API
+    @PutMapping("{id}")
+    public ResponseEntity<Asset> updateAsset(@PathVariable("id") long id,
+                                             @RequestBody Asset assetDetails){
+        Asset updateAsset = assetRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("Asset does not exist with id: " + id));
+
+        updateAsset.setAssetNumber(assetDetails.getAssetNumber());
+        updateAsset.setBrand(assetDetails.getBrand());
+
+
+        assetRepository.save(updateAsset);
+        return ResponseEntity.ok(updateAsset);
+    }
+     */
 
 }
