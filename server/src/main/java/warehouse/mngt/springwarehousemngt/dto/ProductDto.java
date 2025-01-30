@@ -24,7 +24,7 @@ public class ProductDto {
 
     private BigDecimal price;
 
-    private Long supplierId;
+    private Supplier supplier;
 
 
     // Getters & Setters
@@ -70,11 +70,11 @@ public class ProductDto {
         this.price = price;
     }
 
-    public Supplier getSupplierId() {
-        return supplierId;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }

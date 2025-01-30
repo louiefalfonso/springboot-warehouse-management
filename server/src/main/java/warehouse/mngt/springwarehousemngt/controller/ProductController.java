@@ -54,24 +54,8 @@ public class ProductController {
         updateProduct.setQuantity(productDetails.getQuantity());
         updateProduct.setPrice(productDetails.getPrice());
         updateProduct.setSupplier(productDetails.getSupplier());
+
+        productRepository.save(updateProduct);
+        return ResponseEntity.ok(updateProduct);
     }
-
-
-    /*
-    //UPDATE - Update Asset REST API
-    @PutMapping("{id}")
-    public ResponseEntity<Asset> updateAsset(@PathVariable("id") long id,
-                                             @RequestBody Asset assetDetails){
-        Asset updateAsset = assetRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Asset does not exist with id: " + id));
-
-        updateAsset.setAssetNumber(assetDetails.getAssetNumber());
-        updateAsset.setBrand(assetDetails.getBrand());
-
-
-        assetRepository.save(updateAsset);
-        return ResponseEntity.ok(updateAsset);
-    }
-     */
-
 }
