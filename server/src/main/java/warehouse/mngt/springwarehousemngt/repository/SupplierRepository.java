@@ -10,5 +10,4 @@ public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
     Optional<Supplier> findAllById (Long SupplierId);
 
-    List<Supplier> findByContactNameContaining(String contactName);
 }

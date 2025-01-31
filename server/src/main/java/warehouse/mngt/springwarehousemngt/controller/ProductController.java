@@ -16,11 +16,13 @@ import java.util.List;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    @Autowired
     private ProductService productService;
-
-    @Autowired
     private ProductRepository productRepository;
+
+    public ProductController(ProductService productService, ProductRepository productRepository) {
+        this.productService = productService;
+        this.productRepository = productRepository;
+    }
 
     //POST - Create New Product REST API
     @PostMapping
@@ -45,7 +47,9 @@ public class ProductController {
     }
 
     //UPDATE - Update Product REST API
-    public ResponseEntity<Product> updateProducts( long id, Product productDetails){
+    @PutMapping("{id}")
+    public ResponseEntity<Product> updateProducts( @PathVariable ("id") long id,
+                                                   @RequestBody Product productDetails){
         Product updateProduct = productRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Product does not exist with id: " + id));
 
@@ -57,5 +61,12 @@ public class ProductController {
 
         productRepository.save(updateProduct);
         return ResponseEntity.ok(updateProduct);
+    }
+
+    // DELETE - Delete Product REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable ("id") Long productId){
+        productService.deleteProduct(productId);
+        return ResponseEntity.ok("Product Deleted Successfully");
     }
 }

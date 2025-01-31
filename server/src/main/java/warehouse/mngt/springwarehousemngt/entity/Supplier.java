@@ -16,6 +16,7 @@ import java.util.List;
 @Table(name = "suppliers")
 public class Supplier {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

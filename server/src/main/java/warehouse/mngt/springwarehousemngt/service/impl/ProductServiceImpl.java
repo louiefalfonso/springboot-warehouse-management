@@ -1,8 +1,6 @@
 package warehouse.mngt.springwarehousemngt.service.impl;
 
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import warehouse.mngt.springwarehousemngt.dto.ProductDto;
 import warehouse.mngt.springwarehousemngt.entity.Product;
@@ -15,12 +13,14 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
 
-    @Autowired
+    private ProductRepository productRepository;
     private ModelMapper modelMapper;
 
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
+        this.productRepository = productRepository;
+        this.modelMapper = modelMapper;
+    }
 
     // REST API - Create New Product
     @Override
@@ -62,5 +62,13 @@ public class ProductServiceImpl implements ProductService {
         Product updateProductObj = productRepository.save(product);
         return modelMapper.map(updateProductObj, ProductDto.class);
 
+    }
+
+    // REST API - Delete Product
+    @Override
+    public void deleteProduct(Long productId) {
+        Product product = productRepository.findAllById(productId)
+                .orElseThrow(()-> new RuntimeException("Product doesn't exist with given id:" + productId));
+        productRepository.deleteById(productId);
     }
 }

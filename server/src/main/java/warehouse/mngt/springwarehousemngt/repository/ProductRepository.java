@@ -9,6 +9,4 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findAllById (Long ProductId);
-
-    List<Product> findByNameContaining(String name);
 }
