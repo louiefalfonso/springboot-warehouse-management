@@ -16,7 +16,6 @@ import java.util.List;
 @Table(name = "suppliers")
 public class Supplier {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +23,11 @@ public class Supplier {
     @Column(nullable = false)
     private String supplierName;
 
+    private String supplierCode;
+
     private String contactInfo;
+
+    private String status;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Product> products;

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import warehouse.mngt.springwarehousemngt.entity.Product;
 
 import java.util.List;
 
@@ -15,10 +16,14 @@ public class SupplierDto {
 
     private Long id;
 
-    private String name;
+    private String supplierName;
+
+    private String supplierCode;
 
     private String contactInfo;
 
-    private List<Long> productIds;
+    private String status;
+
+    private List<Product> productIds;
 
 }

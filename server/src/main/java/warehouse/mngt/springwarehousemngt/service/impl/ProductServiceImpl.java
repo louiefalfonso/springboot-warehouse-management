@@ -1,5 +1,6 @@
 package warehouse.mngt.springwarehousemngt.service.impl;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import warehouse.mngt.springwarehousemngt.dto.ProductDto;
@@ -11,25 +12,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
-
 
     private ProductRepository productRepository;
     private ModelMapper modelMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
-        this.productRepository = productRepository;
-        this.modelMapper = modelMapper;
-    }
-
     // REST API - Create New Product
     @Override
-    public ProductDto createProduct(ProductDto productDto) {
+    public ProductDto createNewProduct(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
         Product savedProduct = productRepository.save(product);
         return modelMapper.map(savedProduct, ProductDto.class);
     }
-
 
     // REST API - Get Product By ID
     @Override

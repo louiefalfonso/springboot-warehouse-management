@@ -1,6 +1,6 @@
 package warehouse.mngt.springwarehousemngt.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,21 +13,17 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
     private ProductService productService;
     private ProductRepository productRepository;
 
-    public ProductController(ProductService productService, ProductRepository productRepository) {
-        this.productService = productService;
-        this.productRepository = productRepository;
-    }
-
     //POST - Create New Product REST API
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
-        ProductDto savedProduct = productService.createProduct(productDto);
+    public ResponseEntity<ProductDto> createNewProduct(@RequestBody ProductDto productDto){
+        ProductDto savedProduct = productService.createNewProduct(productDto);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
