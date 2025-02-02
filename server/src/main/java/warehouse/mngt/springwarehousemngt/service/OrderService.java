@@ -12,8 +12,8 @@ public interface OrderService {
 
     List<OrderDto> getAllOrders();
 
-    /*
-    OrderDTO updateOrder(Long id, OrderDTO orderDTO);
-    void deleteOrder(Long id);
-     */
+    OrderDto updateOrder(Long orderId, OrderDto updateOrder);
+
+    void deleteOrder(Long orderId);
+
 }

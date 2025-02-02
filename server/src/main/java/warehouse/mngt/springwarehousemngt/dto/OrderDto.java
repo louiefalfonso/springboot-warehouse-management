@@ -21,7 +21,7 @@ public class OrderDto {
 
     private User userId;
 
-    private String productStatus;
+    private String orderStatus;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
     private Date orderDate;

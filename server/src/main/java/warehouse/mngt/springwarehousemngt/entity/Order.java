@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import warehouse.mngt.springwarehousemngt.dto.OrderItemDto;
 
 import java.util.Date;
 import java.util.List;
@@ -36,6 +37,6 @@ public class Order {
     private Date orderDate;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    private List<OrderItemDto> orderItems;
 
 }

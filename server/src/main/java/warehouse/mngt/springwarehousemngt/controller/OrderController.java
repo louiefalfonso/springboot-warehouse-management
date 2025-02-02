@@ -42,4 +42,27 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
+
+    //UPDATE - Update Order REST API
+    @PutMapping("{id}")
+    public ResponseEntity<Order> updateOrder(@PathVariable ("id") long id,
+                                             @RequestBody Order orderDetails) {
+        Order updateOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order does not exist with id: " + id));
+
+        updateOrder.setUser(orderDetails.getUser());
+        updateOrder.setOrderStatus(orderDetails.getOrderStatus());
+        updateOrder.setOrderDate(orderDetails.getOrderDate());
+        updateOrder.setOrderItems(orderDetails.getOrderItems());
+
+        orderRepository.save(updateOrder);
+        return ResponseEntity.ok(updateOrder);
+    }
+
+    // DELETE - Delete Order REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteOrder(@PathVariable ("id") Long orderId){
+        orderService.deleteOrder(orderId);
+        return ResponseEntity.ok("Order Deleted Successfully");
+    }
 }

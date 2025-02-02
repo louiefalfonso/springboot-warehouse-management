@@ -41,4 +41,28 @@ public class OrderServiceImpl implements OrderService {
         return orders.stream().map((order)-> modelMapper.map(order, OrderDto.class))
                 .collect(Collectors.toList());
     }
+
+    // REST API - Update Order
+    @Override
+    public OrderDto updateOrder(Long orderId, OrderDto updateOrder) {
+        Order order = orderRepository.findAllById(orderId)
+                .orElseThrow(()-> new RuntimeException("Order doesn't exist with a given Id:" + orderId));
+
+        order.setUser(updateOrder.getUserId());
+        order.setOrderStatus(updateOrder.getOrderStatus());
+        order.setOrderDate(updateOrder.getOrderDate());
+        order.setOrderItems(updateOrder.getOrderItems());
+
+        Order updateOrderObj = orderRepository.save(order);
+        return modelMapper.map(updateOrderObj, OrderDto.class);
+
+    }
+
+    // REST API - Delete Order
+    @Override
+    public void deleteOrder(Long orderId) {
+        Order order = orderRepository.findAllById(orderId)
+                .orElseThrow(()-> new RuntimeException("Order doesn't exist with given id:" + orderId));
+        orderRepository.deleteById(orderId);
+    }
 }

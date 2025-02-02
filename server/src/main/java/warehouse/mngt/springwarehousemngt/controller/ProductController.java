@@ -44,7 +44,7 @@ public class ProductController {
 
     //UPDATE - Update Product REST API
     @PutMapping("{id}")
-    public ResponseEntity<Product> updateProducts( @PathVariable ("id") long id,
+    public ResponseEntity<Product> updateProduct( @PathVariable ("id") long id,
                                                    @RequestBody Product productDetails){
         Product updateProduct = productRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Product does not exist with id: " + id));
