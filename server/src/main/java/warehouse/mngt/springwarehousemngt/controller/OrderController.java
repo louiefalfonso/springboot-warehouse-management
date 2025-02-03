@@ -53,7 +53,6 @@ public class OrderController {
         updateOrder.setUser(orderDetails.getUser());
         updateOrder.setOrderStatus(orderDetails.getOrderStatus());
         updateOrder.setOrderDate(orderDetails.getOrderDate());
-        updateOrder.setOrderItems(orderDetails.getOrderItems());
 
         orderRepository.save(updateOrder);
         return ResponseEntity.ok(updateOrder);

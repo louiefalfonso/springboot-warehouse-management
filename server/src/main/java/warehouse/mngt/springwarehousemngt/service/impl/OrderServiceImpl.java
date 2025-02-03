@@ -51,7 +51,6 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(updateOrder.getUserId());
         order.setOrderStatus(updateOrder.getOrderStatus());
         order.setOrderDate(updateOrder.getOrderDate());
-        order.setOrderItems(updateOrder.getOrderItems());
 
         Order updateOrderObj = orderRepository.save(order);
         return modelMapper.map(updateOrderObj, OrderDto.class);
