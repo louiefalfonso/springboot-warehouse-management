@@ -1,22 +1,16 @@
-package warehouse.mngt.springwarehousemngt.entity;
+package warehouse.mngt.springwarehousemngt.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "warehouses")
-public class Warehouse {
+@NoArgsConstructor
+@Builder
+public class WarehouseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String warehouseName;
@@ -26,6 +20,4 @@ public class Warehouse {
     private String warehouseManager;
 
     private String contactNumber;
-
-    private boolean deleted = false;
 }
