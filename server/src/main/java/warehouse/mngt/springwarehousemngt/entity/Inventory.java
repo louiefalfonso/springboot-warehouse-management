@@ -26,4 +26,6 @@ public class Inventory {
 
     private int quantity;
 
+    private boolean deleted = false;
+
 }
