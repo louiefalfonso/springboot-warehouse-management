@@ -22,7 +22,7 @@ public class SupplierController {
 
     //POST - Create New Supplier REST API
     @PostMapping
-    public ResponseEntity<SupplierDto> createNewSupplier(SupplierDto supplierDto){
+    public ResponseEntity<SupplierDto> createNewSupplier(@RequestBody SupplierDto supplierDto){
         SupplierDto savedSupplier = supplierService.createNewSupplier(supplierDto);
         return new ResponseEntity<>(savedSupplier, HttpStatus.CREATED);
     }
@@ -54,6 +54,9 @@ public class SupplierController {
         updateSupplier.setContactInfo(supplierDetails.getContactInfo());
         updateSupplier.setStatus(supplierDetails.getStatus());
         updateSupplier.setProducts(supplierDetails.getProducts());
+        updateSupplier.setContactAddress(supplierDetails.getContactAddress());
+        updateSupplier.setSupplierCompany(supplierDetails.getSupplierCompany());
+        updateSupplier.setSupplierEmail(supplierDetails.getSupplierEmail());
 
         supplierRepository.save(updateSupplier);
         return ResponseEntity.ok(updateSupplier);

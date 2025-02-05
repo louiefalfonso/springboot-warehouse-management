@@ -20,10 +20,15 @@ public class SupplierDto {
 
     private String supplierCode;
 
+    private String supplierCompany;
+
+    private String supplierEmail;
+
     private String contactInfo;
 
     private String status;
 
-    private List<Product> productIds;
+    private String contactAddress;
 
+    private List<Product> productIds;
 }

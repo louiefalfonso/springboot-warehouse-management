@@ -53,6 +53,9 @@ public class SupplierServiceImpl implements SupplierService {
         supplier.setContactInfo(updateSupplier.getContactInfo());
         supplier.setStatus(updateSupplier.getStatus());
         supplier.setProducts(updateSupplier.getProductIds());
+        supplier.setContactAddress(updateSupplier.getContactAddress());
+        supplier.setSupplierCompany(updateSupplier.getSupplierCompany());
+        supplier.setSupplierEmail(updateSupplier.getSupplierEmail());
 
         Supplier updateSupplierObj = supplierRepository.save(supplier);
         return modelMapper.map(updateSupplierObj, SupplierDto.class);

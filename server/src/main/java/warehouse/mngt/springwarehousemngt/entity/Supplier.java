@@ -20,14 +20,19 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String supplierName;
 
     private String supplierCode;
 
+    private String supplierCompany;
+
+    private String supplierEmail;
+
     private String contactInfo;
 
     private String status;
+
+    private String contactAddress;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Product> products;
