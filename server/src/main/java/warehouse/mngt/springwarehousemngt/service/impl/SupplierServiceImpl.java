@@ -52,7 +52,7 @@ public class SupplierServiceImpl implements SupplierService {
         supplier.setSupplierCode(updateSupplier.getSupplierCode());
         supplier.setContactInfo(updateSupplier.getContactInfo());
         supplier.setStatus(updateSupplier.getStatus());
-        supplier.setProducts(updateSupplier.getProductIds());
+        supplier.setProducts(updateSupplier.getProducts());
         supplier.setContactAddress(updateSupplier.getContactAddress());
         supplier.setSupplierCompany(updateSupplier.getSupplierCompany());
         supplier.setSupplierEmail(updateSupplier.getSupplierEmail());

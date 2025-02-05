@@ -86,7 +86,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     public WarehouseDto getDeletedWarehouseById(Long id) {
         Warehouse warehouse = warehouseRepository.findByIdAndDeleted(id, true)
-                .orElseThrow(()-> new RuntimeException("Deleted Device doesn't exist with a given Id:" + id));
+                .orElseThrow(()-> new RuntimeException("Deleted Warehouse doesn't exist with a given Id:" + id));
         return modelMapper.map(warehouse, WarehouseDto.class);
     }
 }

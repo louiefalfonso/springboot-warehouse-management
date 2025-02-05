@@ -54,6 +54,8 @@ public class ProductController {
         updateProduct.setQuantity(productDetails.getQuantity());
         updateProduct.setPrice(productDetails.getPrice());
         updateProduct.setSupplier(productDetails.getSupplier());
+        updateProduct.setSku(productDetails.getSku());
+        updateProduct.setProductBrand(productDetails.getProductBrand());
 
         productRepository.save(updateProduct);
         return ResponseEntity.ok(updateProduct);
@@ -64,5 +66,20 @@ public class ProductController {
     public ResponseEntity<String> deleteProduct(@PathVariable ("id") Long productId){
         productService.deleteProduct(productId);
         return ResponseEntity.ok("Product Deleted Successfully");
+    }
+
+
+    //GET - Get All Deleted Products REST API
+    @GetMapping("/deleted")
+    public ResponseEntity<List<ProductDto>> getAllDeletedProduct(){
+        List<ProductDto> deletedProducts = productService.getAllDeletedProducts();
+        return ResponseEntity.ok(deletedProducts);
+    }
+
+    //GET - Get Deleted Product By ID REST API
+    @GetMapping("/deleted/{id}")
+    public ResponseEntity<ProductDto> getDeletedProductById(@PathVariable ("id") Long id){
+        ProductDto deletedProduct = productService.getDeletedProductById(id);
+        return ResponseEntity.ok(deletedProduct);
     }
 }

@@ -64,4 +64,18 @@ public class OrderController {
         orderService.deleteOrder(orderId);
         return ResponseEntity.ok("Order Deleted Successfully");
     }
+
+    //GET - Get All Deleted Orders REST API
+    @GetMapping("/deleted")
+    public ResponseEntity<List<OrderDto>> getAllDeletedOrders(){
+        List<OrderDto> deletedOrders = orderService.getAllDeletedOrders();
+        return ResponseEntity.ok(deletedOrders);
+    }
+
+    //GET - Get Deleted Order By ID REST API
+    @GetMapping("/deleted/{id}")
+    public ResponseEntity<OrderDto> getDeletedOrderById(@PathVariable ("id") Long id){
+        OrderDto deletedOrder = orderService.getDeletedOrderById(id);
+        return ResponseEntity.ok(deletedOrder);
+    }
 }

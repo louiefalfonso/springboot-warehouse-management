@@ -30,5 +30,5 @@ public class SupplierDto {
 
     private String contactAddress;
 
-    private List<Product> productIds;
+    private List<Product> products;
 }

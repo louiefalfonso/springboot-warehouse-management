@@ -1,5 +1,6 @@
 package warehouse.mngt.springwarehousemngt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,7 @@ public class Supplier {
     private String contactAddress;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Product> products;
 
 }

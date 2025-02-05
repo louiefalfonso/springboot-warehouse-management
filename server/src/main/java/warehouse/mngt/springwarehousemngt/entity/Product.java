@@ -1,5 +1,6 @@
 package warehouse.mngt.springwarehousemngt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,10 @@ public class Product {
 
     private String description;
 
+    private String sku;
+
+    private String productBrand;
+
     @Column(nullable = false)
     private int quantity;
 
@@ -35,4 +40,5 @@ public class Product {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
+    private boolean deleted = false;
 }

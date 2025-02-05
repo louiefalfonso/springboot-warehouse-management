@@ -1,6 +1,7 @@
 package warehouse.mngt.springwarehousemngt.service.impl;
 
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import warehouse.mngt.springwarehousemngt.dto.OrderDto;
@@ -60,8 +61,27 @@ public class OrderServiceImpl implements OrderService {
     // REST API - Delete Order
     @Override
     public void deleteOrder(Long orderId) {
-        Order order = orderRepository.findAllById(orderId)
+        Order order = orderRepository.findById(orderId)
                 .orElseThrow(()-> new RuntimeException("Order doesn't exist with given id:" + orderId));
-        orderRepository.deleteById(orderId);
+        order.setDeleted(true);
+        orderRepository.save(order);
     }
+
+    // REST API - Get All Deleted Orders
+    @Override
+    public List<OrderDto> getAllDeletedOrders() {
+       List<Order> deletedOrders = orderRepository.findByDeleted(true);
+       return deletedOrders.stream()
+               .map(order -> modelMapper.map(order, OrderDto.class))
+               .collect(Collectors.toList());
+    }
+
+    // REST API - Get Deleted Order By ID
+    @Override
+    public OrderDto getDeletedOrderById(Long id) {
+        Order order = orderRepository.findByIdAndDeleted(id, true)
+                .orElseThrow(()-> new RuntimeException("Deleted Order doesn't exist with a given Id:" + id));
+        return  modelMapper.map(order, OrderDto.class);
+    }
+
 }

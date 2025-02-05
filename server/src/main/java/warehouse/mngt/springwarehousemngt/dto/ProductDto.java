@@ -22,6 +22,10 @@ public class ProductDto {
 
     private int quantity;
 
+    private String sku;
+
+    private String productBrand;
+
     private BigDecimal price;
 
     private Supplier supplier;
