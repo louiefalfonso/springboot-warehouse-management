@@ -21,6 +21,10 @@ public class ProductServiceImpl implements ProductService {
     // REST API - Create New Product
     @Override
     public ProductDto createNewProduct(ProductDto productDto) {
+
+        if (productRepository.existsByProductNumber(productDto.getProductNumber())){
+            throw new RuntimeException("Product Number already exists");
+        }
         Product product = modelMapper.map(productDto, Product.class);
         Product savedProduct = productRepository.save(product);
         return modelMapper.map(savedProduct, ProductDto.class);
@@ -49,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(()-> new RuntimeException("Product doesn't exist with a given Id:" + productId));
 
         product.setProductName(updateProduct.getProductName());
+        product.setProductNumber(updateProduct.getProductNumber());
         product.setDescription(updateProduct.getDescription());
         product.setQuantity(updateProduct.getQuantity());
         product.setPrice(updateProduct.getPrice());

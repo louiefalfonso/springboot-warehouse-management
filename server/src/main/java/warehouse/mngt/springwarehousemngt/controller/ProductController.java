@@ -50,6 +50,7 @@ public class ProductController {
                 .orElseThrow(()-> new RuntimeException("Product does not exist with id: " + id));
 
         updateProduct.setProductName(productDetails.getProductName());
+        updateProduct.setProductNumber(productDetails.getProductNumber());
         updateProduct.setDescription(productDetails.getDescription());
         updateProduct.setQuantity(productDetails.getQuantity());
         updateProduct.setPrice(productDetails.getPrice());

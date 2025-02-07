@@ -18,6 +18,8 @@ public class ProductDto {
 
     private String productName;
 
+    private String productNumber;
+
     private String description;
 
     private int quantity;

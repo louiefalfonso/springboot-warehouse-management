@@ -24,6 +24,8 @@ public class Product {
     @Column(nullable = false)
     private String productName;
 
+    private String productNumber;
+
     private String description;
 
     private String sku;
