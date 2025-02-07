@@ -66,7 +66,25 @@ public class SupplierServiceImpl implements SupplierService {
     public void deleteSupplier(Long supplierId) {
         Supplier supplier = supplierRepository.findAllById(supplierId)
                 .orElseThrow(()-> new RuntimeException("Supplier doesn't exist with given id:" + supplierId));
-        supplierRepository.deleteById(supplierId);
+       supplier.setDeleted(true);
+       supplierRepository.save(supplier);
 
+    }
+
+    // REST API - Get All Deleted Suppliers
+    @Override
+    public List<SupplierDto> getAllDeletedSuppliers() {
+        List<Supplier> deletedSuppliers = supplierRepository.findByDeleted(true);
+        return deletedSuppliers.stream()
+                .map(supplier -> modelMapper.map(supplier, SupplierDto.class))
+                .collect(Collectors.toList());
+    }
+
+    // REST API - Get Deleted Supplier By ID
+    @Override
+    public SupplierDto getDeletedSupplierById(Long id) {
+       Supplier supplier = supplierRepository.findByIdAndDeleted(id, true)
+               .orElseThrow(()-> new RuntimeException("Deleted Supplier doesn't exist with a given Id:" + id));
+       return modelMapper.map(supplier, SupplierDto.class);
     }
 }

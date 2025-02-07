@@ -39,4 +39,5 @@ public class Supplier {
     @JsonIgnore
     private List<Product> products;
 
+    private boolean deleted = false;
 }
