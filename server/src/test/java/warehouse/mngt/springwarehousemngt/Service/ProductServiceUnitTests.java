@@ -167,5 +167,67 @@ public class ProductServiceUnitTests {
         verify(modelMapper,never()).map(any(Product.class), eq(ProductDto.class));
     }
 
+    @Test
+    @Order(7)
+    @DisplayName("Test 6: Get All Products with No Products")
+    void getAllProducts_NoProducts(){
+        //Arrange
+        when(productRepository.findAll()).thenReturn(List.of());
 
+        //Act
+        List<ProductDto> result = productService.getAllProducts();
+
+        //Assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        verify(productRepository,times(1)).findAll();
+        verify(modelMapper,never()).map(any(Product.class), eq(ProductDto.class));
+    }
+
+    @Test
+    @Order(8)
+    @DisplayName("Test 6: Get All Products with Repository Returns Null")
+    public void testGetAllProducts_RepositoryReturnsNull() {
+        // Arrange
+        when(productRepository.findAll()).thenReturn(null);
+
+        // Act and Assert
+        assertThrows(NullPointerException.class, () -> productService.getAllProducts());
+    }
+
+    @Test
+    public void testCreateNewProduct_ProductNumberAlreadyExists() {
+        // Arrange
+        ProductDto productDto = new ProductDto();
+        productDto.setProductNumber("existing-product-number");
+        when(productRepository.existsByProductNumber(productDto.getProductNumber())).thenReturn(true);
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.createNewProduct(productDto));
+    }
+
+    @Test
+    public void testCreateNewProduct_ProductCreatedSuccessfully() {
+        // Arrange
+        ProductDto productDto = new ProductDto();
+        productDto.setProductNumber("new-product-number");
+        Product product = new Product();
+        Product savedProduct = new Product();
+        when(productRepository.existsByProductNumber(productDto.getProductNumber())).thenReturn(false);
+        when(modelMapper.map(productDto, Product.class)).thenReturn(product);
+        when(productRepository.save(product)).thenReturn(savedProduct);
+        when(modelMapper.map(savedProduct, ProductDto.class)).thenReturn(productDto);
+
+        // Act
+        ProductDto createdProduct = productService.createNewProduct(productDto);
+
+        // Assert
+        assertEquals(productDto, createdProduct);
+    }
+
+    @Test
+    public void testCreateNewProduct_ProductDtoIsNull() {
+        // Act and Assert
+        assertThrows(NullPointerException.class, () -> productService.createNewProduct(null));
+    }
 }
