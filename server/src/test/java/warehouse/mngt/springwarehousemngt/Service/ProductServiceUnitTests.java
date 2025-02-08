@@ -10,11 +10,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import warehouse.mngt.springwarehousemngt.dto.ProductDto;
 import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.repository.ProductRepository;
 import warehouse.mngt.springwarehousemngt.service.impl.ProductServiceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +42,7 @@ public class ProductServiceUnitTests {
     @Test
     @Order(1)
     @DisplayName("Test 1: Create New Product Successfully v1")
-    public void createNewProduct_Success(){
+    void createNewProduct_v1(){
 
         //Arrange
         ProductDto productDto = new ProductDto();
@@ -66,7 +68,7 @@ public class ProductServiceUnitTests {
     @Test
     @Order(2)
     @DisplayName("Test 2: Create New Product Successfully v2")
-    void testCreateNewProduct() {
+    void createNewProduct_v2() {
         // Arrange
         ProductDto productDto = new ProductDto();
         Product product = new Product();
@@ -90,7 +92,7 @@ public class ProductServiceUnitTests {
     @Test
     @Order(3)
     @DisplayName("Test 3: Create New Product Using Product Number")
-    void createProduct_Success() {
+    void createNewProduct_ProductNumber() {
         // Arrange
         ProductDto productDto = new ProductDto();
         productDto.setProductNumber("12345");
@@ -117,7 +119,7 @@ public class ProductServiceUnitTests {
 
     @Test
     @Order(4)
-    @DisplayName("Test 4: Create New Product - Product Number Exists")
+    @DisplayName("Test 4: Create New Product If Product Number Exists")
     void createNewProduct_ProductNumberExists() {
         // Arrange
         ProductDto productDto = new ProductDto();
@@ -134,5 +136,36 @@ public class ProductServiceUnitTests {
         verify(productRepository, times(1)).existsByProductNumber(productDto.getProductNumber());
         verify(productRepository, never()).save(any(Product.class));
     }
+
+    @Test
+    @Order(5)
+    @DisplayName("Test 5: Create New Product with Null Input")
+    void createNewProduct_NullInput(){
+        // Act & Assert
+        assertThrows(NullPointerException.class, ()-> productService.createNewProduct(null));
+
+        verify(productRepository, never()).existsByProductNumber(anyString());
+        verify(productRepository, never()).save(any(Product.class));
+
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("Test 6: Get All Products with Null Repository Response")
+    void getAllProducts_NullRepositoryResponse() {
+
+        //Arrange
+        when(productRepository.findAll()).thenReturn(List.of());
+
+        //Act
+        List<ProductDto> result = productService.getAllProducts();
+
+        //Assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        verify(productRepository,times(1)).findAll();
+        verify(modelMapper,never()).map(any(Product.class), eq(ProductDto.class));
+    }
+
 
 }
