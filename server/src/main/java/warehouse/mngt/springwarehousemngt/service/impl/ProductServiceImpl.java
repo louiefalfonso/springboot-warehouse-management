@@ -33,9 +33,7 @@ public class ProductServiceImpl implements ProductService {
     // REST API - Get Product By ID
     @Override
     public ProductDto getProductById(Long productId) {
-        if (productId == null) {
-            throw new IllegalArgumentException("Product ID cannot be null");
-        }
+
         Product product = productRepository.findAllById(productId)
                 .orElseThrow(()->new RuntimeException("Product doesn't exist with a given Id:" + productId));
         return modelMapper.map(product, ProductDto.class);

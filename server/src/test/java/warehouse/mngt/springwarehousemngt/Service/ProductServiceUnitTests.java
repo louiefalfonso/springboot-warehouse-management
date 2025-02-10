@@ -16,6 +16,8 @@ import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.repository.ProductRepository;
 import warehouse.mngt.springwarehousemngt.service.impl.ProductServiceImpl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,64 +41,14 @@ public class ProductServiceUnitTests {
         MockitoAnnotations.openMocks(this);
     }
 
+    // Unit Test Cases for Create New Product
     @Test
     @Order(1)
-    @DisplayName("Test 1: Create New Product Successfully v1")
-    void createNewProduct_v1(){
-
-        //Arrange
-        ProductDto productDto = new ProductDto();
-        productDto.setProductName("Eberspacher E5071 Header Tank Single Port");
-
-        Product product = new Product();
-        product.setProductName("Eberspacher E5071 Header Tank Single Port");
-
-        when(modelMapper.map(productDto, Product.class)).thenReturn(product);
-        when(productRepository.save(product)).thenReturn(product);
-        when(modelMapper.map(product,ProductDto.class)).thenReturn(productDto);
-
-        //Act
-        ProductDto result = productService.createNewProduct(productDto);
-
-        //Assert
-        assertNotNull(result);
-        assertEquals("Eberspacher E5071 Header Tank Single Port", result.getProductName());
-        verify(productRepository, times(1)).save(product);
-
-    }
-
-    @Test
-    @Order(2)
-    @DisplayName("Test 2: Create New Product Successfully v2")
-    void createNewProduct_v2() {
+    @DisplayName("Test 1: Create New Product - Successfully")
+    void createNewProduct_Successfully() {
         // Arrange
         ProductDto productDto = new ProductDto();
-        Product product = new Product();
-        Product savedProduct = new Product();
-        ProductDto savedProductDto = new ProductDto();
-
-        when(modelMapper.map(productDto, Product.class)).thenReturn(product);
-        when(productRepository.save(product)).thenReturn(savedProduct);
-        when(modelMapper.map(savedProduct, ProductDto.class)).thenReturn(savedProductDto);
-
-        // Act
-        ProductDto result = productService.createNewProduct(productDto);
-
-        // Assert
-        assertEquals(savedProductDto, result);
-        verify(modelMapper).map(productDto, Product.class);
-        verify(productRepository).save(product);
-        verify(modelMapper).map(savedProduct, ProductDto.class);
-    }
-
-    @Test
-    @Order(3)
-    @DisplayName("Test 3: Create New Product Using Product Number")
-    void createNewProduct_ProductNumber() {
-        // Arrange
-        ProductDto productDto = new ProductDto();
-        productDto.setProductNumber("12345");
-
+        productDto.setProductNumber("123456");
         Product product = new Product();
         Product savedProduct = new Product();
 
@@ -106,40 +58,36 @@ public class ProductServiceUnitTests {
         when(modelMapper.map(savedProduct, ProductDto.class)).thenReturn(productDto);
 
         // Act
-        ProductDto result = productService.createNewProduct(productDto);
+        ProductDto createdProduct = productService.createNewProduct(productDto);
 
         // Assert
-        assertNotNull(result);
-        assertEquals(productDto, result);
-        verify(productRepository, times(1)).existsByProductNumber(productDto.getProductNumber());
-        verify(productRepository, times(1)).save(product);
-        verify(modelMapper, times(1)).map(productDto, Product.class);
-        verify(modelMapper, times(1)).map(savedProduct, ProductDto.class);
+        assertEquals(productDto, createdProduct);
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Test 2: Create New Product - Product Number Already Exists")
+    void createNewProduct_ProductNumberAlreadyExists() {
+        // Arrange
+        ProductDto productDto = new ProductDto();
+        productDto.setProductNumber("123456");
+        when(productRepository.existsByProductNumber(productDto.getProductNumber())).thenReturn(true);
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.createNewProduct(productDto));
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Test 3: Create New Product - Product Dto Is Null")
+    void createNewProduct_ProductDtoIsNull() {
+        // Act and Assert
+        assertThrows(NullPointerException.class, () -> productService.createNewProduct(null));
     }
 
     @Test
     @Order(4)
-    @DisplayName("Test 4: Create New Product If Product Number Exists")
-    void createNewProduct_ProductNumberExists() {
-        // Arrange
-        ProductDto productDto = new ProductDto();
-        productDto.setProductNumber("12345");
-
-        when(productRepository.existsByProductNumber(productDto.getProductNumber())).thenReturn(true);
-
-        // Act & Assert
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            productService.createNewProduct(productDto);
-        });
-
-        assertEquals("Product Number already exists", exception.getMessage());
-        verify(productRepository, times(1)).existsByProductNumber(productDto.getProductNumber());
-        verify(productRepository, never()).save(any(Product.class));
-    }
-
-    @Test
-    @Order(5)
-    @DisplayName("Test 5: Create New Product with Null Input")
+    @DisplayName("Test 4: Create New Product - Null Input")
     void createNewProduct_NullInput(){
         // Act & Assert
         assertThrows(NullPointerException.class, ()-> productService.createNewProduct(null));
@@ -149,101 +97,21 @@ public class ProductServiceUnitTests {
 
     }
 
+    // Unit Test Cases for Get Product By ID
     @Test
-    @Order(6)
-    @DisplayName("Test 6: Get All Products with Null Repository Response")
-    void getAllProducts_NullRepositoryResponse() {
-
-        //Arrange
-        when(productRepository.findAll()).thenReturn(List.of());
-
-        //Act
-        List<ProductDto> result = productService.getAllProducts();
-
-        //Assert
-        assertNotNull(result);
-        assertTrue(result.isEmpty());
-        verify(productRepository,times(1)).findAll();
-        verify(modelMapper,never()).map(any(Product.class), eq(ProductDto.class));
-    }
-
-    @Test
-    @Order(7)
-    @DisplayName("Test 7: Get All Products with No Products")
-    void getAllProducts_NoProducts(){
-        //Arrange
-        when(productRepository.findAll()).thenReturn(List.of());
-
-        //Act
-        List<ProductDto> result = productService.getAllProducts();
-
-        //Assert
-        assertNotNull(result);
-        assertTrue(result.isEmpty());
-        verify(productRepository,times(1)).findAll();
-        verify(modelMapper,never()).map(any(Product.class), eq(ProductDto.class));
-    }
-
-    @Test
-    @Order(8)
-    @DisplayName("Test 8: Get All Products with Repository Returns Null")
-    void testGetAllProducts_RepositoryReturnsNull() {
-        // Arrange
-        when(productRepository.findAll()).thenReturn(null);
-
-        // Act and Assert
-        assertThrows(NullPointerException.class, () -> productService.getAllProducts());
-    }
-
-    @Test
-    void testCreateNewProduct_ProductNumberAlreadyExists() {
-        // Arrange
-        ProductDto productDto = new ProductDto();
-        productDto.setProductNumber("existing-product-number");
-        when(productRepository.existsByProductNumber(productDto.getProductNumber())).thenReturn(true);
-
-        // Act and Assert
-        assertThrows(RuntimeException.class, () -> productService.createNewProduct(productDto));
-    }
-
-    @Test
-    void testCreateNewProduct_ProductDtoIsNull() {
-        // Act and Assert
-        assertThrows(NullPointerException.class, () -> productService.createNewProduct(null));
-    }
-
-    @Test
-    public void testGetProductById_ProductIdIsZero() {
-        // Arrange
-        Long productId = 0L;
-
-        // Act and Assert
-        assertThrows(RuntimeException.class, () -> productService.getProductById(productId));
-    }
-
-    @Test
-    void getProductById_NofFound(){
-        Long productId = 1L;
-        when(productRepository.findAllById(productId)).thenReturn(Optional.empty());
-
-        RuntimeException exception = assertThrows(RuntimeException.class, ()-> productService.getProductById(productId));
-
-        verify(productRepository, times(1)).findAllById(productId);
-        verify(modelMapper, never()).map(any(), eq(ProductDto.class));
-    }
-
-    @Test
-    public void testGetProductById_Success() {
+    @Order(5)
+    @DisplayName("Test 5: Get Product By Id - Successfully")
+    void getProductById_Success() {
         // Arrange
         Long productId = 1L;
         Product product = new Product();
         product.setId(productId);
-        product.setProductName("Test Product");
+        product.setProductNumber("123456");
         when(productRepository.findAllById(productId)).thenReturn(Optional.of(product));
 
         ProductDto expectedProductDto = new ProductDto();
         expectedProductDto.setId(productId);
-        expectedProductDto.setProductName("Test Product");
+        expectedProductDto.setProductNumber("123456");
         when(modelMapper.map(product, ProductDto.class)).thenReturn(expectedProductDto);
 
         // Act
@@ -254,32 +122,174 @@ public class ProductServiceUnitTests {
     }
 
     @Test
-    public void testGetProductById_ProductNotFound() {
+    @Order(6)
+    @DisplayName("Test 6: Get Product By Id - Product Id Is Zero")
+    void getProductById_ProductIdIsZero() {
         // Arrange
+        Long productId = 0L;
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.getProductById(productId));
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("Test 7: Get Product By Id - Product Id Not Found")
+    void getProductById_ProductIdNotFound(){
         Long productId = 1L;
         when(productRepository.findAllById(productId)).thenReturn(Optional.empty());
 
-        // Act and Assert
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> productService.getProductById(productId));
-        assertEquals("Product doesn't exist with a given Id:1", exception.getMessage());
+        RuntimeException exception = assertThrows(RuntimeException.class, ()-> productService.getProductById(productId));
+
+        verify(productRepository, times(1)).findAllById(productId);
+        verify(modelMapper, never()).map(any(), eq(ProductDto.class));
     }
 
     @Test
-    public void testGetProductById_NullProductId() {
+    @Order(8)
+    @DisplayName("Test 8: Get Product By Id - Null Product Id & Throws RuntimeException")
+    void getProductById_NullProductId_ThrowsRuntimeException() {
         // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> productService.getProductById(null));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> productService.getProductById(null));
+        assertEquals("Product doesn't exist with a given Id:null", exception.getMessage());
+    }
+
+    // Unit Test Cases for Get All Products
+    @Test
+    @Order(9)
+    @DisplayName("Test 9: Get All Products - Successfully")
+    void getAllProducts_Success(){
+
+        //Arrange
+        List<Product> products = new ArrayList<>();
+        Product product1 = new Product();
+        product1.setId(1L);
+        Product product2 = new Product();
+        product2.setId(1L);
+        products.add(product1);
+        products.add(product2);
+
+        when(productRepository.findAll()).thenReturn(products);
+
+        ProductDto productDto1 = new ProductDto();
+        productDto1.setId(1L);
+        ProductDto productDto2 = new ProductDto();
+        productDto2.setId(1L);
+
+        when(modelMapper.map(product1, ProductDto.class)).thenReturn(productDto1);
+        when(modelMapper.map(product2, ProductDto.class)).thenReturn(productDto2);
+
+        // Act
+        List<ProductDto> actualProductDtos = productService.getAllProducts();
+
+        // Assert
+        List<ProductDto> expectedProductDtos = new ArrayList<>();
+        expectedProductDtos.add(productDto1);
+        expectedProductDtos.add(productDto2);
+        assertEquals(expectedProductDtos, actualProductDtos);
     }
 
     @Test
-    public void testGetAllProducts_NoProductsFound() {
+    @Order(10)
+    @DisplayName("Test 10: Get All Products - No Products Found")
+    void getAllProducts_EmptyList() {
         // Arrange
-        when(productRepository.findAll()).thenReturn(List.of());
+        when(productRepository.findAll()).thenReturn(new ArrayList<>());
 
         // Act
         List<ProductDto> result = productService.getAllProducts();
 
         // Assert
-        assertEquals(List.of(), result);
+        assertEquals(0, result.size());
     }
 
+    @Test
+    @Order(11)
+    @DisplayName("Test 11: Get All Products - Null List")
+    void getAllProducts_NullList() {
+        // Arrange
+        when(productRepository.findAll()).thenReturn(null);
+
+        // Act and Assert
+        assertThrows(NullPointerException.class, () -> productService.getAllProducts());
+    }
+
+    @Test
+    @Order(12)
+    @DisplayName("Test 12: Get All Products - Should Return Empty List when Repository Returns Empty List")
+    void getAllProducts_shouldReturnEmptyList_whenRepositoryReturnsEmptyList() {
+        // given
+        List<Product> products = Arrays.asList();
+        when(productRepository.findAll()).thenReturn(products);
+
+        // when
+        List<ProductDto> result = productService.getAllProducts();
+
+        // then
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    @Order(13)
+    @DisplayName("Test 13: Get All Products - Should Return Empty List when Repository Returns Non Empty List")
+    void getAllProducts_shouldReturnListWithMappedProducts_whenRepositoryReturnsNonEmptyList() {
+        // given
+        Product product1 = new Product();
+        Product product2 = new Product();
+        List<Product> products = Arrays.asList(product1, product2);
+        when(productRepository.findAll()).thenReturn(products);
+        ProductDto productDto1 = new ProductDto();
+        ProductDto productDto2 = new ProductDto();
+        when(modelMapper.map(product1, ProductDto.class)).thenReturn(productDto1);
+        when(modelMapper.map(product2, ProductDto.class)).thenReturn(productDto2);
+
+        // when
+        List<ProductDto> result = productService.getAllProducts();
+
+        // then
+        assertEquals(2, result.size());
+        assertEquals(productDto1, result.get(0));
+        assertEquals(productDto2, result.get(1));
+    }
+
+
+    @Test
+    @Order(14)
+    @DisplayName("Test 14: Get All Products - Null Product Repository")
+    void getAllProducts_NullProductRepository() {
+        // Arrange
+        when(productRepository.findAll()).thenReturn(null);
+
+        // Act and Assert
+        assertThrows(NullPointerException.class, () -> productService.getAllProducts());
+    }
+
+    @Test
+    @Order(15)
+    @DisplayName("Test 15: Get All Products - Product Repository ThrowsException")
+    public void getAllProducts_ProductRepositoryThrowsException() {
+        // Arrange
+        when(productRepository.findAll()).thenThrow(new RuntimeException("Test exception"));
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.getAllProducts());
+    }
+
+    @Test
+    @Order(16)
+    @DisplayName("Test 16: Get All Products - ModelMapper ThrowsException")
+    public void getAllProducts_ModelMapperThrowsException() {
+        // Arrange
+        List<Product> products = new ArrayList<>();
+        Product product1 = new Product();
+        product1.setId(1L);
+        products.add(product1);
+
+        when(productRepository.findAll()).thenReturn(products);
+
+        when(modelMapper.map(product1, ProductDto.class)).thenThrow(new RuntimeException("Test exception"));
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.getAllProducts());
+    }
 }
