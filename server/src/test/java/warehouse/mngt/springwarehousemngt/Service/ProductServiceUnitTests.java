@@ -293,7 +293,10 @@ public class ProductServiceUnitTests {
         assertThrows(RuntimeException.class, () -> productService.getAllProducts());
     }
 
+    // Unit Test Cases for Update Product
     @Test
+    @Order(17)
+    @DisplayName("Test 17: Update Product - Success")
     void updateProduct_Success() {
         // Arrange
         Long productId = 1L;
@@ -324,6 +327,8 @@ public class ProductServiceUnitTests {
     }
 
     @Test
+    @Order(18)
+    @DisplayName("Test 18: Update Product - Product Not Found")
     void updateProduct_ProductNotFound() {
         // Arrange
         Long productId = 1L;
@@ -339,6 +344,8 @@ public class ProductServiceUnitTests {
     }
 
     @Test
+    @Order(19)
+    @DisplayName("Test 19: Update Product - Null Product Id")
     void updateProduct_NullProductId() {
         // Arrange
         Long productId = null;
@@ -351,8 +358,9 @@ public class ProductServiceUnitTests {
         verify(modelMapper, never()).map(any(Product.class), eq(ProductDto.class));
     }
 
-
     @Test
+    @Order(20)
+    @DisplayName("Test 20: Update Product - Null Update Product")
     void updateProduct_NullUpdateProduct() {
         // Arrange
         Long productId = 1L;
@@ -365,5 +373,90 @@ public class ProductServiceUnitTests {
         verify(modelMapper, never()).map(any(Product.class), eq(ProductDto.class));
     }
 
+    // Unit Test Cases for Delete Product
+    @Test
+    @Order(21)
+    @DisplayName("Test 21: Delete Product - When Product Exists & Should Set Deleted To True")
+    void deleteProduct_whenProductExists_shouldSetDeletedToTrue() {
+        // given
+        Long productId = 1L;
+        Product product = new Product();
+        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
 
+        // when
+        productService.deleteProduct(productId);
+
+        // then
+        verify(productRepository, times(1)).findById(productId);
+        verify(productRepository, times(1)).save(product);
+        assertTrue(product.isDeleted());
+    }
+
+    @Test
+    @Order(22)
+    @DisplayName("Test 22: Delete Product - When Product Does Not Exist")
+    void deleteProduct_whenProductDoesNotExist() {
+        // given
+        Long productId = 1L;
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+
+        // when and then
+        assertThrows(RuntimeException.class, () -> productService.deleteProduct(productId));
+        verify(productRepository, times(1)).findById(productId);
+        verify(productRepository, times(0)).save(any(Product.class));
+    }
+
+    @Test
+    @Order(23)
+    @DisplayName("Test 23: Delete Product - When Product Id Is Null")
+    void deleteProduct_whenProductIdIsNull() {
+        // when and then
+        assertThrows(RuntimeException.class, () -> productService.deleteProduct(null));
+        verify(productRepository, times(0)).findById(anyLong());
+        verify(productRepository, times(0)).save(any(Product.class));
+    }
+
+    @Test
+    @Order(24)
+    @DisplayName("Test 24: Delete Product - When Product Id Is Zero")
+    void deleteProduct_whenProductIdIsZero() {
+        // given
+        Long productId = 0L;
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+
+        // when and then
+        assertThrows(RuntimeException.class, () -> productService.deleteProduct(productId));
+        verify(productRepository, times(1)).findById(productId);
+        verify(productRepository, times(0)).save(any(Product.class));
+    }
+
+    @Test
+    @Order(25)
+    @DisplayName("Test 25: Delete Product - When Product Repository ThrowsException")
+    void deleteProduct_whenProductRepositoryThrowsException_shouldThrowException() {
+        // given
+        Long productId = 1L;
+        when(productRepository.findById(productId)).thenThrow(RuntimeException.class);
+
+        // when and then
+        assertThrows(RuntimeException.class, () -> productService.deleteProduct(productId));
+        verify(productRepository, times(1)).findById(productId);
+        verify(productRepository, times(0)).save(any(Product.class));
+    }
+
+    @Test
+    @Order(26)
+    @DisplayName("Test 26: Delete Product - When Product Repository Save ThrowsException")
+    void deleteProduct_whenProductRepositorySaveThrowsException_shouldThrowException() {
+        // given
+        Long productId = 1L;
+        Product product = new Product();
+        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        when(productRepository.save(product)).thenThrow(RuntimeException.class);
+
+        // when and then
+        assertThrows(RuntimeException.class, () -> productService.deleteProduct(productId));
+        verify(productRepository, times(1)).findById(productId);
+        verify(productRepository, times(1)).save(product);
+    }
 }

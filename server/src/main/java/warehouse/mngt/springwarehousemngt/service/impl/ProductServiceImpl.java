@@ -74,6 +74,9 @@ public class ProductServiceImpl implements ProductService {
     // REST API - Delete Product
     @Override
     public void deleteProduct(Long productId) {
+        if (productId == null) {
+            throw new RuntimeException("Product ID cannot be null");
+        }
         Product product = productRepository.findById(productId)
                 .orElseThrow(()-> new RuntimeException("Product doesn't exist with given id:" + productId));
         product.setDeleted(true);
