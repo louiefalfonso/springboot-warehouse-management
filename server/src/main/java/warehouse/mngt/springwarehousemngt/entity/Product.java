@@ -43,4 +43,10 @@ public class Product {
     private Supplier supplier;
 
     private boolean deleted = false;
+
+    public Product(long l, String productName, String productNumber, String description, int i, BigDecimal bigDecimal, String supplier, String sku, String productBrand) {
+    }
+
+    public Product(long l, String productName, String productNumber, String description, int quantity, BigDecimal price, Supplier supplier, String sku, String productBrand) {
+    }
 }

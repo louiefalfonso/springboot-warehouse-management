@@ -16,6 +16,7 @@ import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.repository.ProductRepository;
 import warehouse.mngt.springwarehousemngt.service.impl.ProductServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -252,7 +253,6 @@ public class ProductServiceUnitTests {
         assertEquals(productDto2, result.get(1));
     }
 
-
     @Test
     @Order(14)
     @DisplayName("Test 14: Get All Products - Null Product Repository")
@@ -292,4 +292,78 @@ public class ProductServiceUnitTests {
         // Act and Assert
         assertThrows(RuntimeException.class, () -> productService.getAllProducts());
     }
+
+    @Test
+    void updateProduct_Success() {
+        // Arrange
+        Long productId = 1L;
+        ProductDto updateProduct = new ProductDto(1L, "Product Name", "Product Number", "Description", 10, BigDecimal.valueOf(100.0), "Supplier", "Sku", "Product Brand");
+        Product product = new Product(1L, "Product Name", "Product Number", "Description", 10, BigDecimal.valueOf(100.0), "Supplier", "Sku", "Product Brand");
+        Product updatedProduct = new Product(1L,
+                updateProduct.getProductName(),
+                updateProduct.getProductNumber(),
+                updateProduct.getDescription(),
+                updateProduct.getQuantity(),
+                updateProduct.getPrice(),
+                updateProduct.getSupplier(),
+                updateProduct.getSku(),
+                updateProduct.getProductBrand());
+
+        when(productRepository.findAllById(productId)).thenReturn(Optional.of(product));
+        when(productRepository.save(any(Product.class))).thenReturn(updatedProduct);
+        when(modelMapper.map(updatedProduct, ProductDto.class)).thenReturn(updateProduct);
+
+        // Act
+        ProductDto result = productService.updateProduct(productId, updateProduct);
+
+        // Assert
+        assertEquals(updateProduct, result);
+        verify(productRepository, times(1)).findAllById(productId);
+        verify(productRepository, times(1)).save(any(Product.class));
+        verify(modelMapper, times(1)).map(updatedProduct, ProductDto.class);
+    }
+
+    @Test
+    void updateProduct_ProductNotFound() {
+        // Arrange
+        Long productId = 1L;
+        ProductDto updateProduct = new ProductDto(1L, "Product Name", "Product Number", "Description", 10, BigDecimal.valueOf(100.0), "Supplier", "Sku", "Product Brand");
+
+        when(productRepository.findAllById(productId)).thenReturn(Optional.empty());
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.updateProduct(productId, updateProduct));
+        verify(productRepository, times(1)).findAllById(productId);
+        verify(productRepository, never()).save(any(Product.class));
+        verify(modelMapper, never()).map(any(Product.class), eq(ProductDto.class));
+    }
+
+    @Test
+    void updateProduct_NullProductId() {
+        // Arrange
+        Long productId = null;
+        ProductDto updateProduct = new ProductDto(1L, "Product Name", "Product Number", "Description", 10, BigDecimal.valueOf(100.0), "Supplier", "Sku", "Product Brand");
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.updateProduct(productId, updateProduct));
+        verify(productRepository, never()).findAllById(anyLong());
+        verify(productRepository, never()).save(any(Product.class));
+        verify(modelMapper, never()).map(any(Product.class), eq(ProductDto.class));
+    }
+
+
+    @Test
+    void updateProduct_NullUpdateProduct() {
+        // Arrange
+        Long productId = 1L;
+        ProductDto updateProduct = null;
+
+        // Act and Assert
+        assertThrows(RuntimeException.class, () -> productService.updateProduct(productId, updateProduct));
+        verify(productRepository, never()).findAllById(anyLong());
+        verify(productRepository, never()).save(any(Product.class));
+        verify(modelMapper, never()).map(any(Product.class), eq(ProductDto.class));
+    }
+
+
 }

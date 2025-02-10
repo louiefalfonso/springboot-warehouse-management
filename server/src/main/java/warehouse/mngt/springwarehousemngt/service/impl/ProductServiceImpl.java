@@ -50,6 +50,10 @@ public class ProductServiceImpl implements ProductService {
     // REST API - Update Product
     @Override
     public ProductDto updateProduct(Long productId, ProductDto updateProduct) {
+        if (updateProduct == null) {
+            throw new NullPointerException("Update Product cannot be null");
+        }
+
         Product product = productRepository.findAllById(productId)
                 .orElseThrow(()-> new RuntimeException("Product doesn't exist with a given Id:" + productId));
 
