@@ -2,6 +2,7 @@ package warehouse.mngt.springwarehousemngt.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import warehouse.mngt.springwarehousemngt.entity.Product;
+import warehouse.mngt.springwarehousemngt.entity.Supplier;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     boolean existsByProductNumber (String productNumber);
 
     // for JUnit Test Case Only
-    Optional<Product> findByProductNumber (String productNumber);
+
+    List<Product> findBySku(String sku);
+
+    List<Product> findByProductNumber(String productNumber);
+
+    List<Product> findBySupplier(Supplier supplier);
 
 }
