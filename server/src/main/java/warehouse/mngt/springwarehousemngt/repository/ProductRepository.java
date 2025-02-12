@@ -18,4 +18,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // for JUnit Test Case Only
     Optional<Product> findByProductNumber (String productNumber);
+
 }

@@ -21,7 +21,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String productName;
 
     private String productNumber;
@@ -32,11 +31,10 @@ public class Product {
 
     private String productBrand;
 
-    @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false)
     private BigDecimal price;
+
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
@@ -46,7 +44,7 @@ public class Product {
 
     public Product(long l, String productName, String productNumber, String description, int i, BigDecimal bigDecimal, String supplier, String sku, String productBrand) {
     }
-
     public Product(long l, String productName, String productNumber, String description, int quantity, BigDecimal price, Supplier supplier, String sku, String productBrand) {
     }
+
 }
