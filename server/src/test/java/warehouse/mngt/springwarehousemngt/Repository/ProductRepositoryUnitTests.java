@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 
 
@@ -270,7 +269,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 9: Find Product By Product SKU")
+    @DisplayName("Test 10: Find Product By Product SKU")
     public void findByProductSKUTest() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
@@ -319,7 +318,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 10: Verify Product Deletion by Setting Deleted Flag")
+    @DisplayName("Test 11: Verify Product Deletion by Setting Deleted Flag")
     void verifyProductDeletionBySettingDeletedFlag() {
         // Create and save a new supplier
         Supplier supplier = Supplier.builder().build();
@@ -350,7 +349,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 11: Verify Product Validation - Empty ProductName")
+    @DisplayName("Test 12: Verify Product Validation - Empty ProductName")
     public void testProductValidation_EmptyProductName() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
@@ -384,7 +383,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 12: Verify Product Validation - Invalid Product Price")
+    @DisplayName("Test 13: Verify Product Validation - Invalid Product Price")
     public void testProductValidation_InvalidProductPrice() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
@@ -418,7 +417,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 13: Verify Product Validation - Duplicate Product SKU")
+    @DisplayName("Test 14: Verify Product Validation - Duplicate Product SKU")
     public void testProductValidation_DuplicateProductSKU() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
@@ -468,7 +467,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 14: Get Products By Supplier")
+    @DisplayName("Test 15: Get Products By Supplier")
     public void getProductsBySupplierTest() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
