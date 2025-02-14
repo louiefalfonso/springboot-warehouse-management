@@ -7,16 +7,25 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import warehouse.mngt.springwarehousemngt.dto.ProductDto;
 import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.entity.Supplier;
 
 import warehouse.mngt.springwarehousemngt.repository.ProductRepository;
 import warehouse.mngt.springwarehousemngt.repository.SupplierRepository;
+import warehouse.mngt.springwarehousemngt.service.impl.ProductServiceImpl;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
+import static org.assertj.core.api.AssertionsForClassTypes.tuple;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 
 @DataJpaTest
@@ -349,8 +358,8 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 12: Verify Product Validation - Empty ProductName")
-    public void testProductValidation_EmptyProductName() {
+    @DisplayName("Test 12: Verify Product Validation - Empty Product Name")
+    public void productValidation_EmptyProductName() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
@@ -384,7 +393,7 @@ public class ProductRepositoryUnitTests {
 
     @Test
     @DisplayName("Test 13: Verify Product Validation - Invalid Product Price")
-    public void testProductValidation_InvalidProductPrice() {
+    public void productValidation_InvalidProductPrice() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
@@ -418,7 +427,7 @@ public class ProductRepositoryUnitTests {
 
     @Test
     @DisplayName("Test 14: Verify Product Validation - Duplicate Product SKU")
-    public void testProductValidation_DuplicateProductSKU() {
+    public void productValidation_DuplicateProductSKU() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
@@ -467,50 +476,87 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 15: Get Products By Supplier")
-    public void getProductsBySupplierTest() {
+    @DisplayName("Test 15: Find By Deleted Products")
+    public void findByDeleted() {
+        // Given
+        List<Product> products = productRepository.findAll();
+
+        // When
+        List<Product> actualProducts = productRepository.findByDeleted(true);
+
+        // Then
+        assertEquals(0, actualProducts.size());
+    }
+
+    @Test
+    @DisplayName("Test 16: Find By Deleted Products - No Deleted Items")
+    public void findByDeleted_NoDeletedItems() {
+        // Given
+        List<Product> products = productRepository.findAll();
+
+        // Ensure there are no deleted items in the list
+        for (Product product : products) {
+            product.setDeleted(true);
+            productRepository.save(product);
+        }
+
+        // When
+        List<Product> actualProducts = productRepository.findByDeleted(false);
+
+        // Then
+        assertEquals(0, actualProducts.size());
+    }
+
+    @Test
+    @DisplayName("Test 17: Find Product with the different Product Supplier")
+    public void findByProductSupplierTest() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
         // Save the supplier
         Supplier savedSupplier = supplierRepository.save(supplier);
 
-        // Create two new product objects with the same supplier
-        Product product1 = Product.builder()
-                .productName("Product 1")
-                .productNumber("FL-123456")
-                .description("Description 1")
-                .productBrand("Brand 1")
-                .quantity(100)
-                .sku("010-010")
-                .price(BigDecimal.valueOf(100.00))
-                .supplier(savedSupplier)
-                .deleted(false)
-                .build();
-
-        Product product2 = Product.builder()
-                .productName("Product 2")
-                .productNumber("FL-789012")
-                .description("Description 2")
-                .productBrand("Brand 2")
+        // Create a new product object
+        Product product = Product.builder()
+                .productName("Product Name 1")
+                .productNumber("FL-4638254")
+                .description("Product Description 1")
+                .productBrand("Flotec")
                 .quantity(200)
-                .sku("020-020")
-                .price(BigDecimal.valueOf(200.00))
+                .sku("020-070")
+                .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
                 .deleted(false)
                 .build();
 
-        // Save the products
-        productRepository.save(product1);
-        productRepository.save(product2);
+        // Save the product
+        productRepository.save(product);
 
-        // Get products by supplier
-        List<Product> productsBySupplier = productRepository.findBySupplier(savedSupplier);
+        // Create another product with the different product supplier
+        Supplier anotherSupplier = Supplier.builder().build();
+        anotherSupplier = supplierRepository.save(anotherSupplier);
+
+        Product anotherProduct = Product.builder()
+                .productName("Another Product")
+                .productNumber("FL-4638230")
+                .description("Another product description")
+                .productBrand("Another Brand")
+                .quantity(100)
+                .sku("030-080")
+                .price(BigDecimal.valueOf(200.00))
+                .supplier(anotherSupplier)
+                .deleted(false)
+                .build();
+
+        // Save the another product
+        productRepository.save(anotherProduct);
+
+        // Find products by supplier
+        List<Product> foundProducts = productRepository.findBySupplier(savedSupplier);
 
         // Verify that the products are found
-        Assertions.assertThat(productsBySupplier).isNotEmpty();
-        Assertions.assertThat(productsBySupplier.size()).isEqualTo(2);
-        Assertions.assertThat(productsBySupplier).contains(product1, product2);
+        Assertions.assertThat(foundProducts).isNotEmpty();
+        Assertions.assertThat(foundProducts.size()).isEqualTo(1);
     }
 
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.entity.Supplier;
 import warehouse.mngt.springwarehousemngt.repository.SupplierRepository;
 
@@ -118,7 +117,32 @@ public class SupplierRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 7: Delete Supplier")
+    @DisplayName("Test 7: Update Supplier")
+    void updateSupplierTest() {
+        // Create a new supplier object
+        Supplier supplier = Supplier.builder()
+                .supplierName("Shelby & Co. Tradings")
+                .supplierCode("SUX-28374")
+                .supplierEmail("info@shelbyandcotradings.co.uk")
+                .contactInfo("024834637920")
+                .contactAddress("Larkfield, Crofton CA5 6QF")
+                .status("Active")
+                .deleted(false)
+                .build();
+
+        // Save the supplier
+        Supplier savedSupplier = supplierRepository.save(supplier);
+
+        // Update the supplier
+        savedSupplier.setSupplierName("Updated Supplier Name");
+        Supplier updateSupplier = supplierRepository.save(savedSupplier);
+
+        // Verify the update
+        Assertions.assertThat(updateSupplier.getSupplierName()).isEqualTo("Updated Supplier Name");
+    }
+
+    @Test
+    @DisplayName("Test 8: Delete Supplier")
     public void deleteSupplier(){
         // Create a new supplier object
         Supplier supplier = Supplier.builder()
@@ -142,29 +166,5 @@ public class SupplierRepositoryUnitTests {
         Assertions.assertThat(deletedSupplier).isEmpty();
     }
 
-    @Test
-    @DisplayName("Test 8: Update Supplier")
-    void updateSupplierTest() {
-        // Create a new supplier object
-        Supplier supplier = Supplier.builder()
-                .supplierName("Shelby & Co. Tradings")
-                .supplierCode("SUX-28374")
-                .supplierEmail("info@shelbyandcotradings.co.uk")
-                .contactInfo("024834637920")
-                .contactAddress("Larkfield, Crofton CA5 6QF")
-                .status("Active")
-                .deleted(false)
-                .build();
-
-        // Save the supplier
-        Supplier savedSupplier = supplierRepository.save(supplier);
-
-        // Update the supplier
-        savedSupplier.setSupplierName("Updated Supplier Name");
-        Supplier updateSupplier = supplierRepository.save(savedSupplier);
-
-        // Verify the update
-        Assertions.assertThat(updateSupplier.getSupplierName()).isEqualTo("Updated Supplier Name");
-    }
 
 }
