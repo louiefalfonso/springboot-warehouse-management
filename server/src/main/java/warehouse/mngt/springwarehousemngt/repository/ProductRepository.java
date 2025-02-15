@@ -1,6 +1,7 @@
 package warehouse.mngt.springwarehousemngt.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.entity.Supplier;
 
@@ -25,4 +26,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findBySupplier(Supplier supplier);
 
+    @Query("SELECT p FROM Product p WHERE p.quantity <= :quantity")
+    List<Product> findOutOfStockProduct (int quantity);
 }

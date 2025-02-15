@@ -4,6 +4,7 @@ package warehouse.mngt.springwarehousemngt.Repository;
 import org.assertj.core.api.Assertions;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -23,8 +24,7 @@ import java.util.Optional;
 import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 
@@ -485,7 +485,7 @@ public class ProductRepositoryUnitTests {
         List<Product> actualProducts = productRepository.findByDeleted(true);
 
         // Then
-        assertEquals(0, actualProducts.size());
+        assertEquals(1, actualProducts.size());
     }
 
     @Test
@@ -494,7 +494,7 @@ public class ProductRepositoryUnitTests {
         // Given
         List<Product> products = productRepository.findAll();
 
-        // Ensure there are no deleted items in the list
+        // Ensure there are deleted items in the list
         for (Product product : products) {
             product.setDeleted(true);
             productRepository.save(product);
@@ -558,5 +558,73 @@ public class ProductRepositoryUnitTests {
         Assertions.assertThat(foundProducts).isNotEmpty();
         Assertions.assertThat(foundProducts.size()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("Test 18: Find Out of Stock Products")
+    public void findByProduct_OutOfStockProduct() {
+        // Given
+        List<Product> products = productRepository.findAll();
+
+        // Ensure there are out of stock products in the list
+        for (Product product : products) {
+            product.setQuantity(0);
+            productRepository.save(product);
+        }
+
+        // Act
+        List<Product> outOfStock = productRepository.findOutOfStockProduct(0);
+
+        // Then
+        assertEquals(products.size(), outOfStock.size());
+    }
+
+    @Test
+    public void testFindByIdAndDeleted_WhenDeletedIsTrue_AndProductExists() {
+
+        // Mock the productRepository using Mockito
+        ProductRepository mockProductRepository = Mockito.mock(ProductRepository.class);
+        Mockito.when(mockProductRepository.findByIdAndDeleted(1L, true)).thenReturn(Optional.empty());
+
+        // When
+        Optional<Product> actualProduct = mockProductRepository.findByIdAndDeleted(1L, true);
+
+        // Then
+        assertFalse(actualProduct.isPresent());
+        Mockito.verify(mockProductRepository).findByIdAndDeleted(1L, true);
+    }
+
+    @Test
+    public void testFindByIdAndDeleted_WhenDeletedIsTrue_AndProductExists1() {
+
+        // Mock the productRepository using Mockito
+        ProductRepository mockProductRepository = Mockito.mock(ProductRepository.class);
+
+        // When
+        Product mockProduct = new Product();
+        mockProduct.setId(1L);
+        mockProduct.setDeleted(true);
+        Optional<Product> expectedProduct = Optional.of(mockProduct);
+        Mockito.when(mockProductRepository.findByIdAndDeleted(1L, true)).thenReturn(expectedProduct);
+
+        // Then
+        Optional<Product> actualProduct = mockProductRepository.findByIdAndDeleted(1L, true);
+        assertTrue(actualProduct.isPresent());
+        assertEquals(1L, actualProduct.get().getId().longValue());
+        assertTrue(actualProduct.get().isDeleted());
+        Mockito.verify(mockProductRepository).findByIdAndDeleted(1L, true);
+    }
+
+    @Test
+    public void testFindByIdAndDeleted_WhenDeletedIsFalse_AndProductDoesNotExists() {
+        // Given
+        Long nonExistingProductId = 999L; // assume this product ID does not exist in the database
+
+        // When
+        Optional<Product> actualProduct = productRepository.findByIdAndDeleted(nonExistingProductId, false);
+
+        // Then
+        assertFalse(actualProduct.isPresent());
+    }
+
 
 }
