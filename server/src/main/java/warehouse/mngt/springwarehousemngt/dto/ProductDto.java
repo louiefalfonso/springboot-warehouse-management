@@ -34,4 +34,6 @@ public class ProductDto {
 
     public ProductDto(long id, String productName, String productNumber, String description, int quantity, BigDecimal bigDecimal, String supplier, String sku, String productBrand) {
     }
+
+    
 }

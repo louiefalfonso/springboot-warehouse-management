@@ -41,28 +41,6 @@ public class Product {
 
     private boolean deleted = false;
 
-    // for JUnit Test Case Only
-    public Product(
-            long l,
-            String productName,
-            String productNumber,
-            String description,
-            int i,
-            BigDecimal bigDecimal,
-            String supplier,
-            String sku,
-            String productBrand) {
-    }
-    public Product(
-            long l,
-            String productName,
-            String productNumber,
-            String description,
-            int quantity,
-            BigDecimal price,
-            Supplier supplier,
-            String sku,
-            String productBrand) {
-    }
+
 
 }
