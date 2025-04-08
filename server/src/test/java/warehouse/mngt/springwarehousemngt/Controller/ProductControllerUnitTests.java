@@ -47,7 +47,7 @@ public class ProductControllerUnitTests {
         inputProductDto.setProductBrand("Flotec");
         inputProductDto.setQuantity(200);
         inputProductDto.setPrice(BigDecimal.valueOf(150.00));
-        inputProductDto.setSupplier(11);
+        inputProductDto.setSupplier(11L);
 
         ProductDto savedProductDto = new ProductDto();
         savedProductDto.setProductNumber("AB-8493519");
@@ -57,7 +57,7 @@ public class ProductControllerUnitTests {
         savedProductDto.setProductBrand("Flotec");
         savedProductDto.setQuantity(200);
         savedProductDto.setPrice(BigDecimal.valueOf(150.00));
-        savedProductDto.setSupplier(11);
+        savedProductDto.setSupplier(11L);
 
         when(productService.createNewProduct(inputProductDto)).thenReturn(savedProductDto);
 
