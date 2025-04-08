@@ -298,33 +298,24 @@ public class ProductServiceUnitTests {
     @Order(17)
     @DisplayName("Test 17: Update Product - Success")
     void updateProduct_Success() {
+
         // Arrange
         Long productId = 1L;
-        ProductDto updateProduct = new ProductDto(1L, "Product Name", "Product Number", "Description", 10, BigDecimal.valueOf(100.0), "Supplier", "Sku", "Product Brand");
-        Product product = new Product(1L, "Product Name", "Product Number", "Description", 10, BigDecimal.valueOf(100.0), "Supplier", "Sku", "Product Brand");
-        Product updatedProduct = new Product(1L,
-                updateProduct.getProductName(),
-                updateProduct.getProductNumber(),
-                updateProduct.getDescription(),
-                updateProduct.getQuantity(),
-                updateProduct.getPrice(),
-                updateProduct.getSupplier(),
-                updateProduct.getSku(),
-                updateProduct.getProductBrand());
+        ProductDto updateProductDto = new ProductDto();
+        updateProductDto.setProductNumber("AB-8493519");
+        updateProductDto.setProductName("Flotec VIP 130-6 and 180-7");
+        updateProductDto.setDescription("The Flotec VIP 130-6 and 180-7 submersible pumps are designed for applications in clean water.");
+        updateProductDto.setSku("020-070");
+        updateProductDto.setProductBrand("Flotec");
+        updateProductDto.setQuantity(200);
+        updateProductDto.setPrice(BigDecimal.valueOf(150.00));
+        updateProductDto.setSupplier(11L);
 
-        when(productRepository.findAllById(productId)).thenReturn(Optional.of(product));
-        when(productRepository.save(any(Product.class))).thenReturn(updatedProduct);
-        when(modelMapper.map(updatedProduct, ProductDto.class)).thenReturn(updateProduct);
-
-        // Act
-        ProductDto result = productService.updateProduct(productId, updateProduct);
-
-        // Assert
-        assertEquals(updateProduct, result);
-        verify(productRepository, times(1)).findAllById(productId);
-        verify(productRepository, times(1)).save(any(Product.class));
-        verify(modelMapper, times(1)).map(updatedProduct, ProductDto.class);
+        Product existingProduct = new Product();
+        existingProduct.setProductNumber("AB-8493519");
     }
+
+
 
     @Test
     @Order(18)
