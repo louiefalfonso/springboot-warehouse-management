@@ -50,6 +50,8 @@ public class WarehouseController {
                 .orElseThrow(()-> new RuntimeException("Warehouse does not exist with id: " + id));
 
         updateWarehouse.setWarehouseName(warehouseDetails.getWarehouseName());
+        updateWarehouse.setWarehouseCode(warehouseDetails.getWarehouseCode());
+        updateWarehouse.setOfficeHours(warehouseDetails.getOfficeHours());
         updateWarehouse.setWarehouseLocation(warehouseDetails.getWarehouseLocation());
         updateWarehouse.setWarehouseManager(warehouseDetails.getWarehouseManager());
         updateWarehouse.setContactNumber(warehouseDetails.getContactNumber());
