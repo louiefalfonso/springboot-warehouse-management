@@ -53,6 +53,8 @@ public class WarehouseServiceImpl implements WarehouseService {
                 .orElseThrow(()->new RuntimeException("Warehouse doesn't exist with a given Id:" + warehouseId));
 
         warehouse.setWarehouseName(updateWarehouse.getWarehouseName());
+        warehouse.setWarehouseCode(updateWarehouse.getWarehouseCode());
+        warehouse.setOfficeHours(updateWarehouse.getOfficeHours());
         warehouse.setWarehouseLocation(updateWarehouse.getWarehouseLocation());
         warehouse.setWarehouseManager(updateWarehouse.getWarehouseManager());
         warehouse.setContactNumber(updateWarehouse.getContactNumber());

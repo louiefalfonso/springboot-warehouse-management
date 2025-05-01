@@ -15,6 +15,10 @@ public class WarehouseDto {
 
     private String warehouseName;
 
+    private String warehouseCode;
+
+    private String officeHours;
+
     private String warehouseLocation;
 
     private String warehouseManager;

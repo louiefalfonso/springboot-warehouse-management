@@ -36,5 +36,6 @@ public class ProductDto {
     }
 
     public void setSupplier(long l) {
+
     }
 }

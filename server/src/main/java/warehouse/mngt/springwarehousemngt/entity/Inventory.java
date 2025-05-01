@@ -18,6 +18,8 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String inventoryCode;
+
     @ManyToOne
     private Product product;
 
