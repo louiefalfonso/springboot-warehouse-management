@@ -68,19 +68,4 @@ public class SupplierController {
         supplierService.deleteSupplier(supplierId);
         return ResponseEntity.ok("Supplier Deleted Successfully");
     }
-
-    //GET - Get All Deleted Suppliers REST API
-    @GetMapping("/deleted")
-    public ResponseEntity<List<SupplierDto>> getAllDeletedSuppliers(){
-        List<SupplierDto> deletedSuppliers = supplierService.getAllDeletedSuppliers();
-        return ResponseEntity.ok(deletedSuppliers);
-    }
-
-
-    //GET - Get Deleted Supplier By ID REST API
-    @GetMapping("/deleted/{id}")
-    public ResponseEntity<SupplierDto> getDeletedSupplierById(@PathVariable ("id") Long id){
-        SupplierDto deletedSupplier = supplierService.getDeletedSupplierById(id);
-        return ResponseEntity.ok(deletedSupplier);
-    }
 }
