@@ -9,9 +9,4 @@ import java.util.Optional;
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
     Optional<Supplier> findAllById (Long SupplierId);
-
-    List<Supplier> findByDeleted(boolean deleted);
-
-    Optional<Supplier> findByIdAndDeleted (Long id, boolean deleted);
-
 }
