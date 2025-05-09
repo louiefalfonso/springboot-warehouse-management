@@ -33,19 +33,19 @@ const AddNewSupplierForm:React.FC<SupplierProps> = ({onSubmit}) => {
     contactAddress:""
   })
 
-     // Input handlers to use handleInputChange
-    const handleInputChange = (field: keyof typeof supplierData, value: string ) => {
+  // Input handlers to use handleInputChange
+  const handleInputChange = (field: keyof typeof supplierData, value: string ) => {
         setSupplierData((prev) => ({ ...prev, [field]: value }));
-    };
+  };
 
-    const newSupplier = useMemo<Supplier>(
-        ()=>({ id: "", ...supplierData }), [supplierData]
-    );
+  const newSupplier = useMemo<Supplier>(
+      ()=>({ id: "", ...supplierData }), [supplierData]
+  );
 
-   const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
             e.preventDefault();
             onSubmit(newSupplier);
-    }
+ }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -69,7 +69,7 @@ const AddNewSupplierForm:React.FC<SupplierProps> = ({onSubmit}) => {
         </div>
         
       </div>
-      <div className="grid auto-rows-min md:grid-cols-2">
+      <div className="grid auto-rows-min md:grid-cols-1">
         <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="contactAddress">Contact Address:</Label>
           <Textarea id="contactAddress" placeholder="Contact Address" onChange={(e: { target: { value: string; }; }) => handleInputChange("contactAddress", e.target.value)}/>

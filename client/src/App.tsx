@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Toaster } from '@/components/ui/sonner';
 
 import SupplierListPage from '@/pages/suppliers/page';
@@ -23,7 +23,6 @@ function App() {
 
       <Route path="/warehouses" element={<WarehouseListPage/>} />
 
-      
     </Routes>
     <Toaster/>
   </>
