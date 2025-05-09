@@ -1,5 +1,5 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 
 interface HeaderProps { Title: string;}
@@ -11,7 +11,7 @@ const Header = ({ Title }: HeaderProps) => {
             <SidebarTrigger />
             <h1 className="header-title">{Title}</h1>
           </div>
-          <Button className="mr-4 bg-rose-500 hover:bg-rose-600" aria-label="Logout">
+          <Button className="mr-4 bg-rose-700 hover:bg-rose-800" aria-label="Logout">
             <LogOut /> Logout
           </Button>
         </header>
