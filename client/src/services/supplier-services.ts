@@ -25,6 +25,20 @@ const supplierServices = {
         const response = await axios.get(API_BASE_URL);
         return response.data;
     },
+
+    getSupplierById: async (id: string) => {
+        const response = await axios.get(`${API_BASE_URL}/${id}`);
+        return response.data;
+    },
+
+    updateCurrentSupplier: async (currentSupplier: Supplier, id: string) => {
+        const response = await axios.put(`${API_BASE_URL}/${id}`, currentSupplier);
+        return response.data;
+    },
+  
+    deleteSupplier: async (id: string) => {
+        await axios.delete(`${API_BASE_URL}/${id}`);
+    },
 }
 
 // React Query Hooks
@@ -43,7 +57,30 @@ export const useGetAllSuppliers = () => {
       { queryKey: ['suppliers'], queryFn: supplierServices.getAllSuppliers });
 };
 
+export const useGetSupplierById = (id: string) => {
+    return useQuery(
+      { queryKey: ['supplier', id], queryFn: () => supplierServices.getSupplierById(id) });
+}
 
+export const useUpdateSupplier = (id: string) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (currentSupplier: Supplier) => supplierServices.updateCurrentSupplier(currentSupplier, id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['supplier', id] });
+      },
+    });
+};
+
+export const useDeleteSupplier = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (id: string) => supplierServices.deleteSupplier(id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['suppliers'] });
+      },
+    });
+  };
 
 export default supplierServices
 
