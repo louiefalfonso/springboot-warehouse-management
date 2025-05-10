@@ -49,7 +49,7 @@ const AddNewSupplierForm:React.FC<SupplierProps> = ({onSubmit}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Supplier Information</h2>
+      <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Add New Supplier Information</h2>
       <div className="grid auto-rows-min md:grid-cols-2">
         <div className="grid w-full items-center gap-4 p-4">
            <Label htmlFor="supplierName">Supplier Name:</Label>
