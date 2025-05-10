@@ -16,8 +16,4 @@ public interface WarehouseService {
 
     void deleteWarehouse(Long warehouseId);
 
-    List<WarehouseDto> getAllDeletedWarehouses();
-
-    WarehouseDto getDeletedWarehouseById(Long id);
-
 }

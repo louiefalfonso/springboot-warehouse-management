@@ -10,8 +10,4 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 
     Optional<Warehouse> findAllById(Long WarehouseId);
 
-    List<Warehouse> findByDeleted(boolean deleted);
-
-    Optional<Warehouse> findByIdAndDeleted (Long id, boolean deleted);
-
 }

@@ -58,6 +58,7 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setWarehouseLocation(updateWarehouse.getWarehouseLocation());
         warehouse.setWarehouseManager(updateWarehouse.getWarehouseManager());
         warehouse.setContactNumber(updateWarehouse.getContactNumber());
+        warehouse.setDescription(updateWarehouse.getDescription());
 
         Warehouse updateWarehouseObj = warehouseRepository.save(warehouse);
         return modelMapper.map(updateWarehouseObj, WarehouseDto.class);
@@ -69,26 +70,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     public void deleteWarehouse(Long warehouseId) {
         Warehouse warehouse = warehouseRepository.findById(warehouseId)
                 .orElseThrow(()-> new RuntimeException("Warehouse doesn't exist with given id:" + warehouseId));
-        warehouse.setDeleted(true);
-        warehouseRepository.save(warehouse);
+       warehouseRepository.deleteById(warehouseId);
     }
 
-
-    // REST API - Get All Deleted Warehouses
-    @Override
-    public List<WarehouseDto> getAllDeletedWarehouses() {
-       List<Warehouse> deletedWarehouses = warehouseRepository.findByDeleted(true);
-       return deletedWarehouses.stream()
-               .map(warehouse -> modelMapper.map(warehouse, WarehouseDto.class))
-               .collect(Collectors.toList());
-    }
-
-
-    // REST API - Get Deleted Warehouse By ID
-    @Override
-    public WarehouseDto getDeletedWarehouseById(Long id) {
-        Warehouse warehouse = warehouseRepository.findByIdAndDeleted(id, true)
-                .orElseThrow(()-> new RuntimeException("Deleted Warehouse doesn't exist with a given Id:" + id));
-        return modelMapper.map(warehouse, WarehouseDto.class);
-    }
 }

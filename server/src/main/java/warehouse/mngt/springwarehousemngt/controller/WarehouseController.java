@@ -55,6 +55,7 @@ public class WarehouseController {
         updateWarehouse.setWarehouseLocation(warehouseDetails.getWarehouseLocation());
         updateWarehouse.setWarehouseManager(warehouseDetails.getWarehouseManager());
         updateWarehouse.setContactNumber(warehouseDetails.getContactNumber());
+        updateWarehouse.setDescription(warehouseDetails.getDescription());
 
         warehouseRepository.save(updateWarehouse);
         return ResponseEntity.ok(updateWarehouse);
@@ -62,23 +63,9 @@ public class WarehouseController {
 
     //DELETE - Delete Warehouse REST API
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteWarehouse(@PathVariable ("id")  Long warehouseId){
+    public ResponseEntity<String> deleteWarehouse(@PathVariable ("id")  Long warehouseId) {
         warehouseService.deleteWarehouse(warehouseId);
         return ResponseEntity.ok("Warehouse Deleted Successfully");
     }
-
-    //GET - Get All Deleted Warehouses REST API
-    @GetMapping("/deleted")
-    public ResponseEntity<List<WarehouseDto>> getAllDeletedWarehouses(){
-        List<WarehouseDto> deletedWarehouses = warehouseService.getAllDeletedWarehouses();
-        return ResponseEntity.ok(deletedWarehouses);
-    }
-
-
-    //GET - Get Deleted Warehouse By ID REST API
-    @GetMapping("/deleted/{id}")
-    public ResponseEntity<WarehouseDto> getDeletedWarehouseById(@PathVariable ("id") Long id){
-        WarehouseDto deletedWarehouse = warehouseService.getDeletedWarehouseById(id);
-        return ResponseEntity.ok(deletedWarehouse);
-    }
 }
+

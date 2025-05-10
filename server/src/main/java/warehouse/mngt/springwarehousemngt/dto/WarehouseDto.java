@@ -24,4 +24,6 @@ public class WarehouseDto {
     private String warehouseManager;
 
     private String contactNumber;
+
+    private String description;
 }

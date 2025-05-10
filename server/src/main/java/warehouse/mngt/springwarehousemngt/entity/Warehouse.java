@@ -31,5 +31,6 @@ public class Warehouse {
 
     private String contactNumber;
 
-    private boolean deleted = false;
+    private String description;
+
 }
