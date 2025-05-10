@@ -6,8 +6,8 @@ import Header from "@/components/layout/header";
 import AddNewSupplierForm from "./form/add-form";
 import { useAddNewSupplier } from "@/services/supplier-services";
 
-const SUCCESS_MESSAGE = "Treatment Added Successfully";
-const ERROR_MESSAGE = "Failed to Add Treatment.";
+const SUCCESS_MESSAGE = "Supplier Added Successfully";
+const ERROR_MESSAGE = "Failed to Add Supplier.";
 
 const AddNewSupplier = () => {
 

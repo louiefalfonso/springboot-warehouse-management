@@ -35,7 +35,7 @@ const AppSidebar = () => {
     <Sidebar>
       <SidebarContent className="sidebar-content">
         <SidebarGroup>
-          <SidebarGroupLabel className="sidebar-group-label center-logo">
+          <SidebarGroupLabel className="sidebar-group-label">
             <img src={MainLogo} alt="Logo" className="main-logo" />
           </SidebarGroupLabel>
           <SidebarGroupContent>

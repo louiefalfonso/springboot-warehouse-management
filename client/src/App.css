@@ -35,12 +35,6 @@
   height: 100px;
 }
 
-.center-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .sidebar-content{
   background-color: #fff;
 }
