@@ -26,7 +26,6 @@ type SupplierFormProps = {
   supplierId: string;
 }
 
-
 const EditSupplierForm:React.FC<SupplierFormProps> = React.memo(({
   supplierName, setSupplierName,
   supplierCode, setSupplierCode,
