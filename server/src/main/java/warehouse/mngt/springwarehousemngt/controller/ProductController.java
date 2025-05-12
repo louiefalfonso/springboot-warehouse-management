@@ -69,18 +69,5 @@ public class ProductController {
         return ResponseEntity.ok("Product Deleted Successfully");
     }
 
-
-    //GET - Get All Deleted Products REST API
-    @GetMapping("/deleted")
-    public ResponseEntity<List<ProductDto>> getAllDeletedProduct(){
-        List<ProductDto> deletedProducts = productService.getAllDeletedProducts();
-        return ResponseEntity.ok(deletedProducts);
-    }
-
-    //GET - Get Deleted Product By ID REST API
-    @GetMapping("/deleted/{id}")
-    public ResponseEntity<ProductDto> getDeletedProductById(@PathVariable ("id") Long id){
-        ProductDto deletedProduct = productService.getDeletedProductById(id);
-        return ResponseEntity.ok(deletedProduct);
-    }
 }
+

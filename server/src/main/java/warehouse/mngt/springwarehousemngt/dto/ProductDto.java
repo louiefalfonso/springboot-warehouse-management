@@ -32,10 +32,5 @@ public class ProductDto {
 
     private Supplier supplier;
 
-    public ProductDto(long id, String productName, String productNumber, String description, int quantity, BigDecimal bigDecimal, String supplier, String sku, String productBrand) {
-    }
 
-    public void setSupplier(long l) {
-
-    }
 }
