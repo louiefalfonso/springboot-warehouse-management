@@ -12,10 +12,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findAllById (Long ProductId);
 
-    List<Product> findByDeleted(boolean deleted);
-
-    Optional<Product> findByIdAndDeleted(Long id, boolean deleted);
-
     boolean existsByProductNumber (String productNumber);
 
     // for JUnit Test Case Only

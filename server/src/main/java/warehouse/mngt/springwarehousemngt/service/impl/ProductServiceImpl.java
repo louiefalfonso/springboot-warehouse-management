@@ -79,26 +79,6 @@ public class ProductServiceImpl implements ProductService {
         }
         Product product = productRepository.findById(productId)
                 .orElseThrow(()-> new RuntimeException("Product doesn't exist with given id:" + productId));
-        product.setDeleted(true);
-        productRepository.save(product);
-    }
-
-
-    // REST API - Get All Deleted Products
-    @Override
-    public List<ProductDto> getAllDeletedProducts() {
-        List<Product> deletedProducts = productRepository.findByDeleted(true);
-        return deletedProducts.stream()
-                .map(product -> modelMapper.map(product, ProductDto.class))
-                .collect(Collectors.toList());
-    }
-
-
-    // REST API - Get Deleted Product By ID
-    @Override
-    public ProductDto getDeletedProductById(Long id) {
-        Product product = productRepository.findByIdAndDeleted(id, true)
-                .orElseThrow(()-> new RuntimeException("Deleted Product doesn't exist with a given Id:" + id));
-        return modelMapper.map(product, ProductDto.class);
+        productRepository.deleteById(productId);
     }
 }
