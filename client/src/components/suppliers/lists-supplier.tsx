@@ -30,7 +30,7 @@ const SupplierLists = () => {
         contactAddress: string;   
     }
 
- // Filter treatment based on search query
+ // Filter supplier based on search query
   const filteredSuppliers: Supplier[] = searchQuery
   ? data.filter((supplier: Supplier) =>
       supplier.supplierName.toLowerCase().includes(searchQuery.toLowerCase()) ||
