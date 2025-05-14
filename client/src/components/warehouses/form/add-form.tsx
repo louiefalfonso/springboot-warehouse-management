@@ -50,11 +50,33 @@ const AddNewWarehouseForm:React.FC<WarehouseProps> = ({onSubmit}) => {
   return (
     <form onSubmit={handleSubmit}>
         <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Add New Warehouse Information</h2>
-        <div className="grid auto-rows-min md:grid-cols-2">
+        <div className="grid auto-rows-min md:grid-cols-3">
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="warehouseName">Warehouse Name:</Label>
                 <Input type="text" id="warehouseName" placeholder="Warehouse Name" onChange={(e: { target: { value: string; }; }) => handleInputChange("warehouseName", e.target.value)}/>
             </div>
+            <div className="grid w-full items-center gap-4 p-4">
+                <Label htmlFor="warehouseCode">Warehouse Code:</Label>
+                <Input type="text" id="warehouseCode" placeholder="Warehouse Code" onChange={(e: { target: { value: string; }; }) => handleInputChange("warehouseCode", e.target.value)}/>
+            </div>
+            <div className="grid w-full items-center gap-4 p-4">
+                <Label htmlFor="officeHours">Office Hours:</Label>
+                <Input type="text" id="officeHours" placeholder="Office Hours" onChange={(e: { target: { value: string; }; }) => handleInputChange("officeHours", e.target.value)}/>
+            </div>
+        </div>
+        <div className="grid auto-rows-min md:grid-cols-3">
+         <div className="grid w-full items-center gap-4 p-4">
+              <Label htmlFor="warehouseLocation">Warehouse Location:</Label>
+              <Input type="text" id="warehouseLocation" placeholder="Warehouse Location" onChange={(e: { target: { value: string; }; }) => handleInputChange("warehouseLocation", e.target.value)}/>
+          </div>
+          <div className="grid w-full items-center gap-4 p-4">
+              <Label htmlFor="warehouseManager">Warehouse Manager:</Label>
+              <Input type="text" id="warehouseManager" placeholder="Warehouse Manager" onChange={(e: { target: { value: string; }; }) => handleInputChange("warehouseManager", e.target.value)}/>
+          </div>
+          <div className="grid w-full items-center gap-4 p-4">
+              <Label htmlFor="contactNumber">Contact Number:</Label>
+              <Input type="text" id="contactNumber" placeholder="Contact Number" onChange={(e: { target: { value: string; }; }) => handleInputChange("contactNumber", e.target.value)}/>
+          </div>  
         </div>
         <div className="grid auto-rows-min md:grid-cols-1">
             <div className="grid w-full items-center gap-4 p-4">

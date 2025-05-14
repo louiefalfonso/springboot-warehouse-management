@@ -15,7 +15,7 @@ const AddNewSupplier = () => {
   const navigate = useNavigate();
   const { mutate } = useAddNewSupplier();
 
-  // Handle form submission for adding a new treatment
+  // Handle form submission for adding a new supplier
   const handleFormSubmit = (newSupplier) => {
     mutate(newSupplier, {
       onSuccess: () => {
