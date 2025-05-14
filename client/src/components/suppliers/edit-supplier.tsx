@@ -77,7 +77,7 @@ const UpdateSupplier = () => {
     }
   }
 
-    // delete treatment
+  // delete treatment
   const handleDelete = () =>{
     try {
       deleteSupplier(id || "", {
