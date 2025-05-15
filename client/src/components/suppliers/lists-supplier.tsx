@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination"
-
 import { useGetAllSuppliers } from "@/services/supplier-services";
 
 const SupplierLists = () => {
@@ -34,6 +33,9 @@ const SupplierLists = () => {
   const filteredSuppliers: Supplier[] = searchQuery
   ? data.filter((supplier: Supplier) =>
       supplier.supplierName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      supplier.supplierCompany.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      supplier.contactAddress.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      supplier.supplierEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
       supplier.supplierCode.toLowerCase().includes(searchQuery.toLowerCase())
     )
   : data;
@@ -65,9 +67,10 @@ const SupplierLists = () => {
                     <TableRow>
                         <TableHead>Supplier Code</TableHead>
                         <TableHead>Supplier Name</TableHead>
+                        <TableHead>Status</TableHead>
                         <TableHead>Supplier Company</TableHead>
                         <TableHead>Supplier Address</TableHead>
-                        <TableHead>Status</TableHead>
+                        
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -75,9 +78,9 @@ const SupplierLists = () => {
                     <TableRow key={supplier.id}>
                         <TableCell>{supplier.supplierCode}</TableCell>
                         <TableCell>{supplier.supplierName}</TableCell>
+                         <TableCell>{supplier.status}</TableCell>
                         <TableCell>{supplier.supplierCompany}</TableCell>
                         <TableCell>{supplier.contactAddress}</TableCell>
-                        <TableCell>{supplier.status}</TableCell>
                         <TableCell>
                             <Link to={`/suppliers/details/${supplier.id}`}>
                                 <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>

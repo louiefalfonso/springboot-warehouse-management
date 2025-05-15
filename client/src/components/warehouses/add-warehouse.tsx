@@ -33,7 +33,7 @@ const AddNewWarehouse = () => {
 
   return (
     <MainLayout>
-      <Header Title="Add New Supplier" />
+      <Header Title="Add New Warehouse" />
       <div className="flex flex-1 flex-col gap-4 p-4">
         <AddNewWarehouseForm onSubmit={handleFormSubmit}/>
       </div>

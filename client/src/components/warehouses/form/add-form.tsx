@@ -10,6 +10,7 @@ type Warehouse = {
     warehouseName?: string;
     warehouseCode?: string;
     officeHours?: string;
+    warehouseEmail?:string;
     warehouseLocation?: string;
     warehouseManager?: string;
     contactNumber?: string;
@@ -27,6 +28,7 @@ const AddNewWarehouseForm:React.FC<WarehouseProps> = ({onSubmit}) => {
     warehouseName: "",
     warehouseCode: "",
     officeHours: "",
+    warehouseEmail:"",
     warehouseLocation: "",
     warehouseManager: "",
     contactNumber: "",
@@ -49,7 +51,7 @@ const AddNewWarehouseForm:React.FC<WarehouseProps> = ({onSubmit}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Add New Warehouse Information</h2>
+        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Add New Information</h2>
         <div className="grid auto-rows-min md:grid-cols-3">
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="warehouseName">Warehouse Name:</Label>
@@ -66,8 +68,8 @@ const AddNewWarehouseForm:React.FC<WarehouseProps> = ({onSubmit}) => {
         </div>
         <div className="grid auto-rows-min md:grid-cols-3">
          <div className="grid w-full items-center gap-4 p-4">
-              <Label htmlFor="warehouseLocation">Warehouse Location:</Label>
-              <Input type="text" id="warehouseLocation" placeholder="Warehouse Location" onChange={(e: { target: { value: string; }; }) => handleInputChange("warehouseLocation", e.target.value)}/>
+              <Label htmlFor="warehouseEmail">Warehouse Email:</Label>
+              <Input type="text" id="warehouseEmail" placeholder="Warehouse Email" onChange={(e: { target: { value: string; }; }) => handleInputChange("warehouseEmail", e.target.value)}/>
           </div>
           <div className="grid w-full items-center gap-4 p-4">
               <Label htmlFor="warehouseManager">Warehouse Manager:</Label>
@@ -78,7 +80,11 @@ const AddNewWarehouseForm:React.FC<WarehouseProps> = ({onSubmit}) => {
               <Input type="text" id="contactNumber" placeholder="Contact Number" onChange={(e: { target: { value: string; }; }) => handleInputChange("contactNumber", e.target.value)}/>
           </div>  
         </div>
-        <div className="grid auto-rows-min md:grid-cols-1">
+        <div className="grid auto-rows-min md:grid-cols-2">
+           <div className="grid w-full items-center gap-4 p-4">
+                <Label htmlFor="warehouseLocation">Warehouse Location:</Label>
+                <Textarea id="warehouseLocation" placeholder="Warehouse Location" onChange={(e: { target: { value: string; }; }) => handleInputChange("warehouseLocation", e.target.value)}/>
+            </div>
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="description">Description:</Label>
                 <Textarea id="description" placeholder="Description" onChange={(e: { target: { value: string; }; }) => handleInputChange("description", e.target.value)}/>

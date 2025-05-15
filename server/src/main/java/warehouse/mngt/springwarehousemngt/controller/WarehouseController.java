@@ -52,6 +52,7 @@ public class WarehouseController {
         updateWarehouse.setWarehouseName(warehouseDetails.getWarehouseName());
         updateWarehouse.setWarehouseCode(warehouseDetails.getWarehouseCode());
         updateWarehouse.setOfficeHours(warehouseDetails.getOfficeHours());
+        updateWarehouse.setWarehouseEmail(warehouseDetails.getWarehouseEmail());
         updateWarehouse.setWarehouseLocation(warehouseDetails.getWarehouseLocation());
         updateWarehouse.setWarehouseManager(warehouseDetails.getWarehouseManager());
         updateWarehouse.setContactNumber(warehouseDetails.getContactNumber());

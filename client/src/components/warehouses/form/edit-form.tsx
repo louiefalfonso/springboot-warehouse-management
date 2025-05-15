@@ -13,6 +13,8 @@ type WarehouseFormProps = {
     setWarehouseCode: (value: string) => void;
     officeHours: string;
     setOfficeHours: (value: string) => void;
+    warehouseEmail:string;
+    setWarehouseEmail: (value: string) => void;
     warehouseLocation: string;
     setWarehouseLocation: (value: string) => void;
     warehouseManager: string;
@@ -30,6 +32,7 @@ const EditWarehouseForm:React.FC<WarehouseFormProps> = React.memo(({
         warehouseName, setWarehouseName,
         warehouseCode, setWarehouseCode,
         officeHours, setOfficeHours,
+        warehouseEmail, setWarehouseEmail,
         warehouseLocation, setWarehouseLocation,
         warehouseManager, setWarehouseManager,
         contactNumber, setContactNumber,
@@ -41,25 +44,30 @@ const EditWarehouseForm:React.FC<WarehouseFormProps> = React.memo(({
         { label: "Warehouse Name", id: "warehouseName", value: warehouseName, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setWarehouseName(e.target.value) },
         { label: "Warehouse Code", id: "warehouseCode", value: warehouseCode, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setWarehouseCode(e.target.value) },
         { label: "Office Hours", id: "officeHours", value: officeHours, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setOfficeHours(e.target.value) },
-        { label: "Warehouse Location", id: "warehouseLocation", value: warehouseLocation, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setWarehouseLocation(e.target.value) },
+        { label: "Warehouse Email", id: "warehouseEmail", value: warehouseEmail, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setWarehouseEmail(e.target.value) },
         { label: "Warehouse Manager", id: "warehouseManager", value: warehouseManager, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setWarehouseManager(e.target.value) },
         { label: "Contact Number", id: "contactNumber", value: contactNumber, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setContactNumber(e.target.value) }
     ]
   return (
     <form onSubmit={handleSubmit}>
-        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Update Warehouse Information</h2>
+        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Warehouse Information</h2>
         <div className="grid auto-rows-min md:grid-cols-3">
-        {formFields.map(({ label, id, value, onChange }) => (
-          <div key={id} className="grid w-full items-center gap-4 p-4">
-            <Label htmlFor={id}>{label}:</Label>
-            <Input type="text" id={id} value={value} onChange={onChange} />
-          </div>
-        ))}
+          {formFields.map(({ label, id, value, onChange }) => (
+            <div key={id} className="grid w-full items-center gap-4 p-4">
+              <Label htmlFor={id}>{label}:</Label>
+              <Input type="text" id={id} value={value} onChange={onChange} />
+            </div>
+          ))}
         </div>
-        <div className="grid auto-rows-min md:grid-cols-1">
+        
+        <div className="grid auto-rows-min md:grid-cols-2">
             <div className="grid w-full items-center gap-4 p-4">
-            <Label htmlFor="description">Description:</Label>
-            <Textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)}/>    
+             <Label htmlFor="warehouseLocation">Warehouse Location:</Label>
+              <Textarea id="warehouseLocation" value={warehouseLocation} onChange={(e) => setWarehouseLocation(e.target.value)}/>     
+            </div>
+            <div className="grid w-full items-center gap-4 p-4">
+              <Label htmlFor="description">Description:</Label>
+              <Textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)}/>    
             </div>
         </div>
         <div className="flex pl-4 mt-4 ">

@@ -24,6 +24,7 @@ const WarehouseLists = () => {
         warehouseName: string;
         warehouseCode: string;
         officeHours: string;
+        warehouseEmail: string;
         warehouseLocation: string;
         warehouseManager: string;
         contactNumber: string;
@@ -63,11 +64,10 @@ const WarehouseLists = () => {
           <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Warehouse Code</TableHead>
+                        <TableHead>Code</TableHead>
                         <TableHead>Warehouse Name</TableHead>
                         <TableHead>Warehouse Manager</TableHead>
                         <TableHead>Location</TableHead>
-                        <TableHead>Office House</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -77,7 +77,14 @@ const WarehouseLists = () => {
                       <TableCell>{warehouse.warehouseName}</TableCell>
                       <TableCell>{warehouse.warehouseManager}</TableCell>
                       <TableCell>{warehouse.warehouseLocation}</TableCell>
-                      <TableCell>{warehouse.officeHours}</TableCell>
+                      <TableCell>
+                            <Link to={`/warehouses/details/${warehouse.id}`}>
+                                <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
+                            </Link>
+                            <Link to={`/warehouses/update/${warehouse.id}`}>
+                                <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
+                            </Link>
+                        </TableCell> 
                     </TableRow>
                     ))}
                 </TableBody>
