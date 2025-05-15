@@ -22,6 +22,7 @@ const UpdateWarehouse = () => {
   const [warehouseName, setWarehouseName] = useState("");
   const [warehouseCode, setWarehouseCode] = useState("");
   const [officeHours, setOfficeHours] = useState("");
+  const [warehouseEmail, setWarehouseEmail] = useState("");
   const [warehouseLocation, setWarehouseLocation] = useState("");
   const [warehouseManager, setWarehouseManager] = useState("")
   const [contactNumber, setContactNumber] = useState("")
@@ -33,6 +34,7 @@ const UpdateWarehouse = () => {
       setWarehouseName(data.warehouseName);
       setWarehouseCode(data.warehouseCode);
       setOfficeHours(data.officeHours);
+      setWarehouseEmail(data.warehouseEmail)
       setWarehouseLocation(data.warehouseLocation);
       setWarehouseManager(data.warehouseManager);
       setContactNumber(data.contactNumber);
@@ -49,7 +51,7 @@ const UpdateWarehouse = () => {
 
     if(
       !warehouseName || !warehouseCode || !officeHours || !warehouseLocation ||
-      !warehouseManager || !contactNumber || !description
+      !warehouseEmail || !warehouseManager || !contactNumber || !description
     ){
         {
           toast.error("Please fill in all required fields.");
@@ -59,7 +61,7 @@ const UpdateWarehouse = () => {
 
     const currentWarehouse ={
       id: id || "", 
-      warehouseName, warehouseCode, officeHours, warehouseLocation, warehouseManager,contactNumber, description 
+      warehouseName, warehouseCode, officeHours, warehouseEmail, warehouseLocation, warehouseManager,contactNumber, description 
     }
 
     try {
@@ -100,7 +102,7 @@ const UpdateWarehouse = () => {
 
   return (
     <MainLayout>
-      <Header Title="Update Supplier" />
+      <Header Title="Update Warehouse" />
         <div className="flex flex-1 flex-col gap-4 p-4">
           <EditWarehouseForm 
           warehouseName={warehouseName}
@@ -109,6 +111,8 @@ const UpdateWarehouse = () => {
           setWarehouseCode={setWarehouseCode}
           officeHours={officeHours}
           setOfficeHours={setOfficeHours}
+          warehouseEmail={warehouseEmail}
+          setWarehouseEmail={setWarehouseEmail}
           warehouseLocation={warehouseLocation}
           setWarehouseLocation={setWarehouseLocation}
           warehouseManager={warehouseManager}

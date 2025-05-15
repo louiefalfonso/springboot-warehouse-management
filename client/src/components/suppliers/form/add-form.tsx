@@ -65,7 +65,7 @@ const AddNewSupplierForm:React.FC<SupplierProps> = ({onSubmit}) => {
           <Label htmlFor="contactInfo">Contact Number:</Label>
           <Input type="text" id="contactInfo" placeholder="Contact Number" onChange={(e: { target: { value: string; }; }) => handleInputChange("contactInfo", e.target.value)}/>
           <Label htmlFor="status">Status:</Label>
-          <Input type="text" id="status" placeholder="Status" onChange={(e: { target: { value: string; }; }) => handleInputChange("contactInfo", e.target.value)}/>
+          <Input type="text" id="status" placeholder="Status" onChange={(e: { target: { value: string; }; }) => handleInputChange("status", e.target.value)}/>
         </div>
         
       </div>

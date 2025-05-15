@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import { useMemo } from "react";
 import Header from '../layout/header'
 import MainLayout from '../layout/layout'
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,7 @@ const SupplierDetails = () => {
   }
 
   if (!supplierData) {
-    return <div>No doctor data found</div>;
+    return <div>No supplier data found</div>;
   }
 
   return (

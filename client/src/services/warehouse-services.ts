@@ -6,6 +6,7 @@ interface Warehouse {
     warehouseName?: string;
     warehouseCode?: string;
     officeHours?: string;
+    warehouseEmail?:string;
     warehouseLocation?: string;
     warehouseManager?: string;
     contactNumber?: string;
