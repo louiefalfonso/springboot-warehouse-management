@@ -25,6 +25,8 @@ public class Warehouse {
 
     private String officeHours;
 
+    private String warehouseEmail;
+
     private String warehouseLocation;
 
     private String warehouseManager;
