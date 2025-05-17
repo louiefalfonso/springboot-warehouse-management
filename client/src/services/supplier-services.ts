@@ -83,5 +83,3 @@ export const useDeleteSupplier = () => {
   };
 
 export default supplierServices
-
-

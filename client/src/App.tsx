@@ -11,6 +11,9 @@ import WarehouseListPage from '@/pages/warehouses/page';
 import AddNewWarehouse from './components/warehouses/add-warehouse';
 import UpdateWarehouse from './components/warehouses/edit-warehouse';
 import WarehouseDetails from './components/warehouses/details-warehouse';
+import CategoryListPage from './pages/categories/page';
+import AddNewCategory from './components/category/add-category';
+import UpdateCategory from './components/category/edit-category';
 
 function App() {
   
@@ -29,6 +32,10 @@ function App() {
       <Route path="/warehouses/update/:id" element={<UpdateWarehouse/>} />
       <Route path="/warehouses/details/:id" element={<WarehouseDetails/>} />
 
+      <Route path="/categories" element={<CategoryListPage/>} />
+      <Route path="/categories/add" element={<AddNewCategory/>} />
+      <Route path="/categories/update/:id" element={<UpdateCategory/>} />
+    
     </Routes>
     <Toaster/>
   </>
