@@ -5,8 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import warehouse.mngt.springwarehousemngt.dto.CategoryDto;
+import warehouse.mngt.springwarehousemngt.entity.Category;
 import warehouse.mngt.springwarehousemngt.repository.CategoryRepository;
 import warehouse.mngt.springwarehousemngt.service.CategoryService;
+
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -23,5 +26,19 @@ public class CategoryController {
         CategoryDto savedCategory = categoryService.createNewCategory(categoryDto);
         return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
     }
-}
 
+    //GET - Get Category By ID REST API
+    @GetMapping("{id}")
+    public  ResponseEntity<Category> getCategoryById(@PathVariable ("id") Long id){
+        Category category = categoryRepository.findAllById(id)
+                .orElseThrow(()->new RuntimeException("Category does not exist with Id:" + id));
+        return ResponseEntity.ok(category);
+    }
+
+    //GET - Get All Categories REST API
+    @GetMapping
+    public ResponseEntity<List<CategoryDto>> getAllCategories(){
+        List<CategoryDto> categories = categoryService.getAllCategories();
+        return ResponseEntity.ok(categories);
+    }
+}
