@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import warehouse.mngt.springwarehousemngt.entity.Category;
 import warehouse.mngt.springwarehousemngt.entity.Supplier;
 
 import java.math.BigDecimal;
@@ -32,5 +33,5 @@ public class ProductDto {
 
     private Supplier supplier;
 
-
+    private Category category;
 }

@@ -81,4 +81,11 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(()-> new RuntimeException("Product doesn't exist with given id:" + productId));
         productRepository.deleteById(productId);
     }
+
+    // REST API - Get Products By Category
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        return productRepository.findByCategoryName(category);
+    }
 }
+
