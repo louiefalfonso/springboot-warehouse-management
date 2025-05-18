@@ -1,6 +1,7 @@
 package warehouse.mngt.springwarehousemngt.service;
 
 import warehouse.mngt.springwarehousemngt.dto.ProductDto;
+import warehouse.mngt.springwarehousemngt.entity.Product;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface ProductService {
     ProductDto updateProduct(Long productId, ProductDto updateProduct);
 
     void deleteProduct(Long productId);
+    
+    List<Product> getProductsByCategory(String category);
 
 }

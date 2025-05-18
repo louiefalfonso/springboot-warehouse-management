@@ -20,5 +20,7 @@ public class CategoryDto {
 
     private String categoryDescription;
 
+    private String categoryStatus;
+
     private Category category;
 }
