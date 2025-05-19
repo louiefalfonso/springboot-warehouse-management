@@ -80,6 +80,6 @@ export const useDeleteSupplier = () => {
         queryClient.invalidateQueries({ queryKey: ['suppliers'] });
       },
     });
-  };
+};
 
 export default supplierServices

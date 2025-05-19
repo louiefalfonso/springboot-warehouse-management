@@ -6,6 +6,20 @@ import { Button } from "@/components/ui/button";
 import { useGetSupplierById } from "@/services/supplier-services";
 import SupplierDetailsList from "./lists/list-supplier";
 
+
+type Products = {
+  id: number;
+  productName: string;
+  productNumber: string;
+  description: string;
+  sku: string;
+  productBrand: string;
+  quantity: number;
+  price: number;
+  supplier: { id: number;};
+  category: { id: number;};
+};
+
 const SupplierDetails = () => {
 
   const { id } = useParams();
