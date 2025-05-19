@@ -62,9 +62,10 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(updateProduct.getDescription());
         product.setQuantity(updateProduct.getQuantity());
         product.setPrice(updateProduct.getPrice());
-        product.setSupplier(updateProduct.getSupplier());
         product.setSku(updateProduct.getSku());
         product.setProductBrand(updateProduct.getProductBrand());
+        product.setSupplier(updateProduct.getSupplier());
+        product.setCategory(updateProduct.getCategory());
 
         Product updateProductObj = productRepository.save(product);
         return modelMapper.map(updateProductObj, ProductDto.class);
@@ -82,10 +83,5 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(productId);
     }
 
-    // REST API - Get Products By Category
-    @Override
-    public List<Product> getProductsByCategory(String category) {
-        return productRepository.findByCategoryName(category);
-    }
 }
 

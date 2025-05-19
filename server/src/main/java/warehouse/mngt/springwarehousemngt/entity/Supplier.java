@@ -35,8 +35,8 @@ public class Supplier {
 
     private String contactAddress;
 
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     @JsonIgnore
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Product> products;
 
 }

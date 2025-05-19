@@ -14,7 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     boolean existsByProductNumber (String productNumber);
 
-    List<Product> findByCategoryName(String category);
 
     // for JUnit Test Case Only
 

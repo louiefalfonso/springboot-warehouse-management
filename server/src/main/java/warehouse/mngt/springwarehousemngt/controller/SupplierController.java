@@ -20,14 +20,14 @@ public class SupplierController {
     private SupplierRepository supplierRepository;
     private SupplierService supplierService;
 
-    //POST - Create New Supplier REST API
+    // POST - Create New Supplier REST API
     @PostMapping
     public ResponseEntity<SupplierDto> createNewSupplier(@RequestBody SupplierDto supplierDto){
         SupplierDto savedSupplier = supplierService.createNewSupplier(supplierDto);
         return new ResponseEntity<>(savedSupplier, HttpStatus.CREATED);
     }
 
-    //GET - Get Supplier By ID REST API
+    // GET - Get Supplier By ID REST API
     @GetMapping("{id}")
     public ResponseEntity<Supplier> getSupplierById(@PathVariable ("id") Long id){
         Supplier supplier = supplierRepository.findAllById(id)
@@ -35,14 +35,14 @@ public class SupplierController {
         return ResponseEntity.ok(supplier);
     }
 
-    //GET - Get All Suppliers REST API
+    // GET - Get All Suppliers REST API
     @GetMapping
     public ResponseEntity<List<SupplierDto>> getAllSuppliers(){
         List<SupplierDto> suppliers = supplierService.getAllSuppliers();
         return ResponseEntity.ok(suppliers);
     }
 
-    //UPDATE - Update Supplier REST API
+    // UPDATE - Update Supplier REST API
     @PutMapping("{id}")
     public ResponseEntity<Supplier> updateSupplier(@PathVariable ("id") long id,
                                                    @RequestBody Supplier supplierDetails){

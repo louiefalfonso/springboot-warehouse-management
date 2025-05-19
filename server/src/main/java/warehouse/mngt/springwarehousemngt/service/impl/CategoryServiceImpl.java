@@ -56,4 +56,12 @@ public class CategoryServiceImpl implements CategoryService {
        Category updateCategoryObj = categoryRepository.save(category);
        return modelMapper.map(updateCategoryObj, CategoryDto.class);
     }
+
+    // REST API - Delete Category
+    @Override
+    public void deleteCategory(Long categoryId) {
+        Category category = categoryRepository.findAllById(categoryId)
+                .orElseThrow(()->new RuntimeException("Category doesn't exist with given id:" + categoryId));
+        categoryRepository.deleteById(categoryId);
+    }
 }
