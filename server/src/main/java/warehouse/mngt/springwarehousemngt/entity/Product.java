@@ -39,7 +39,7 @@ public class Product {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 }

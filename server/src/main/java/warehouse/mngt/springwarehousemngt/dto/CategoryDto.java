@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import warehouse.mngt.springwarehousemngt.entity.Category;
+import warehouse.mngt.springwarehousemngt.entity.Product;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,5 +25,5 @@ public class CategoryDto {
 
     private String categoryStatus;
 
-    private Category category;
+    private List<Product> products;
 }

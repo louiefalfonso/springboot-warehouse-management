@@ -70,7 +70,6 @@ const SupplierLists = () => {
                         <TableHead>Status</TableHead>
                         <TableHead>Supplier Company</TableHead>
                         <TableHead>Supplier Address</TableHead>
-                        
                     </TableRow>
                 </TableHeader>
                 <TableBody>

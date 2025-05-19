@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, ScrollText, BaggageClaim, ShoppingBag } from "lucide-react";
+import { Home, ScrollText, BaggageClaim, ShoppingBag, Group } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import MainLogo from '@/assets/lbc-logo.png';
 
@@ -14,10 +14,15 @@ const items = [
     url: "/",
     icon: Home,
   },
-    {
+  {
     title: "Products",
     url: "/products",
     icon: ShoppingBag,
+  },
+  {
+    title: "Categories",
+    url: "/categories",
+    icon: Group,
   },
   {
     title: "Suppliers",

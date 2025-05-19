@@ -41,4 +41,27 @@ public class CategoryController {
         List<CategoryDto> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
+
+    // UPDATE - Update Category REST API
+    @PutMapping("{id}")
+    public ResponseEntity<Category> updateCategory(@PathVariable ("id") long id,
+                                                   @RequestBody Category categoryDetails){
+        Category updateCategory = categoryRepository.findAllById(id)
+                .orElseThrow(()->new RuntimeException("Category does not exist with id: " + id));
+
+        updateCategory.setCategoryName(categoryDetails.getCategoryName());
+        updateCategory.setCategoryCode(categoryDetails.getCategoryCode());
+        updateCategory.setCategoryStatus(categoryDetails.getCategoryStatus());
+        updateCategory.setCategoryDescription(categoryDetails.getCategoryDescription());
+
+        categoryRepository.save(updateCategory);
+        return ResponseEntity.ok(updateCategory);
+    }
+
+    // DELETE - Delete Supplier REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable ("id") Long categoryId){
+        categoryService.deleteCategory(categoryId);
+        return ResponseEntity.ok("Category Deleted Successfully");
+    }
 }
