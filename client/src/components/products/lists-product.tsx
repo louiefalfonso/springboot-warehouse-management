@@ -20,7 +20,7 @@ const ProductLists = () => {
     interface Product {
         id: string; 
         productName: string;
-        productCode: string;
+        productNumber: string;
         description: string;
         productBrand:string;
         quantity: number;
@@ -34,7 +34,7 @@ const ProductLists = () => {
   const filteredProducts: Product[] = searchQuery
   ? data.filter((product: Product) =>
       product.productName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.productCode.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      product.productNumber.toLowerCase().includes(searchQuery.toLowerCase()) || 
       product.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.productBrand.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.supplier?.supplierName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -68,9 +68,31 @@ const ProductLists = () => {
                 <TableHeader>
                     <TableRow>
                         <TableHead>Product Code</TableHead>
+                        <TableHead>Product Name</TableHead>
+                        <TableHead>Category</TableHead>
+                        <TableHead>Supplier</TableHead>
+                        <TableHead>SKU</TableHead>
                     </TableRow>
                 </TableHeader>
-                 <TableBody></TableBody>
+                 <TableBody>
+                  {paginatedProducts.map((product: Product) => (
+                    <TableRow key={product.id}>
+                      <TableCell>{product.productNumber}</TableCell>
+                      <TableCell>{product.productName}</TableCell>
+                      <TableCell>{product.category?.categoryName}</TableCell>
+                      <TableCell>{product.supplier?.supplierName}</TableCell>
+                      <TableCell>{product.sku}</TableCell> 
+                      <TableCell>
+                            <Link to={`/products/details/${product.id}`}>
+                                <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
+                            </Link>
+                            <Link to={`/products/update/${product.id}`}>
+                                <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
+                            </Link>
+                        </TableCell>
+                    </TableRow>
+                  ))}
+                 </TableBody>
             </Table> 
             <div className="flex justify-between items-center mt-4">
                 <Pagination>

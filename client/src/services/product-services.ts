@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 interface Product {
     id: string; 
     productName?: string;
-    productCode?: string;
+    productNumber?: string;
     description?: string;
     productBrand?:string;
     quantity?: number;
