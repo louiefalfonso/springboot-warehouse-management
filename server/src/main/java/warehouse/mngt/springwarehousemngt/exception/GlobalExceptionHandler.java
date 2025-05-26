@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ResponseDto> dataIntegrityViolationException(DataIntegrityViolationException rs){
-        String msg="data is already store in database!!                                ."
+        String msg="data is already store in database!!"
                 +rs.getMostSpecificCause().toString();
         ResponseDto responseModel = new ResponseDto(msg, false, LocalDateTime.now());
         return new ResponseEntity<ResponseDto>(responseModel, HttpStatus.BAD_REQUEST);
