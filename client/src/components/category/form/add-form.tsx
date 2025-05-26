@@ -48,8 +48,12 @@ const AddNewCategoryForm:React.FC<CategoryProps> = ({onSubmit}) => {
         <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="categoryName">Category Name:</Label>
           <Input type="text" id="categoryName" placeholder="Category Name" onChange={(e: { target: { value: string; }; }) => handleInputChange("categoryName", e.target.value)}/>
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="categoryCode">Category Code:</Label>
           <Input type="text" id="categoryCode" placeholder="Category Code" onChange={(e: { target: { value: string; }; }) => handleInputChange("categoryCode", e.target.value)}/>
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="categoryStatus">Category Status:</Label>
           <Input type="text" id="categoryStatus" placeholder="Category Status" onChange={(e: { target: { value: string; }; }) => handleInputChange("categoryStatus", e.target.value)}/>
         </div>

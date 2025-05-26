@@ -78,7 +78,6 @@ const AddNewProductForm:React.FC<ProductProps> = ({onSubmit, categories, supplie
     onSubmit(newProduct);
   };
 
-
   return (
     <form onSubmit={handleSubmit}>
         <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Product Information</h2>
@@ -143,7 +142,7 @@ const AddNewProductForm:React.FC<ProductProps> = ({onSubmit, categories, supplie
                     <SelectContent>
                         {suppliers?.map((supplier:Supplier) => (
                             <SelectItem key={supplier.id} value={supplier.id.toString()}>
-                                {supplier.supplierName} - {supplier.supplierName}
+                                {supplier.supplierName} - {supplier.supplierCode}
                             </SelectItem>
                         ))}
                         </SelectContent>

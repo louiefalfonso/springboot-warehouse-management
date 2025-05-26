@@ -59,7 +59,7 @@ const CategoryLists = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                  <TableHead>Category Code</TableHead>
+                  <TableHead>Code</TableHead>
                   <TableHead>Category Name</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-center">Description</TableHead>
@@ -73,9 +73,6 @@ const CategoryLists = () => {
                   <TableCell>{category.categoryStatus}</TableCell>
                   <TableCell className="whitespace-normal">{category.categoryDescription}</TableCell>
                   <TableCell>
-                    <Link to={`/categories/details/${category.id}`}>
-                        <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
-                    </Link>
                     <Link to={`/categories/update/${category.id}`}>
                         <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
                     </Link>
