@@ -10,20 +10,37 @@ const WarehouseDetailsList = ({ warehouseData }: { warehouseData: any }) => {
               <TableRow>
                   <TableHead>Warehouse Code</TableHead>
                   <TableHead>Warehouse Name</TableHead>
-                  <TableHead>Office Hours</TableHead>
-                  <TableHead>Warehouse Email</TableHead>
-                  <TableHead>Warehouse Location</TableHead>
                   <TableHead>Warehouse Manager</TableHead>
-                  <TableHead>Contact Number</TableHead>
                   <TableHead>Description</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow key={warehouseData.id}>
                 <TableCell>{warehouseData.warehouseCode}</TableCell>
+                <TableCell>{warehouseData.warehouseName}</TableCell>
+                <TableCell>{warehouseData.warehouseManager}</TableCell>
+                <TableCell className="whitespace-normal">{warehouseData.description}</TableCell>
               </TableRow>
             </TableBody>
         </Table>
+        <Table className="mt-5">
+          <TableHeader>
+              <TableRow>
+                  <TableHead>Warehouse Location</TableHead>
+                   <TableHead>Warehouse Email</TableHead>
+                  <TableHead>Contact Number</TableHead>
+                  <TableHead>Office Hours</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow key={warehouseData.id}>
+                <TableCell>{warehouseData.warehouseLocation}</TableCell>
+                <TableCell>{warehouseData.warehouseEmail}</TableCell>
+                <TableCell>{warehouseData.contactNumber}</TableCell>
+                <TableCell>{warehouseData.officeHours}</TableCell>
+              </TableRow>
+            </TableBody>  
+        </Table>    
       </div>
     </div>
   )

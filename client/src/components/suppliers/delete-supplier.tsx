@@ -16,7 +16,7 @@ const DeleteSupplierDialog:React.FC<DeleteSupplierDialogProps> = ({supplierId, o
   return (
     <Dialog>
       <DialogTrigger asChild>
-      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete</Button>
+      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete Supplier</Button>
       </DialogTrigger>
           <DialogContent>
             <DialogTitle>Confirm Deletion</DialogTitle>
@@ -24,7 +24,7 @@ const DeleteSupplierDialog:React.FC<DeleteSupplierDialogProps> = ({supplierId, o
               Are you sure you want to fully delete this selected supplier information? This action cannot be undone.
             </DialogDescription>
             <DialogFooter>
-              <Button onClick={onDelete} className="bg-red-500 hover:bg-red-600">
+              <Button onClick={onDelete} className="bg-rose-600 hover:bg-rose-700">
                 Confirm
               </Button>
             </DialogFooter>

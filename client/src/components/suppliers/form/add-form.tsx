@@ -80,7 +80,7 @@ const AddNewSupplierForm:React.FC<SupplierProps> = ({onSubmit}) => {
               Add New Supplier
             </Button>
             <Link to={`/suppliers`}>
-              <Button className="bg-gray-500 hover:bg-gray-600">Back</Button>
+              <Button className="bg-gray-600 hover:bg-gray-700">Back</Button>
             </Link>
         </div>
     </form>

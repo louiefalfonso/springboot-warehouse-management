@@ -36,7 +36,7 @@ const ProductDetailsLists = ({ productData }: { productData: any }) => {
                   <TableRow key={productData.id}>
                     <TableCell>{productData.productBrand}</TableCell>
                     <TableCell>{productData.quantity} pieces</TableCell>
-                    <TableCell>GBP {productData.price.toFixed(2)}</TableCell>
+                    <TableCell>£ {productData.price.toFixed(2)}</TableCell>
                     <TableCell>{productData.sku}</TableCell>
                     <TableCell>{productData.category?.categoryName}</TableCell>
                     <TableCell>{productData.supplier?.supplierName}</TableCell>

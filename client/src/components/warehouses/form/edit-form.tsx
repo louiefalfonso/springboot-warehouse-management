@@ -74,8 +74,8 @@ const EditWarehouseForm:React.FC<WarehouseFormProps> = React.memo(({
             <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Warehouse">Update Warehouse</Button>
             <DeleteWarehouseDialog warehouseId={warehouseId} onDelete={handleDelete} aria-label="Delete Warehouse"/>
             <Link to={`/warehouses`}>
-            <Button className ="bg-gray-500 hover:bg-gray-600">
-                Cancel
+            <Button className ="bg-gray-600 hover:bg-gray-700">
+               Back to Warehouse Lists
             </Button>
             </Link>
       </div>

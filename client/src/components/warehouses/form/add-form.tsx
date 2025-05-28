@@ -95,7 +95,7 @@ const AddNewWarehouseForm:React.FC<WarehouseProps> = ({onSubmit}) => {
               Add New Warehouse
             </Button>
             <Link to={`/warehouses`}>
-              <Button className="bg-gray-500 hover:bg-gray-600">Back</Button>
+              <Button className="bg-gray-600 hover:bg-gray-700">Back</Button>
             </Link>
         </div>
     </form>
