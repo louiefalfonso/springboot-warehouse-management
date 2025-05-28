@@ -16,6 +16,8 @@ import AddNewCategory from './components/category/add-category';
 import UpdateCategory from './components/category/edit-category';
 import ProductListPage from './pages/products/page';
 import AddNewProduct from './components/products/add-product';
+import UpdateProduct from './components/products/edit-product';
+import ProductDetails from './components/products/details-products';
 
 function App() {
   
@@ -40,6 +42,8 @@ function App() {
 
       <Route path="/products" element={<ProductListPage/>} />
       <Route path="/products/add" element={<AddNewProduct/>} />
+      <Route path="/products/update/:id" element={<UpdateProduct/>} />
+      <Route path="/products/details/:id" element={<ProductDetails/>} />
       
     </Routes>
     <Toaster/>
