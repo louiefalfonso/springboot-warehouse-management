@@ -66,7 +66,7 @@ const EditSupplierForm:React.FC<SupplierFormProps> = React.memo(({
         <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Supplier">Update Supplier</Button>
         <DeleteSupplierDialog supplierId={supplierId} onDelete={handleDelete} aria-label="Delete Supplier"/>
         <Link to={`/suppliers`}>
-          <Button className ="bg-gray-500 hover:bg-gray-600">
+          <Button className ="bg-gray-600 hover:bg-gray-700">
             Cancel
           </Button>
         </Link>

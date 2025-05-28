@@ -84,7 +84,7 @@ const ProductLists = () => {
                       <TableCell>{product.sku}</TableCell> 
                       <TableCell>
                             <Link to={`/products/details/${product.id}`}>
-                                <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
+                                <Button className="mr-2 bg-gray-600 hover:bg-gray-700">View</Button>
                             </Link>
                             <Link to={`/products/update/${product.id}`}>
                                 <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>

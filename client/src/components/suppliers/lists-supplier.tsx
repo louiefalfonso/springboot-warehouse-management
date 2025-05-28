@@ -58,7 +58,7 @@ const SupplierLists = () => {
           </Link>
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
             <Input type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="p-2 border rounded"/>
-            <Button className="bg-gray-500 hover:bg-gray-600" onClick={() => { setSearchQuery(""); refetch(); }}> Clear Search</Button>
+            <Button className="bg-gray-600 hover:bg-gray-700" onClick={() => { setSearchQuery(""); refetch(); }}> Clear Search</Button>
           </div>
         </div>
         <div className="min-w-full">
@@ -82,7 +82,7 @@ const SupplierLists = () => {
                         <TableCell>{supplier.contactAddress}</TableCell>
                         <TableCell>
                             <Link to={`/suppliers/details/${supplier.id}`}>
-                                <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
+                                <Button className="mr-2 bg-gray-600 hover:bg-gray-700">View</Button>
                             </Link>
                             <Link to={`/suppliers/update/${supplier.id}`}>
                                 <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
