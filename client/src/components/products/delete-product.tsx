@@ -19,7 +19,7 @@ const DeleteProductDialog:React.FC<DeleteProductDialogProps> = ({productId, onDe
   return (
     <Dialog>
       <DialogTrigger asChild>
-      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete</Button>
+      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete Product</Button>
       </DialogTrigger>
           <DialogContent>
             <DialogTitle>Confirm Deletion</DialogTitle>

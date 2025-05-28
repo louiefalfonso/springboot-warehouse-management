@@ -89,7 +89,9 @@ const UpdateProductForm:React.FC<ProductFormProps> = ({
                 <Label htmlFor="price">Price:</Label>
                 <Input type="number" id="price" value={ price !== null ? price : ''} onChange={(e) => setPrice(Number(e.target.value))}/>
             </div>
-            <div className="grid auto-rows-min md:grid-cols-2">
+            
+        </div>
+        <div className="grid auto-rows-min md:grid-cols-2">
                 <div className="grid w-full items-center gap-4 p-4">
                     <Label htmlFor="category">Category:</Label>
                     <Select value={categoryId ? categoryId.toString() : undefined} onValueChange={(value) => {
@@ -133,9 +135,8 @@ const UpdateProductForm:React.FC<ProductFormProps> = ({
                     </Select> 
                 </div>
             </div>
-        </div>
         <div className="flex pl-4 mt-4 ">
-          <Button type="submit" className="bg-violet-500 hover:bg-violet-600" aria-label="Update Product">Update</Button>
+          <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Product">Update Product</Button>
           <DeleteProductDialog productId={productId} onDelete={handleDelete} aria-label="Delete Product"/>
           <Link to={`/products`}>
               <Button className ="bg-gray-500 hover:bg-gray-600">Back to Products</Button>  
