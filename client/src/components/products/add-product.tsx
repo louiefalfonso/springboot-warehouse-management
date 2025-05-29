@@ -40,7 +40,11 @@ const AddNewProduct = () => {
     <MainLayout>
       <Header Title="Add New Supplier" />
       <div className="flex flex-1 flex-col gap-4 p-4">
-        <AddNewProductForm categories={categories || []} suppliers={suppliers || []} onSubmit={handleFormSubmit} />
+        <AddNewProductForm 
+        categories={categories || []} 
+        suppliers={suppliers || []} 
+        onSubmit={handleFormSubmit} 
+        />
       </div>
     </MainLayout>
   )
