@@ -17,7 +17,7 @@ const ProductDetailsLists = ({ productData }: { productData: any }) => {
                   <TableRow key={productData.id}>
                       <TableCell>{productData.productNumber}</TableCell>
                       <TableCell>{productData.productName}</TableCell>
-                      <TableCell>{productData.description}</TableCell>
+                      <TableCell className="whitespace-normal">{productData.description}</TableCell>
                   </TableRow>
                 </TableBody>
          </Table> 

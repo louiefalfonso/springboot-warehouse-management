@@ -83,56 +83,69 @@ const UpdateProductForm:React.FC<ProductFormProps> = ({
             </div>
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="quantity">Quantity:</Label>
-                <Input type="number" id="quantity" value={ quantity !== null ? quantity : ''} onChange={(e) => setQuantity(Number(e.target.value))}/>
+                <Input 
+                type="number"
+                id="quantity"
+                value={quantity !== null ? quantity : ""}
+                onChange={e => setQuantity(e.target.value === "" ? null : Number(e.target.value))}
+                />
             </div>
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="price">Price:</Label>
-                <Input type="number" id="price" value={ price !== null ? price : ''} onChange={(e) => setPrice(Number(e.target.value))}/>
+                <Input 
+                type="number"
+                id="price"
+                value={price !== null ? price : ""}
+                onChange={e => setPrice(e.target.value === "" ? null : Number(e.target.value))}
+                />
             </div>
             
         </div>
         <div className="grid auto-rows-min md:grid-cols-2">
                 <div className="grid w-full items-center gap-4 p-4">
                     <Label htmlFor="category">Category:</Label>
-                    <Select value={categoryId ? categoryId.toString() : undefined} onValueChange={(value) => {
+                    <Select value={categoryId ? categoryId.toString() : ""} 
+                        onValueChange={(value) => {
                         const parsedValue = parseInt(value);
                         if (!isNaN(parsedValue)) {
                             setCategoryId(parsedValue);
-                            }
-                        }}
-                    >
-                    <SelectTrigger className="w-full">
+                        }
+                        }} required>
+                        <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select Category" />
-                    </SelectTrigger>
-                    <SelectContent>
+                        </SelectTrigger>
+                        <SelectContent>
                         {categories?.map((category: Category) => (
                             <SelectItem key={category.id} value={category.id.toString()}>
-                                {category.categoryName} - {category.categoryCode}
+                            {category.categoryName} - {category.categoryCode}
                             </SelectItem>
-                            ))}
+                        ))}
                         </SelectContent>
                     </Select>
                 </div>
                 <div className="grid w-full items-center gap-4 p-4">
                     <Label htmlFor="supplier">Supplier:</Label>
-                    <Select value={supplierId ? supplierId.toString() : undefined} onValueChange={(value) => {
+                    <Select value={supplierId ? supplierId.toString() : ""}
+                        onValueChange={(value) => {
                         const parsedValue = parseInt(value);
                         if (!isNaN(parsedValue)) {
                             setSupplierId(parsedValue);
-                            }
-                        }}
-                    >
-                    <SelectTrigger className="w-full">
+                        }
+                        }} required>
+                        <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select Supplier" />
-                    </SelectTrigger>
-                    <SelectContent>
+                        </SelectTrigger>
+                        <SelectContent>
                         {suppliers?.map((supplier: Supplier) => (
                             <SelectItem key={supplier.id} value={supplier.id.toString()}>
-                                {supplier.supplierName} - {supplier.supplierCode}
+                            {supplier.supplierName} - {supplier.supplierCode}
                             </SelectItem>
-                            ))}
+                        ))}
                         </SelectContent>
-                    </Select> 
+                    </Select>
+
+
+                    
                 </div>
             </div>
         <div className="flex pl-4 mt-4 ">
