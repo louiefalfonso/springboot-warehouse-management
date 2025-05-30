@@ -28,6 +28,7 @@ const UpdateProduct = () => {
     const [sku, setSku] = useState("");
     const [quantity, setQuantity] = useState<number | null>(null);
     const [price, setPrice] = useState<number | null>(null);
+
     const [categoryId, setCategoryId] = useState<number | null>(null);
     const [supplierId, setSupplierId] = useState<number | null>(null);
 
@@ -40,8 +41,8 @@ const UpdateProduct = () => {
       setSku(data.sku);
       setQuantity(data.quantity);
       setPrice(data.price);
-      setCategoryId(data.category.id);
-      setSupplierId(data.supplier.id);
+      setCategoryId(data.category?.id ?? null);
+      setSupplierId(data.supplier?.id ?? null);
     }
   }, [data]);
 
@@ -52,15 +53,25 @@ const UpdateProduct = () => {
     const handleSubmit = (e:React.FormEvent)=>{
          e.preventDefault();
 
-            if (categoryId === null) {
+            if (!categoryId) {
               toast.error("Please select a category.");
               return;
             }
-            if (supplierId === null) {
+            if (!supplierId) {
               toast.error("Please select a supplier.");
               return;
             }
-            if (!productName || !productNumber || !description || !productBrand || !sku || quantity === null || price === null) {
+            if (
+              !productName ||
+              !productNumber ||
+              !description ||
+              !productBrand ||
+              !sku ||
+              quantity === null || isNaN(quantity) ||
+              price === null || isNaN(price) ||
+              !categoryId ||
+              !supplierId
+            ) {
                 {
                 toast.error("Please fill in all required fields.");
                 return;
@@ -68,9 +79,16 @@ const UpdateProduct = () => {
             }
 
             const currentProduct = {
-                id: id || "",
-                productName, productNumber, description, productBrand, sku, quantity, price,
-                categoryId, supplierId 
+                  id: id || "",
+                  productName,
+                  productNumber,
+                  description,
+                  productBrand,
+                  sku,
+                  quantity,
+                  price,
+                  category: { id: categoryId },
+                  supplier: { id: supplierId },
             };
             try {
                 mutate(currentProduct, {

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import DeleteCategoryDialog from "../delete-category";
 
 type CategoryFormProps = {
     categoryName: string;
@@ -30,7 +31,7 @@ const UpdateCategoryForm:React.FC<CategoryFormProps> = ({
 }) => {
   return (
      <form onSubmit={handleSubmit}>
-        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Add New Category</h2>
+        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Category Information</h2>
       <div className="grid auto-rows-min md:grid-cols-3">
         <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="categoryName">Category Name:</Label>
@@ -52,7 +53,11 @@ const UpdateCategoryForm:React.FC<CategoryFormProps> = ({
         </div>
       </div>
       <div className="flex pl-4 mt-4 ">
-
+        <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Category">Update Category</Button>
+          <DeleteCategoryDialog categoryId={categoryId} onDelete={handleDelete} aria-label="Delete Category"/>
+          <Link to={`/categories`}>
+              <Button className ="bg-gray-500 hover:bg-gray-600">Back to Categories</Button>  
+          </Link>
       </div>
      </form>
   )

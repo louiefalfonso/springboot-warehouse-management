@@ -30,6 +30,7 @@ const CategoryLists = () => {
   const filteredCategories: Category[] = searchQuery
   ? data.filter((category: Category) =>
       category.categoryName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      category.categoryStatus.toLowerCase().includes(searchQuery.toLowerCase()) ||
       category.categoryCode.toLowerCase().includes(searchQuery.toLowerCase())
     )
   : data;
