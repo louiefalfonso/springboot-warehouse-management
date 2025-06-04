@@ -4,6 +4,7 @@ import MainLayout from '../layout/layout'
 import { Button } from "@/components/ui/button";
 
 import { useGetProductById } from "@/services/product-services";
+import { useGetAllSuppliers } from "@/services/supplier-services";
 import ProductDetailsList from "./list/list-product"
 
 const ProductDetails = () => {

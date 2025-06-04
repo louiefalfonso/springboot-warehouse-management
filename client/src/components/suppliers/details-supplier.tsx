@@ -28,30 +28,22 @@ const SupplierDetails = () => {
   const { data: supplierData, isLoading: isSupplierLoading, error: supplierError } = useGetSupplierById(id || "");
   const { data: productData, isLoading: isProductLoading, error: productError } = useGetAllProducts();
 
-  // Filter products for the specific supplier
-
-  /*
-    const employeeAttendance = useMemo(() => {
-    return attendanceData?.filter((attendance: Attendance) => attendance.employee.id.toString() === id);
-  }, [attendanceData, id]);
-  */
-
   const supplierProduct = useMemo(() => {
     return productData?.filter((product: Product) => product.supplier.id.toString() === id);
   }, [productData, id]);
 
 
-  if (isSupplierLoading) {
+  if (isSupplierLoading || isProductLoading) {
     return <div>Loading...</div>;
   }
 
-  if (supplierError) {
-    console.error('Error details:', { supplierError });
+  if (supplierError || productError) {
+    console.error('Error details:', { supplierError, productError });
     return <div>Error loading data. Please check the console for more details.</div>;
   }
 
-  if (!supplierData) {
-    return <div>No supplier data found</div>;
+  if (!supplierData || !productData) {
+    return <div>No data found</div>;
   }
 
   return (
