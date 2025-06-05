@@ -48,8 +48,14 @@ public class InventoryServiceImpl implements InventoryService {
         Inventory inventory = inventoryRepository.findAllById(inventoryId)
                 .orElseThrow(()->new RuntimeException("Inventory doesn't exist with a given Id:" + inventoryId));
 
-        inventory.setQuantity(updateInventory.getQuantity());
         inventory.setInventoryCode(updateInventory.getInventoryCode());
+        inventory.setQuantity(updateInventory.getQuantity());
+        inventory.setValue(updateInventory.getValue());
+        inventory.setLocation(updateInventory.getLocation());
+        inventory.setReorderPoint(updateInventory.getReorderPoint());
+        inventory.setUnitCost(updateInventory.getUnitCost());
+        inventory.setRemarks(updateInventory.getRemarks());
+        inventory.setInventoryManager(updateInventory.getInventoryManager());
         inventory.setWarehouse(updateInventory.getWarehouse());
         inventory.setProduct(updateInventory.getProduct());
 

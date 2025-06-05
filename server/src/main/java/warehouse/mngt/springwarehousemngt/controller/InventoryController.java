@@ -50,8 +50,14 @@ public class InventoryController {
         Inventory updateInventory = inventoryRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Inventory does not exist with id: " + id));
 
-        updateInventory.setQuantity(inventoryDetails.getQuantity());
         updateInventory.setInventoryCode(inventoryDetails.getInventoryCode());
+        updateInventory.setQuantity(inventoryDetails.getQuantity());
+        updateInventory.setValue(inventoryDetails.getValue());
+        updateInventory.setLocation(inventoryDetails.getLocation());
+        updateInventory.setReorderPoint(inventoryDetails.getReorderPoint());
+        updateInventory.setUnitCost(inventoryDetails.getUnitCost());
+        updateInventory.setRemarks(inventoryDetails.getRemarks());
+        updateInventory.setInventoryManager(inventoryDetails.getInventoryManager());
         updateInventory.setWarehouse(inventoryDetails.getWarehouse());
         updateInventory.setProduct(inventoryDetails.getProduct());
 
