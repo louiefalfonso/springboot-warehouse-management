@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,13 +22,27 @@ public class Inventory {
 
     private String inventoryCode;
 
+    private int quantity;
+
+    private String condition;
+
+    private String value;
+
+    private String location;
+
+    private int reorderPoint;
+
+    private BigDecimal unitCost;
+
+    private String remarks;
+
+    private String inventoryManager;
+
     @ManyToOne
     private Product product;
 
     @ManyToOne
     private Warehouse warehouse;
-
-    private int quantity;
 
     private boolean deleted = false;
 
