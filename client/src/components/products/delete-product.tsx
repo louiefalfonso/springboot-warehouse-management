@@ -10,7 +10,7 @@ interface DeleteProductDialogProps {
 
 const DeleteProductDialog:React.FC<DeleteProductDialogProps> = ({productId, onDelete}) => {
   
-    // Validate the appointment prop
+    // Validate the product prop
   if (!productId) {
       console.error("Invalid Product ID");
       return null;
