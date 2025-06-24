@@ -110,21 +110,21 @@ const UpdateProduct = () => {
 
     // delete product
     const handleDelete = () =>{
-    try {
-      deleteProduct(id || "", {
-        onSuccess: () => {
-          toast.success("Product Deleted successfully");
-          navigate("/products");
-        },
-        onError: (error) => {
-          console.error("Error Deleting Supplier:", error);
-          toast.error("Failed to Delete Supplier. Please try again.");
-        },
-      });
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      toast.error("An unexpected error occurred. Please try again.");
-    }
+      try {
+        deleteProduct(id || "", {
+          onSuccess: () => {
+            toast.success("Product Deleted successfully");
+            navigate("/products");
+          },
+          onError: (error) => {
+            console.error("Error Deleting Product:", error);
+            toast.error("Failed to Delete Product. Please try again.");
+          },
+        });
+      } catch (error) {
+        console.error("Unexpected error:", error);
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     } 
 
   return (
