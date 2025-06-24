@@ -147,7 +147,7 @@ const UpdateProductForm:React.FC<ProductFormProps> = ({
 
                     
                 </div>
-            </div>
+        </div>
         <div className="flex pl-4 mt-4 ">
           <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Product">Update Product</Button>
           <DeleteProductDialog productId={productId} onDelete={handleDelete} aria-label="Delete Product"/>
