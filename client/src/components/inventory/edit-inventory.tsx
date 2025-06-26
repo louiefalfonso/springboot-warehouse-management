@@ -51,6 +51,67 @@ const UpdateInventory = () => {
      if (isLoading) { return <div>Loading...</div>;}
      if (!data) { return <div>No data found</div>;}
 
+     // update product
+    const handleSubmit = (e:React.FormEvent)=>{
+         e.preventDefault();
+
+            if (!productId) {
+              toast.error("Please select a product.");
+              return;
+            }
+            if (!warehouseId) {
+              toast.error("Please select a warehouse.");
+              return;
+            }
+
+            if (
+              !inventoryCode ||
+              quantity === null ||
+              !value ||
+              !location ||
+              reorderPoint === null ||
+              unitCost === null ||
+              !inventoryManager|| 
+              !remarks||
+              !productId ||
+              !warehouseId 
+            ) {
+             {
+                toast.error("Please fill in all required fields.");
+                return;
+              }
+            }
+            
+
+            const currentInventory = {
+                  id: id || "",
+                  inventoryCode,
+                  quantity,
+                  value,
+                  location,
+                  reorderPoint,
+                  unitCost,
+                  remarks,
+                  inventoryManager,
+                  product:{ id: productId },
+                  warehouse: { id: warehouseId },
+            };
+            try {
+              mutate(currentInventory, {
+                onSuccess: () => {
+                  toast.success("Inventory Updated successfully");
+                  navigate("/inventories");
+                },
+                onError: (error) => {
+                  console.error("Error Updating Inventory:", error);
+                  toast.error("Failed to Update Inventory. Please try again.");
+                },
+              });
+            } catch (error) {
+              console.error("Unexpected error:", error);
+              toast.error("An unexpected error occurred. Please try again."); 
+    }
+
      // delete inventory
     const handleDelete = () =>{
       try {
