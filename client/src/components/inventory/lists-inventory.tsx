@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination";
 import { useGetAllInventories } from "@/services/inventory-services";
-
 const InventoryLists = () => {
   
   // Declare state variables
