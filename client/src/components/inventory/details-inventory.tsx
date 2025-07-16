@@ -8,6 +8,8 @@ import { useGetInventoryById } from "@/services/inventory-services";
 import InventoryDetailsList from "./list/list-inventory";
 import { useGetAllProducts } from "@/services/product-services";
 import { useGetAllWarehouses } from "@/services/warehouse-services";
+import WarehouseDetailsList from "./list/list-warehouse";
+import ProductDetailsList from "./list/list-product";
 
 type Product = {
     id: string; 
@@ -69,8 +71,8 @@ const InventoryDetails = () => {
       <Header Title="Inventory Details" />
       <div className="flex flex-1 flex-col gap-4 p-4">
         <InventoryDetailsList inventoryData={inventoryData} />
-
-
+        <WarehouseDetailsList warehouseData={inventoryWarehouse}/>
+        <ProductDetailsList productData={inventoryProduct}/>
         <div className="flex">
           <Link to={`/inventories`}>
             <Button className="bg-gray-500 hover:bg-gray-600">Back to Inventory List</Button>

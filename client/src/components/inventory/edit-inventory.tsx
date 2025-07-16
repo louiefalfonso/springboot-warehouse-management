@@ -111,6 +111,7 @@ const UpdateInventory = () => {
               console.error("Unexpected error:", error);
               toast.error("An unexpected error occurred. Please try again."); 
     }
+  }
 
      // delete inventory
     const handleDelete = () =>{
@@ -130,6 +131,8 @@ const UpdateInventory = () => {
         toast.error("An unexpected error occurred. Please try again.");
       }
     } 
+    
+    
   return (
    <MainLayout>
       <Header Title="Update Inventory" />
@@ -162,6 +165,7 @@ const UpdateInventory = () => {
           inventoryId={id || ""}
           />
         </div>
+        <Toaster />  
    </MainLayout>     
   )
 }
