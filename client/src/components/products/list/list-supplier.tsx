@@ -8,21 +8,25 @@ const SupplierDetailTable = ({ supplierData }: { supplierData: any }) => {
         <Table>
           <TableHeader>
             <TableRow>
-                <TableHead>Supplier Code</TableHead>
-                <TableHead>Supplier Name</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Supplier Company</TableHead>
-                <TableHead>Supplier Address</TableHead>
+                  <TableHead>Supplier Code</TableHead>
+                  <TableHead>Supplier Name</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Supplier Company</TableHead>
+                  <TableHead>Email Address</TableHead>
+                  <TableHead>Contact Number</TableHead>
+                  <TableHead>Supplier Address</TableHead>
               </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow key={supplierData.id}>
-              <TableCell>{supplierData.supplierCode}</TableCell>
-              <TableCell>{supplierData.supplierName}</TableCell>
-              <TableCell>{supplierData.status}</TableCell>
-              <TableCell>{supplierData.supplierCompany}</TableCell>
-              <TableCell>{supplierData.contactAddress}</TableCell>
-            </TableRow>
+               <TableRow key={supplierData.id}>
+                <TableCell>{supplierData.supplierCode}</TableCell>
+                <TableCell>{supplierData.supplierName}</TableCell>
+                <TableCell>{supplierData.status}</TableCell>
+                <TableCell>{supplierData.supplierCompany}</TableCell>
+                <TableCell>{supplierData.supplierEmail}</TableCell>
+                <TableCell>{supplierData.contactInfo}</TableCell>
+                <TableCell>{supplierData.contactAddress}</TableCell>
+              </TableRow>
           </TableBody>
         </Table>
       </div>
