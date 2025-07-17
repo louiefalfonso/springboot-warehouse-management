@@ -10,7 +10,7 @@ const SupplierDetailsList = ({ supplierData }: { supplierData: any }) => {
               <TableRow>
                   <TableHead>Supplier Code</TableHead>
                   <TableHead>Supplier Name</TableHead>
-                    <TableHead>Status</TableHead>
+                  <TableHead>Status</TableHead>
                   <TableHead>Supplier Company</TableHead>
                   <TableHead>Email Address</TableHead>
                   <TableHead>Contact Number</TableHead>
