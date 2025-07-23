@@ -142,7 +142,7 @@ const EditInventoryForm:React.FC<InventoryFormProps> = ({
           <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Inventory">Update Inventory</Button>
           <DeleteInventoryDialog inventoryId={inventoryId} onDelete={handleDelete} aria-label="Delete Inventory"/>
           <Link to={`/products`}>
-              <Button className ="bg-gray-500 hover:bg-gray-600">Back to Inventories</Button>  
+              <Button className ="bg-gray-500 hover:bg-gray-600">Cancel</Button>  
           </Link>
       </div>
     </form>   
