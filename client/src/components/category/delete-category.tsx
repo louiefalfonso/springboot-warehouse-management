@@ -18,7 +18,7 @@ const DeleteCategoryDialog:React.FC<DeleteCategoryDialogProps> = ({categoryId, o
   return (
     <Dialog>
       <DialogTrigger asChild>
-      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete Product</Button>
+      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete Category</Button>
       </DialogTrigger>
           <DialogContent>
             <DialogTitle>Confirm Deletion</DialogTitle>

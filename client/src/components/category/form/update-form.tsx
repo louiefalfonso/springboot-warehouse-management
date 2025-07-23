@@ -56,7 +56,7 @@ const UpdateCategoryForm:React.FC<CategoryFormProps> = ({
         <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Category">Update Category</Button>
           <DeleteCategoryDialog categoryId={categoryId} onDelete={handleDelete} aria-label="Delete Category"/>
           <Link to={`/categories`}>
-              <Button className ="bg-gray-500 hover:bg-gray-600">Back to Categories</Button>  
+              <Button className ="bg-gray-500 hover:bg-gray-600">Cancel</Button>  
           </Link>
       </div>
      </form>
