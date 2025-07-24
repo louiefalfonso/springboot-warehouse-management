@@ -51,7 +51,7 @@ const AddNewWarehouseForm:React.FC<WarehouseProps> = ({onSubmit}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Add New Information</h2>
+        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Add New Warehouse Information</h2>
         <div className="grid auto-rows-min md:grid-cols-3">
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="warehouseName">Warehouse Name:</Label>
