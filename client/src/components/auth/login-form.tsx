@@ -16,7 +16,7 @@ const LoginFormComponent = () => {
     const API_BASE_URL = import.meta.env.VITE_BASE_URI_AUTH;
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState("");
+    const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const LoginFormComponent = () => {
         setLoading(true);
         setError("");
 
-        if (!username || !password) {
+        if (!emailAddress || !password) {
             setError("Username and password are required.");
             toast.error("Username and password are required.");
             setLoading(false);
@@ -34,7 +34,7 @@ const LoginFormComponent = () => {
         }
 
         try {
-            const response = await axios.post(`${API_BASE_URL}/login`, { username, password });
+            const response = await axios.post(`${API_BASE_URL}/login`, { emailAddress, password });
             if (response.status === 200) {
                 toast.success("Login successful!");
                 navigate("/dashboard");
@@ -48,7 +48,62 @@ const LoginFormComponent = () => {
     }
 
   return (
-    <div>LoginFormComponent</div>
+    <div className="flex flex-col gap-6">
+      <Card>
+        <CardHeader className="flex flex-col items-center">
+          <img src={MainLogo} alt="Logo" className="main-logo" />
+          <CardTitle className="text-2xl text-center">Account Login</CardTitle>
+          <CardDescription className="text-center">
+            Enter your email below to login to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleLogin}>
+            <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  type="email"
+                  className="form-input"
+                  required
+                  value={emailAddress}
+                  onChange={(e) => setEmailAddress(e.target.value)}
+                  placeholder="Enter Email"
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                </div>
+                <Input
+                  type="password"
+                  className="form-input"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                />
+              </div>
+              <Button
+                type="submit"
+                className="w-full bg-sky-500 hover:bg-sky-600"
+        
+              >
+                Login
+              </Button>
+            </div>
+            {error && <div className="mt-2 text-center text-red-500">{error}</div>}
+            <div className="mt-4 text-center text-sm">
+              Don&apos;t have an account?{" "}
+              <a href="#" className="underline underline-offset-4">
+                Sign up
+              </a>
+            </div>
+            
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 
