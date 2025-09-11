@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, ScrollText, BaggageClaim, ShoppingBag, Group, FileBox } from "lucide-react";
+import { Home, ScrollText, BaggageClaim, ShoppingBag, Group, FileBox, Users } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import MainLogo from '@/assets/lbc-logo.png';
 
@@ -38,6 +38,11 @@ const items = [
     title: "Inventories",
     url: "/inventories",
     icon: FileBox,
+  },
+  {
+    title: "Users",
+    url: "/users",
+    icon: Users,
   },
 
   
