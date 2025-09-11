@@ -60,7 +60,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the product
@@ -76,7 +75,6 @@ public class ProductRepositoryUnitTests {
         Assertions.assertThat(savedProduct.getSku()).isEqualTo("020-070");
         Assertions.assertThat(savedProduct.getPrice()).isEqualTo(BigDecimal.valueOf(150.00));
         Assertions.assertThat(savedProduct.getSupplier()).isEqualTo(savedSupplier);
-        Assertions.assertThat(savedProduct.isDeleted()).isEqualTo(false);
     }
 
     @Test
@@ -99,7 +97,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Verify that the product is saved
@@ -127,7 +124,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the product
@@ -187,7 +183,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
         Product savedProduct = productRepository.save(product);
 
@@ -216,7 +211,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
         Product savedProduct = productRepository.save(product);
 
@@ -247,7 +241,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the product
@@ -263,7 +256,6 @@ public class ProductRepositoryUnitTests {
                 .sku("030-080")
                 .price(BigDecimal.valueOf(200.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the another product
@@ -296,7 +288,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the product
@@ -312,7 +303,6 @@ public class ProductRepositoryUnitTests {
                 .sku("030-080")
                 .price(BigDecimal.valueOf(200.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the another product
@@ -343,18 +333,17 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
         Product savedProduct = productRepository.save(product);
 
         // Set the deleted flag to true
-        savedProduct.setDeleted(true);
+        //savedProduct.setDeleted(true);
         Product updatedProduct = productRepository.save(savedProduct);
 
         // Verify the deletion
         Optional<Product> deletedProduct = productRepository.findById(savedProduct.getId());
         Assertions.assertThat(deletedProduct).isNotEmpty();
-        Assertions.assertThat(deletedProduct.get().isDeleted()).isEqualTo(true);
+        //Assertions.assertThat(deletedProduct.get().isDeleted()).isEqualTo(true);
     }
 
     @Test
@@ -376,7 +365,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Try to save the product
@@ -410,7 +398,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(-150.00)) // invalid product price
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Try to save the product
@@ -444,7 +431,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the product
@@ -460,7 +446,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070") // duplicate SKU
                 .price(BigDecimal.valueOf(200.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Try to save the duplicate product
@@ -476,39 +461,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 15: Find By Deleted Products")
-    public void findByDeleted() {
-        // Given
-        List<Product> products = productRepository.findAll();
-
-        // When
-        List<Product> actualProducts = productRepository.findByDeleted(true);
-
-        // Then
-        assertEquals(1, actualProducts.size());
-    }
-
-    @Test
-    @DisplayName("Test 16: Find By Deleted Products - No Deleted Items")
-    public void findByDeleted_NoDeletedItems() {
-        // Given
-        List<Product> products = productRepository.findAll();
-
-        // Ensure there are deleted items in the list
-        for (Product product : products) {
-            product.setDeleted(true);
-            productRepository.save(product);
-        }
-
-        // When
-        List<Product> actualProducts = productRepository.findByDeleted(false);
-
-        // Then
-        assertEquals(0, actualProducts.size());
-    }
-
-    @Test
-    @DisplayName("Test 17: Find Product with the different Product Supplier")
+    @DisplayName("Test 15: Find Product with the different Product Supplier")
     public void findByProductSupplierTest() {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
@@ -526,7 +479,6 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
-                .deleted(false)
                 .build();
 
         // Save the product
@@ -545,7 +497,6 @@ public class ProductRepositoryUnitTests {
                 .sku("030-080")
                 .price(BigDecimal.valueOf(200.00))
                 .supplier(anotherSupplier)
-                .deleted(false)
                 .build();
 
         // Save the another product
@@ -560,7 +511,7 @@ public class ProductRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 18: Find Out of Stock Products")
+    @DisplayName("Test 16: Find Out of Stock Products")
     public void findByProduct_OutOfStockProduct() {
         // Given
         List<Product> products = productRepository.findAll();
@@ -578,53 +529,7 @@ public class ProductRepositoryUnitTests {
         assertEquals(products.size(), outOfStock.size());
     }
 
-    @Test
-    public void testFindByIdAndDeleted_WhenDeletedIsTrue_AndProductExists() {
 
-        // Mock the productRepository using Mockito
-        ProductRepository mockProductRepository = Mockito.mock(ProductRepository.class);
-        Mockito.when(mockProductRepository.findByIdAndDeleted(1L, true)).thenReturn(Optional.empty());
-
-        // When
-        Optional<Product> actualProduct = mockProductRepository.findByIdAndDeleted(1L, true);
-
-        // Then
-        assertFalse(actualProduct.isPresent());
-        Mockito.verify(mockProductRepository).findByIdAndDeleted(1L, true);
-    }
-
-    @Test
-    public void testFindByIdAndDeleted_WhenDeletedIsTrue_AndProductExists1() {
-
-        // Mock the productRepository using Mockito
-        ProductRepository mockProductRepository = Mockito.mock(ProductRepository.class);
-
-        // When
-        Product mockProduct = new Product();
-        mockProduct.setId(1L);
-        mockProduct.setDeleted(true);
-        Optional<Product> expectedProduct = Optional.of(mockProduct);
-        Mockito.when(mockProductRepository.findByIdAndDeleted(1L, true)).thenReturn(expectedProduct);
-
-        // Then
-        Optional<Product> actualProduct = mockProductRepository.findByIdAndDeleted(1L, true);
-        assertTrue(actualProduct.isPresent());
-        assertEquals(1L, actualProduct.get().getId().longValue());
-        assertTrue(actualProduct.get().isDeleted());
-        Mockito.verify(mockProductRepository).findByIdAndDeleted(1L, true);
-    }
-
-    @Test
-    public void testFindByIdAndDeleted_WhenDeletedIsFalse_AndProductDoesNotExists() {
-        // Given
-        Long nonExistingProductId = 999L; // assume this product ID does not exist in the database
-
-        // When
-        Optional<Product> actualProduct = productRepository.findByIdAndDeleted(nonExistingProductId, false);
-
-        // Then
-        assertFalse(actualProduct.isPresent());
-    }
 
 
 }

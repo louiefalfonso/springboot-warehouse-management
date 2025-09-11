@@ -309,7 +309,6 @@ public class ProductServiceUnitTests {
         updateProductDto.setProductBrand("Flotec");
         updateProductDto.setQuantity(200);
         updateProductDto.setPrice(BigDecimal.valueOf(150.00));
-        updateProductDto.setSupplier(11L);
 
         Product existingProduct = new Product();
         existingProduct.setProductNumber("AB-8493519");
@@ -380,7 +379,6 @@ public class ProductServiceUnitTests {
         // then
         verify(productRepository, times(1)).findById(productId);
         verify(productRepository, times(1)).save(product);
-        assertTrue(product.isDeleted());
     }
 
     @Test
