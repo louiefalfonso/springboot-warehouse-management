@@ -32,7 +32,6 @@ public class SupplierRepositoryUnitTests {
                 .contactInfo("024834637920")
                 .contactAddress("Larkfield, Crofton CA5 6QF")
                 .status("Active")
-                .deleted(false)
                 .build();
 
         // Save the supplier
@@ -46,8 +45,6 @@ public class SupplierRepositoryUnitTests {
         Assertions.assertThat(savedSupplier.getContactInfo()).isEqualTo("024834637920");
         Assertions.assertThat(savedSupplier.getContactAddress()).isEqualTo("Larkfield, Crofton CA5 6QF");
         Assertions.assertThat(savedSupplier.getStatus()).isEqualTo("Active");
-        Assertions.assertThat(savedSupplier.isDeleted()).isEqualTo(false);
-
     }
 
     @Test
@@ -61,7 +58,6 @@ public class SupplierRepositoryUnitTests {
                 .contactInfo("123-456-7890")
                 .contactAddress("123 Main St")
                 .status("Active")
-                .deleted(false)
                 .build();
 
         // Save the supplier
@@ -127,7 +123,6 @@ public class SupplierRepositoryUnitTests {
                 .contactInfo("024834637920")
                 .contactAddress("Larkfield, Crofton CA5 6QF")
                 .status("Active")
-                .deleted(false)
                 .build();
 
         // Save the supplier
@@ -152,7 +147,6 @@ public class SupplierRepositoryUnitTests {
                 .contactInfo("024834637920")
                 .contactAddress("Larkfield, Crofton CA5 6QF")
                 .status("Active")
-                .deleted(false)
                 .build();
 
         // Save the supplier

@@ -29,7 +29,6 @@ public class WarehouseRepositoryUnitTests {
                 .warehouseLocation("Leeds, UK")
                 .warehouseManager("Daniel Shelby")
                 .contactNumber("024834637920")
-                .deleted(false)
                 .build();
 
         // Save the warehouse
@@ -41,8 +40,6 @@ public class WarehouseRepositoryUnitTests {
         Assertions.assertThat(savedWarehouse.getWarehouseLocation()).isEqualTo("Leeds, UK");
         Assertions.assertThat(savedWarehouse.getWarehouseManager()).isEqualTo("Daniel Shelby");
         Assertions.assertThat(savedWarehouse.getContactNumber()).isEqualTo("024834637920");
-        Assertions.assertThat(savedWarehouse.isDeleted()).isEqualTo(false);
-
     }
 
 
