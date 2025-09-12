@@ -75,13 +75,13 @@ public class SupplierRepositoryUnitTests {
     @DisplayName("Test 3: Get Supplier By ID from Database")
     public void getSupplierByIdDBTest(){
         // Create supplier with ID 1L if it doesn't exist
-        Supplier supplier = supplierRepository.findAllById(13L).orElseGet(()->{
+        Supplier supplier = supplierRepository.findAllById(1L).orElseGet(()->{
             Supplier newSupplier = new Supplier();
             newSupplier.setId(1L);
             return  supplierRepository.save(newSupplier);
         });
 
-        Assertions.assertThat(supplier.getId()).isEqualTo(13L);
+        Assertions.assertThat(supplier.getId()).isEqualTo(1L);
     }
 
     @Test
@@ -159,6 +159,5 @@ public class SupplierRepositoryUnitTests {
         Optional<Supplier> deletedSupplier = supplierRepository.findById(savedSupplier.getId());
         Assertions.assertThat(deletedSupplier).isEmpty();
     }
-
 
 }

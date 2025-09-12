@@ -34,4 +34,8 @@ public class ProductDto {
     private Supplier supplier;
 
     private Category category;
+
+    // for unit test
+    public ProductDto(long l, String productName, String productNumber, String description, int i, BigDecimal bigDecimal, String supplier, String sku, String productBrand) {
+    }
 }
