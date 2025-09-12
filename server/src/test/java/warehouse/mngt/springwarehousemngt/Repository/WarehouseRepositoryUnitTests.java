@@ -9,8 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import warehouse.mngt.springwarehousemngt.entity.Product;
+import warehouse.mngt.springwarehousemngt.entity.Supplier;
 import warehouse.mngt.springwarehousemngt.entity.Warehouse;
 import warehouse.mngt.springwarehousemngt.repository.WarehouseRepository;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -42,9 +47,8 @@ public class WarehouseRepositoryUnitTests {
         Assertions.assertThat(savedWarehouse.getContactNumber()).isEqualTo("024834637920");
     }
 
-
     @Test
-    @DisplayName("Test 2: Get Warehouse By ID")
+    @DisplayName("Test 2: Get Warehouse By ID from Database")
     public void getWarehouseByIdTest(){
         // Create a warehouse with ID 1L if it doesn't exist
         Warehouse warehouse = warehouseRepository.findById(1L).orElseGet(() -> {
@@ -55,5 +59,54 @@ public class WarehouseRepositoryUnitTests {
 
         // Verify that the retrieved warehouse's ID is 1L
         Assertions.assertThat(warehouse.getId()).isEqualTo(1L);
+    }
+
+    @Test
+    @DisplayName("Test 4: Get All Warehouses")
+    public void getListOfWarehouses(){
+        List<Warehouse> warehouses = warehouseRepository.findAll();
+        Assertions.assertThat(warehouses.size()).isGreaterThan(0);
+    }
+
+    @Test
+    @DisplayName("Test 5: Test for Warehouse Not Found")
+    public void warehouseNotFoundTest(){
+        // Try to find warehouse with an ID that doesn't exist
+        Optional<Warehouse> warehouseOptional = warehouseRepository.findById(999L);
+
+        // Verify that the Warehouse is not found
+        Assertions.assertThat(warehouseOptional).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Test 6: Test for Warehouse Not Found - NoSuchElementException")
+    public void warehouseNotFoundSuchElementExceptionTest(){
+        // Try to find warehouse with an ID that doesn't exist
+        Optional<Warehouse> warehouseOptional = warehouseRepository.findById(999L);
+
+        // Verify that a NoSuchElementException is thrown when trying to get the Warehouse
+        Assertions.assertThatThrownBy(warehouseOptional::get).isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    @DisplayName("Test 7: Update Supplier")
+    void updateSupplierTest() {
+        // Create a new warehouse object
+        Warehouse warehouse = Warehouse.builder()
+                .warehouseName("Shelby & Co. Tradings")
+                .warehouseLocation("Leeds, UK")
+                .warehouseManager("Daniel Shelby")
+                .contactNumber("024834637920")
+                .build();
+
+        // Save the warehouse
+        Warehouse savedWarehouse = warehouseRepository.save(warehouse);
+
+        // Update the warehouse
+        savedWarehouse.setWarehouseName("Updated Supplier Name");
+        Warehouse updateWarehouse = warehouseRepository.save(savedWarehouse);
+
+        // Verify the update
+        Assertions.assertThat(updateWarehouse.getWarehouseName()).isEqualTo("Updated Supplier Name");
     }
 }
