@@ -8,8 +8,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import warehouse.mngt.springwarehousemngt.entity.Product;
-import warehouse.mngt.springwarehousemngt.entity.Supplier;
 import warehouse.mngt.springwarehousemngt.entity.Warehouse;
 import warehouse.mngt.springwarehousemngt.repository.WarehouseRepository;
 
@@ -49,7 +47,7 @@ public class WarehouseRepositoryUnitTests {
 
     @Test
     @DisplayName("Test 2: Get Warehouse By ID from Database")
-    public void getWarehouseByIdTest(){
+    public void getWarehouseByIdDatabase(){
         // Create a warehouse with ID 1L if it doesn't exist
         Warehouse warehouse = warehouseRepository.findById(1L).orElseGet(() -> {
             Warehouse newWarehouse = new Warehouse();
@@ -89,8 +87,8 @@ public class WarehouseRepositoryUnitTests {
     }
 
     @Test
-    @DisplayName("Test 7: Update Supplier")
-    void updateSupplierTest() {
+    @DisplayName("Test 7: Update Warehouse")
+    void updateWarehouseTest() {
         // Create a new warehouse object
         Warehouse warehouse = Warehouse.builder()
                 .warehouseName("Shelby & Co. Tradings")
@@ -109,4 +107,55 @@ public class WarehouseRepositoryUnitTests {
         // Verify the update
         Assertions.assertThat(updateWarehouse.getWarehouseName()).isEqualTo("Updated Supplier Name");
     }
+
+    @Test
+    @DisplayName("Test 8: Delete Supplier - Success")
+    void deleteWarehouse(){
+        // Create a new warehouse object
+        Warehouse warehouse = Warehouse.builder()
+                .warehouseName("Shelby & Co. Tradings")
+                .warehouseLocation("Leeds, UK")
+                .warehouseManager("Daniel Shelby")
+                .contactNumber("024834637920")
+                .build();
+
+        // Save the warehouse
+        Warehouse savedWarehouse = warehouseRepository.save(warehouse);
+
+        // verify that warehouse is saved
+        Assertions.assertThat(savedWarehouse.getId()).isGreaterThan(0);
+
+        // Delete the warehouse
+        warehouseRepository.deleteById(savedWarehouse.getId());
+
+        // Verify that the warehouse is deleted
+        Warehouse deletedWarehouse = warehouseRepository.findById(savedWarehouse.getId()).orElse(null);
+        Assertions.assertThat(deletedWarehouse).isNull();
+    }
+
+    @Test
+    @DisplayName("Test 9: Get Warehouse By Id - Success")
+    void getWarehouseById(){
+
+        // Create a new warehouse object
+        Warehouse warehouse = Warehouse.builder()
+                .warehouseName("Shelby & Co. Tradings")
+                .warehouseLocation("Leeds, UK")
+                .warehouseManager("Daniel Shelby")
+                .contactNumber("024834637920")
+                .build();
+
+        // Save the warehouse
+        Warehouse savedWarehouse = warehouseRepository.save(warehouse);
+
+        // Retrieve the warehouse by ID
+        Warehouse retrievedWarehouse = warehouseRepository.findById(savedWarehouse.getId()).orElse(null);
+
+        // Verify that the retrieved employee is not null
+        Assertions.assertThat(retrievedWarehouse).isNotNull();
+
+        // Verify that the retrieved warehouse's details match the saved employee's details
+        Assertions.assertThat(retrievedWarehouse.getWarehouseName()).isEqualTo("Shelby & Co. Tradings");
+    }
+
 }
