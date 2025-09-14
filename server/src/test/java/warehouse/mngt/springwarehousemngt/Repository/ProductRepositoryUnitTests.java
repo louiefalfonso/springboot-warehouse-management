@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import warehouse.mngt.springwarehousemngt.dto.ProductDto;
+import warehouse.mngt.springwarehousemngt.entity.Category;
 import warehouse.mngt.springwarehousemngt.entity.Product;
 import warehouse.mngt.springwarehousemngt.entity.Supplier;
 
+import warehouse.mngt.springwarehousemngt.repository.CategoryRepository;
 import warehouse.mngt.springwarehousemngt.repository.ProductRepository;
 import warehouse.mngt.springwarehousemngt.repository.SupplierRepository;
 import warehouse.mngt.springwarehousemngt.service.impl.ProductServiceImpl;
@@ -39,6 +41,9 @@ public class ProductRepositoryUnitTests {
     @Autowired
     private SupplierRepository supplierRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
 
     @Test
     @DisplayName("Test 1: Create New Product")
@@ -47,8 +52,12 @@ public class ProductRepositoryUnitTests {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
-        // Save the supplier
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
         Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
 
         // Create a new product object
         Product product = Product.builder()
@@ -60,6 +69,7 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the product
@@ -75,6 +85,7 @@ public class ProductRepositoryUnitTests {
         Assertions.assertThat(savedProduct.getSku()).isEqualTo("020-070");
         Assertions.assertThat(savedProduct.getPrice()).isEqualTo(BigDecimal.valueOf(150.00));
         Assertions.assertThat(savedProduct.getSupplier()).isEqualTo(savedSupplier);
+        Assertions.assertThat(savedProduct.getCategory()).isEqualTo(savedCategory);
     }
 
     @Test
@@ -84,8 +95,12 @@ public class ProductRepositoryUnitTests {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
-        // Save the supplier
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
         Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
 
         // Create a new product object
         Product product = Product.builder()
@@ -97,6 +112,7 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Verify that the product is saved
@@ -111,8 +127,12 @@ public class ProductRepositoryUnitTests {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
-        // Save the supplier
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
         Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
 
         // Create a new product object
         Product product = Product.builder()
@@ -124,6 +144,7 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the product
@@ -169,11 +190,18 @@ public class ProductRepositoryUnitTests {
     @Test
     @DisplayName("Test 7: Update Product")
     void updateProductTest() {
-        // Create and save a new supplier
-        Supplier supplier = Supplier.builder().build();
-        Supplier savedSupplier = supplierRepository.save(supplier);
 
-        // Create and save a new product
+        // Create a new supplier object
+        Supplier supplier = Supplier.builder().build();
+
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
+        Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
+
+        // Create a new product object
         Product product = Product.builder()
                 .productName("Flotec VIP 130-6 and 180-7")
                 .productNumber("FL-4638254")
@@ -183,7 +211,9 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
+
         Product savedProduct = productRepository.save(product);
 
         // Update the product
@@ -197,11 +227,18 @@ public class ProductRepositoryUnitTests {
     @Test
     @DisplayName("Test 8: Delete Product")
     void deleteProductTest() {
-        // Create and save a new supplier
-        Supplier supplier = Supplier.builder().build();
-        Supplier savedSupplier = supplierRepository.save(supplier);
 
-        // Create and save a new product
+        // Create a new supplier object
+        Supplier supplier = Supplier.builder().build();
+
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
+        Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
+
+        // Create a new product object
         Product product = Product.builder()
                 .productName("Flotec VIP 130-6 and 180-7")
                 .productNumber("FL-4638254")
@@ -211,7 +248,10 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
+
+        // Save the product
         Product savedProduct = productRepository.save(product);
 
         // Delete the product
@@ -275,8 +315,12 @@ public class ProductRepositoryUnitTests {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
-        // Save the supplier
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
         Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
 
         // Create a new product object
         Product product = Product.builder()
@@ -288,6 +332,7 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the product
@@ -303,6 +348,7 @@ public class ProductRepositoryUnitTests {
                 .sku("030-080")
                 .price(BigDecimal.valueOf(200.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the another product
@@ -319,11 +365,17 @@ public class ProductRepositoryUnitTests {
     @Test
     @DisplayName("Test 11: Verify Product Deletion by Setting Deleted Flag")
     void verifyProductDeletionBySettingDeletedFlag() {
-        // Create and save a new supplier
+        // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
-        Supplier savedSupplier = supplierRepository.save(supplier);
 
-        // Create and save a new product
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
+        Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
+
+        // Create a new product object
         Product product = Product.builder()
                 .productName("Flotec VIP 130-6 and 180-7")
                 .productNumber("FL-4638254")
@@ -333,7 +385,10 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
+
+        // Save the product
         Product savedProduct = productRepository.save(product);
 
         // Set the deleted flag to true
@@ -418,10 +473,14 @@ public class ProductRepositoryUnitTests {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
-        // Save the supplier
-        Supplier savedSupplier = supplierRepository.save(supplier);
+        // Create a new category object
+        Category category = Category.builder().build();
 
-        // Create a new product object with a unique SKU
+        // Save the supplier & category
+        Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
+
+        // Create a new product object
         Product product = Product.builder()
                 .productName("Flotec VIP 130-6 and 180-7")
                 .productNumber("FL-4638254")
@@ -431,6 +490,7 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the product
@@ -466,19 +526,24 @@ public class ProductRepositoryUnitTests {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
-        // Save the supplier
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
         Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
 
         // Create a new product object
         Product product = Product.builder()
-                .productName("Product Name 1")
+                .productName("Flotec VIP 130-6 and 180-7")
                 .productNumber("FL-4638254")
-                .description("Product Description 1")
+                .description("The Flotec VIP 130-6 and 180-7 submersible pumps are designed for applications in clean water.")
                 .productBrand("Flotec")
                 .quantity(200)
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the product
@@ -487,6 +552,9 @@ public class ProductRepositoryUnitTests {
         // Create another product with the different product supplier
         Supplier anotherSupplier = Supplier.builder().build();
         anotherSupplier = supplierRepository.save(anotherSupplier);
+
+        Category anotherCategory = Category.builder().build();
+        anotherCategory = categoryRepository.save(anotherCategory);
 
         Product anotherProduct = Product.builder()
                 .productName("Another Product")
@@ -497,6 +565,7 @@ public class ProductRepositoryUnitTests {
                 .sku("030-080")
                 .price(BigDecimal.valueOf(200.00))
                 .supplier(anotherSupplier)
+                .category(anotherCategory)
                 .build();
 
         // Save the another product
