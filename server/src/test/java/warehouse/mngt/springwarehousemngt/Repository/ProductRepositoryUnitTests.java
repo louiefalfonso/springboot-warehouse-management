@@ -44,7 +44,6 @@ public class ProductRepositoryUnitTests {
     @Autowired
     private CategoryRepository categoryRepository;
 
-
     @Test
     @DisplayName("Test 1: Create New Product")
     void createNewProductTest(){
@@ -268,8 +267,12 @@ public class ProductRepositoryUnitTests {
         // Create a new supplier object
         Supplier supplier = Supplier.builder().build();
 
-        // Save the supplier
+        // Create a new category object
+        Category category = Category.builder().build();
+
+        // Save the supplier & category
         Supplier savedSupplier = supplierRepository.save(supplier);
+        Category savedCategory = categoryRepository.save(category);
 
         // Create a new product object
         Product product = Product.builder()
@@ -281,6 +284,7 @@ public class ProductRepositoryUnitTests {
                 .sku("020-070")
                 .price(BigDecimal.valueOf(150.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the product
@@ -296,6 +300,7 @@ public class ProductRepositoryUnitTests {
                 .sku("030-080")
                 .price(BigDecimal.valueOf(200.00))
                 .supplier(savedSupplier)
+                .category(savedCategory)
                 .build();
 
         // Save the another product
@@ -597,8 +602,4 @@ public class ProductRepositoryUnitTests {
         // Then
         assertEquals(products.size(), outOfStock.size());
     }
-
-
-
-
 }
