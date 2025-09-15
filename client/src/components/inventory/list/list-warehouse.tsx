@@ -19,7 +19,7 @@ const WarehouseDetailsList = ({ warehouseData }: { warehouseData: any }) => {
                 <TableCell>{warehouseData.warehouseCode}</TableCell>
                 <TableCell>{warehouseData.warehouseName}</TableCell>
                 <TableCell>{warehouseData.warehouseManager}</TableCell>
-                <TableCell className="whitespace-normal">{warehouseData.description}</TableCell>
+                <TableCell>{warehouseData.description}</TableCell>
               </TableRow>
             </TableBody>
         </Table>
