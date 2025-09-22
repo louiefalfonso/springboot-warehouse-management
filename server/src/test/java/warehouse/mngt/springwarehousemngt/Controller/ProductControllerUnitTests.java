@@ -17,8 +17,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class ProductControllerUnitTests {
@@ -78,7 +77,51 @@ public class ProductControllerUnitTests {
 
     @Test
     @Order(2)
-    @DisplayName("Test 2: Get Product By Id - Success")
+    @DisplayName("Test 2: Create New Product - Service Throws Exception")
+    void createNewProduct_ServiceThrowsException() {
+
+        // Arrange
+        ProductDto inputProductDto = new ProductDto();
+        inputProductDto.setProductNumber("AB-8493519");
+        inputProductDto.setProductName("Flotec VIP 130-6 and 180-7");
+        inputProductDto.setDescription("The Flotec VIP 130-6 and 180-7 submersible pumps are designed for applications in clean water.");
+        inputProductDto.setSku("020-070");
+        inputProductDto.setProductBrand("Flotec");
+        inputProductDto.setQuantity(200);
+        inputProductDto.setPrice(BigDecimal.valueOf(150.00));
+
+        when(productService.createNewProduct(inputProductDto)).thenThrow(new RuntimeException("Service Error"));
+
+        // Act & Assert
+        Exception exception = assertThrows(RuntimeException.class, () -> productController.createNewProduct(inputProductDto));
+
+        assertEquals("Service Error", exception.getMessage());
+
+        // Verify
+        verify(productService, times(1)).createNewProduct(inputProductDto);
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Test 3: Create New Product - Null Input")
+    void createNewProduct_NullInput() {
+        // Arrange
+        when(productService.createNewProduct(null)).thenReturn(null);
+
+        // Act
+        ResponseEntity<ProductDto> response = productController.createNewProduct(null);
+
+        // Assert
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNull(response.getBody());
+
+        // Verify
+        verify(productService, times(1)).createNewProduct(null);
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Test 4: Get Product By Id - Success")
     void getProductById_Success(){
 
         // Arrange
@@ -106,8 +149,8 @@ public class ProductControllerUnitTests {
     }
 
     @Test
-    @Order(3)
-    @DisplayName("Test 3: Get Product By Id - When Product Does Not Exist")
+    @Order(5)
+    @DisplayName("Test 5: Get Product By Id - When Product Does Not Exist")
     void getProductById_WhenProductDoesNotExist(){
 
         // Arrange
@@ -124,30 +167,32 @@ public class ProductControllerUnitTests {
     }
 
     @Test
-    @Order(4)
-    @DisplayName("Test 4: Create New Product - Service Throws Exception")
-    void createNewProduct_ServiceThrowsException() {
+    @Order(6)
+    @DisplayName("Test 6: Delete Product - Success")
+    void deleteProduct_Success(){
 
         // Arrange
-        ProductDto inputProductDto = new ProductDto();
-        inputProductDto.setProductNumber("AB-8493519");
-        inputProductDto.setProductName("Flotec VIP 130-6 and 180-7");
-        inputProductDto.setDescription("The Flotec VIP 130-6 and 180-7 submersible pumps are designed for applications in clean water.");
-        inputProductDto.setSku("020-070");
-        inputProductDto.setProductBrand("Flotec");
-        inputProductDto.setQuantity(200);
-        inputProductDto.setPrice(BigDecimal.valueOf(150.00));
+        Long productId = 1L;
 
-        when(productService.createNewProduct(inputProductDto)).thenThrow(new RuntimeException("Service Error"));
+        // Mock the service method to do nothing (since it's a void method)
+        doNothing().when(productService).deleteProduct(productId);
 
-        // Act & Assert
-        Exception exception = assertThrows(RuntimeException.class, () -> productController.createNewProduct(inputProductDto));
+        // Act
+        ResponseEntity<String> response = productController.deleteProduct(productId);
 
-        assertEquals("Service Error", exception.getMessage());
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Product Deleted Successfully", response.getBody());
 
-        // Verify
-        verify(productService, times(1)).createNewProduct(inputProductDto);
+        // Verify that the service method was called once
+        verify(productService, times(1)).deleteProduct(productId);
+
     }
+
+
+
+
+
 
 
 
