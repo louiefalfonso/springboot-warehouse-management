@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from '@/components/ui/sonner';
 
 import SupplierListPage from '@/pages/suppliers/page';
@@ -22,13 +22,24 @@ import InventoryListPage from './pages/inventories/page';
 import AddNewInventory from './components/inventory/add-inventory';
 import UpdateInventory from './components/inventory/edit-inventory';
 import InventoryDetails from './components/inventory/details-inventory';
+import ProtectedRoute from './services/protected-route';
+import LoginPage from './pages/login/page';
+import RegisterPage from './pages/register/page';
 
 function App() {
+
+  const token = localStorage.getItem("token");
   
   return (
     <>
     <Routes>
-      <Route path="/" element={<DashboardPage/>} />
+      <Route path="/" element={<Navigate to={"/login"} replace/>} /> 
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+
+      <Route path="/" element={<ProtectedRoute token={token}> <DashboardPage /> </ProtectedRoute>} />
+
+      
       
       <Route path="/suppliers" element={<SupplierListPage/>} />
       <Route path="/suppliers/add" element={<AddNewSupplier/>} />
