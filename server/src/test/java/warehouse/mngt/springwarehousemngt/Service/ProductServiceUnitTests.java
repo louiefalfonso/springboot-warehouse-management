@@ -314,8 +314,6 @@ public class ProductServiceUnitTests {
         existingProduct.setProductNumber("AB-8493519");
     }
 
-
-
     @Test
     @Order(18)
     @DisplayName("Test 18: Update Product - Product Not Found")

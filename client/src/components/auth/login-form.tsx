@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import MainLogo from '@/assets/lbc-logo.png';
+import MainLogo from '../../assets/lbc-logo.png';
 
 
 const LoginFormComponent = () => {
@@ -88,7 +88,7 @@ const LoginFormComponent = () => {
                   placeholder="Password"
                 />
               </div>
-              <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-700 text-white">
+              <Button type="submit" className="w-full bg-rose-700 hover:bg-rose-800 text-white">
                 Login
               </Button>
             </div>
