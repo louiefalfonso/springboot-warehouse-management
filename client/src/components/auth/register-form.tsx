@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import MainLogo from '@/assets/curve-dental-logo.jpeg';
+import MainLogo from '../../assets/lbc-logo.png';
 
 const RegisterFormComponent = () => {
 
@@ -121,7 +121,7 @@ const RegisterFormComponent = () => {
               </div>
               <Button
                 type="submit"
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white"
+                className="w-full bg-rose-700 hover:bg-rose-800 text-white"
               >
                 Register
               </Button>
