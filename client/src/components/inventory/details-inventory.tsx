@@ -6,37 +6,9 @@ import { Button } from "@/components/ui/button";
 
 import { useGetInventoryById } from "@/services/inventory-services";
 import InventoryDetailsList from "./list/list-inventory";
-import { useGetAllProducts } from "@/services/product-services";
-import { useGetAllWarehouses } from "@/services/warehouse-services";
+
 import WarehouseDetailsList from "./list/list-warehouse";
 import ProductDetailsList from "./list/list-product";
-
-type Product = {
-    id: string; 
-    productName: string;
-    productNumber: string;
-    description: string;
-    productBrand:string;
-    quantity: number;
-    sku: string;
-    price: number;
-    supplier: { id: number;}
-    category: { id: number;} 
-}
-
-type Warehouse = {
-    id: string;
-    warehouseName: string;
-    warehouseCode: string;
-    officeHours: string;
-    warehouseEmail:string;
-    warehouseLocation: string;
-    warehouseManager: string;
-    contactNumber: string;
-    description: string;
-}
-
-
 
 const InventoryDetails = () => {
 

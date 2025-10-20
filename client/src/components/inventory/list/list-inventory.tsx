@@ -5,7 +5,7 @@ const InventoryDetailsList = ({ inventoryData }: { inventoryData: any }) => {
     <div className="rounded-md border p-5 w-full overflow-x-auto">
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0">Inventory Information</h2>
       <div className="min-w-full">
-         <Table>
+        <Table>
           <TableHeader>
                 <TableRow>
                   <TableHead>Inventory Code</TableHead>
@@ -13,7 +13,6 @@ const InventoryDetailsList = ({ inventoryData }: { inventoryData: any }) => {
                   <TableHead>Quantity</TableHead>
                   <TableHead>Unit Cost</TableHead>
                   <TableHead>Value</TableHead>
-                  <TableHead>Warehouse</TableHead>
                 </TableRow>
           </TableHeader>
           <TableBody>
@@ -23,10 +22,29 @@ const InventoryDetailsList = ({ inventoryData }: { inventoryData: any }) => {
               <TableCell>{inventoryData.quantity}</TableCell>
               <TableCell>{inventoryData.unitCost}</TableCell>
               <TableCell>{inventoryData.value}</TableCell>
-              <TableCell>{inventoryData.warehouse?.warehouseName}</TableCell>
             </TableRow>
           </TableBody>
          </Table>
+         <Table className="mt-5">
+          <TableHeader>
+                <TableRow>
+                  <TableHead>Warehouse</TableHead>
+                  <TableHead>Location</TableHead>
+                  <TableHead>Reorder Point</TableHead>
+                  <TableHead>Inventory Manager</TableHead>
+                  <TableHead>Remarks</TableHead>
+                </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow key={inventoryData.id}>
+              <TableCell>{inventoryData.location}</TableCell>
+              <TableCell>{inventoryData.reorderPoint}</TableCell>
+              <TableCell>{inventoryData.inventoryManager}</TableCell>
+              <TableCell>{inventoryData.remarks}</TableCell>
+              <TableCell>{inventoryData.warehouse?.warehouseName}</TableCell>
+            </TableRow>
+          </TableBody>  
+         </Table> 
       </div>
     </div>  
   )
