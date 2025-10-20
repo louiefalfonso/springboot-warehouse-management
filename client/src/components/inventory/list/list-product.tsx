@@ -6,18 +6,18 @@ const ProductDetailsList = ({ productData }: { productData: any }) => {
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0">Product Information</h2>
       <div className="min-w-full">
          <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Product Name</TableHead>
-                        <TableHead>Product Description</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow key={productData.id}>
-                      <TableCell>{productData.productName}</TableCell>
-                      <TableCell>{productData.description}</TableCell>
-                  </TableRow>
-                </TableBody>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Product Name</TableHead>
+                <TableHead>Product Description</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow key={productData.id}>
+                <TableCell>{productData.productName}</TableCell>
+                <TableCell className="whitespace-normal" >{productData.description}</TableCell>
+              </TableRow>
+            </TableBody>
          </Table> 
          <Table className="mt-5">
           <TableHeader>

@@ -36,34 +36,31 @@ function App() {
       <Route path="/" element={<Navigate to={"/login"} replace/>} /> 
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/dashboard" element={<ProtectedRoute token={token}><DashboardPage /> </ProtectedRoute>}/>
 
-      <Route path="/" element={<ProtectedRoute token={token}> <DashboardPage /> </ProtectedRoute>} />
+      <Route path="/suppliers" element={<ProtectedRoute token={token}><SupplierListPage/></ProtectedRoute>}/>
+      <Route path="/suppliers/add" element={<ProtectedRoute token={token}><AddNewSupplier/></ProtectedRoute>}/>
+      <Route path="/suppliers/update/:id" element={<ProtectedRoute token={token}><UpdateSupplier/></ProtectedRoute>}/>
+      <Route path="/suppliers/details/:id" element={<ProtectedRoute token={token}><SupplierDetails/></ProtectedRoute>}/>
 
-      
-      
-      <Route path="/suppliers" element={<SupplierListPage/>} />
-      <Route path="/suppliers/add" element={<AddNewSupplier/>} />
-      <Route path="/suppliers/update/:id" element={<UpdateSupplier/>} />
-      <Route path="/suppliers/details/:id" element={<SupplierDetails/>} />
+      <Route path="/warehouses" element={<ProtectedRoute token={token}><WarehouseListPage/></ProtectedRoute>}/>
+      <Route path="/warehouses/add" element={<ProtectedRoute token={token}><AddNewWarehouse/></ProtectedRoute>}/>
+      <Route path="/warehouses/update/:id" element={<ProtectedRoute token={token}><UpdateWarehouse/></ProtectedRoute>}/>
+      <Route path="/warehouses/details/:id" element={<ProtectedRoute token={token}><WarehouseDetails/></ProtectedRoute>}/>
 
-      <Route path="/warehouses" element={<WarehouseListPage/>} />
-      <Route path="/warehouses/add" element={<AddNewWarehouse/>} />
-      <Route path="/warehouses/update/:id" element={<UpdateWarehouse/>} />
-      <Route path="/warehouses/details/:id" element={<WarehouseDetails/>} />
+      <Route path="/categories" element={<ProtectedRoute token={token}><CategoryListPage/></ProtectedRoute>}/>
+      <Route path="/categories/add" element={<ProtectedRoute token={token}><AddNewCategory/></ProtectedRoute>}/>
+      <Route path="/categories/update/:id" element={<ProtectedRoute token={token}><UpdateCategory/></ProtectedRoute>}/>
 
-      <Route path="/categories" element={<CategoryListPage/>} />
-      <Route path="/categories/add" element={<AddNewCategory/>} />
-      <Route path="/categories/update/:id" element={<UpdateCategory/>} />
+      <Route path="/products" element={<ProtectedRoute token={token}><ProductListPage/></ProtectedRoute>}/>
+      <Route path="/products/add" element={<ProtectedRoute token={token}><AddNewProduct/></ProtectedRoute>}/>
+      <Route path="/products/update/:id" element={<ProtectedRoute token={token}><UpdateProduct/></ProtectedRoute>}/>
+      <Route path="/products/details/:id" element={<ProtectedRoute token={token}><ProductDetails/></ProtectedRoute>}/>
 
-      <Route path="/products" element={<ProductListPage/>} />
-      <Route path="/products/add" element={<AddNewProduct/>} />
-      <Route path="/products/update/:id" element={<UpdateProduct/>} />
-      <Route path="/products/details/:id" element={<ProductDetails/>} />
-
-      <Route path="/inventories" element={<InventoryListPage/>} />
-      <Route path="/inventories/add" element={<AddNewInventory/>} />
-      <Route path="/inventories/update/:id" element={<UpdateInventory/>} />
-      <Route path="/inventories/details/:id" element={<InventoryDetails/>} />
+      <Route path="/inventories" element={<ProtectedRoute token={token}><InventoryListPage/></ProtectedRoute>} />
+      <Route path="/inventories/add" element={<ProtectedRoute token={token}><AddNewInventory/></ProtectedRoute>} />
+      <Route path="/inventories/update/:id" element={<ProtectedRoute token={token}><UpdateInventory/></ProtectedRoute>} />
+      <Route path="/inventories/details/:id" element={<ProtectedRoute token={token}><InventoryDetails/></ProtectedRoute>} />
       
     </Routes>
     <Toaster/>

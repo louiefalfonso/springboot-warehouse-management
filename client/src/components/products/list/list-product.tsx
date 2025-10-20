@@ -8,40 +8,50 @@ const ProductDetailsLists = ({ productData }: { productData: any }) => {
          <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Product Number</TableHead>
-                        <TableHead>Product Name</TableHead>
-                        <TableHead>Brand</TableHead>
-                        <TableHead>SKU</TableHead>
-                        <TableHead>Quantity</TableHead>
-                        <TableHead>Price</TableHead>
+                      <TableHead>Product Name</TableHead>
+                      <TableHead>Product Number</TableHead>
+                      <TableHead>SKU</TableHead>  
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow key={productData.id}>
-                      <TableCell>{productData.productNumber}</TableCell>
-                      <TableCell>{productData.productName}</TableCell>
-                      <TableCell>{productData.sku}</TableCell>
-                      <TableCell>{productData.productBrand}</TableCell>
-                      <TableCell>{productData.quantity} pieces</TableCell>
-                      <TableCell>£ {productData.price.toFixed(2)}</TableCell> 
+                    <TableCell>{productData.productName}</TableCell>
+                    <TableCell>{productData.productNumber}</TableCell>
+                    <TableCell>SKU-{productData.sku}</TableCell>  
                   </TableRow>
                 </TableBody>
          </Table> 
          <Table className="mt-5">
           <TableHeader>
+              <TableRow>
+                <TableHead>Brand</TableHead>
+                <TableHead>Quantity</TableHead>
+                <TableHead>Price</TableHead> 
+                <TableHead>Category</TableHead>
+                <TableHead>Supplier</TableHead>
+              </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow key={productData.id}>
+              <TableCell>{productData.productBrand}</TableCell>
+              <TableCell>{productData.quantity} pieces</TableCell>
+              <TableCell>£ {productData.price.toFixed(2)}</TableCell> 
+              <TableCell>{productData.category?.categoryName}</TableCell>
+              <TableCell>{productData.supplier?.supplierName}</TableCell>
+            </TableRow>
+          </TableBody>        
+        </Table>
+        <Table className="mt-5">
+          <TableHeader>
               <TableRow> 
-                  <TableHead>Category</TableHead>
-                  <TableHead>Supplier</TableHead>
                   <TableHead>Product Description</TableHead>
               </TableRow>
           </TableHeader>
           <TableBody>
-                  <TableRow key={productData.id}>
-                    <TableCell>{productData.category?.categoryName}</TableCell>
-                    <TableCell>{productData.supplier?.supplierName}</TableCell>
-                    <TableCell className="whitespace-normal">{productData.description}</TableCell>
-                  </TableRow>
-          </TableBody>        
+            <TableRow key={productData.id}>
+              <TableCell className="whitespace-normal" >{productData.description}</TableCell>
+            </TableRow>
+          </TableBody>  
         </Table>  
       </div>
     </div>
