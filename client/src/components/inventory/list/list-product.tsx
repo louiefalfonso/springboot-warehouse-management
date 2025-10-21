@@ -9,21 +9,33 @@ const ProductDetailsList = ({ productData }: { productData: any }) => {
             <TableHeader>
               <TableRow>
                 <TableHead>Product Name</TableHead>
-                <TableHead>Product Description</TableHead>
+                <TableHead>Product Number</TableHead>
+                <TableHead>Brand</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow key={productData.id}>
                 <TableCell>{productData.productName}</TableCell>
+                <TableCell>{productData.productNumber}</TableCell>
+                <TableCell>{productData.productBrand}</TableCell>
+              </TableRow>
+            </TableBody>
+         </Table>
+         <Table className="mt-5">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Product Description</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow key={productData.id}>
                 <TableCell className="whitespace-normal" >{productData.description}</TableCell>
               </TableRow>
             </TableBody>
-         </Table> 
+         </Table>  
          <Table className="mt-5">
           <TableHeader>
               <TableRow>
-                  <TableHead>Product Number</TableHead>
-                  <TableHead>Brand</TableHead>
                   <TableHead>Quantity</TableHead>
                   <TableHead>Price</TableHead>
                    <TableHead>SKU</TableHead>
@@ -33,8 +45,6 @@ const ProductDetailsList = ({ productData }: { productData: any }) => {
           </TableHeader>
           <TableBody>
                   <TableRow key={productData.id}>
-                    <TableCell>{productData.productNumber}</TableCell>
-                    <TableCell>{productData.productBrand}</TableCell>
                     <TableCell>{productData.quantity} pieces</TableCell>
                     <TableCell>£ {productData.price.toFixed(2)}</TableCell>
                     <TableCell>{productData.sku}</TableCell>

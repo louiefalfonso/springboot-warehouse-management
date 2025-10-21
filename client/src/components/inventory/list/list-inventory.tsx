@@ -37,11 +37,12 @@ const InventoryDetailsList = ({ inventoryData }: { inventoryData: any }) => {
           </TableHeader>
           <TableBody>
             <TableRow key={inventoryData.id}>
+              <TableCell>{inventoryData.warehouse?.warehouseName}</TableCell>
               <TableCell>{inventoryData.location}</TableCell>
               <TableCell>{inventoryData.reorderPoint}</TableCell>
               <TableCell>{inventoryData.inventoryManager}</TableCell>
               <TableCell>{inventoryData.remarks}</TableCell>
-              <TableCell>{inventoryData.warehouse?.warehouseName}</TableCell>
+              
             </TableRow>
           </TableBody>  
          </Table> 
